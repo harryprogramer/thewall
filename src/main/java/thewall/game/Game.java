@@ -1,6 +1,6 @@
 package thewall.game;
 
-import thewall.game.engine.DisplayManager;
+import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.entity.Camera;
 import thewall.game.engine.entity.Entity;
 import thewall.game.engine.entity.Light;
@@ -10,7 +10,6 @@ import thewall.game.engine.models.TexturedModel;
 import thewall.game.engine.models.obj.thinmatrix.OBJLoader;
 import thewall.game.engine.render.MasterRenderer;
 import thewall.game.engine.render.SyncTimer;
-import thewall.game.engine.audio.SoundChannel;
 import thewall.game.engine.audio.SoundManager;
 import thewall.game.engine.terrain.Terrain;
 import thewall.game.engine.textures.ModelTexture;
@@ -106,20 +105,20 @@ public class Game {
 
         List<Entity> worldEntities = new ArrayList<>();
 
-        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass", GL_RGBA)));
-        Terrain terrain2 = new Terrain(1, 0, loader, new ModelTexture(loader.loadTexture("grass", GL_RGBA)));
+        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass3", GL_RGBA)));
+        Terrain terrain2 = new Terrain(1, 0, loader, new ModelTexture(loader.loadTexture("grass3", GL_RGBA)));
 
         terrain.getTexture().setUseFakeLighting(true);
         terrain2.getTexture().setUseFakeLighting(true);
 
 
-        for(int i = 0; i < 300; i++){
+        for(int i = 0; i < 500; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             worldEntities.add(new Entity(treemodel, new Vector3f(x, 0, z), 0, 180, 0, 1));
         }
 
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 500; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             worldEntities.add(new Entity(grassModel, new Vector3f(x, 0, z), 0, 180, 0, 1));

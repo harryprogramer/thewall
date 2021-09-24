@@ -13,13 +13,13 @@
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/scripting/api/console/ScriptConsole.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/models/RawModel.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/audio/SoundManager.java
-/home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/DisplayManager.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/shaders/ShaderProgram.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/textures/ModelTexture.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/utils/ResourceUtils.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/render/SyncTimer.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/render/TerrainRenderer.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/entity/Entity.java
+/home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/display/DisplayManager.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/scheduler/RenderThreadTask.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/TheWall.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/models/TexturedModel.java
@@ -38,6 +38,7 @@
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/input/KeyboardCallback.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/render/MasterRenderer.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/audio/SoundChannel.java
+/home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/audio/VectorSoundMaster.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/models/ExampleModels.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/terrain/Terrain.java
 /home/many/IdeaProjects/opengl-edu2/src/main/java/thewall/game/engine/models/Loader.java

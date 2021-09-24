@@ -1,10 +1,9 @@
 package thewall.game.engine.render;
 
 import lombok.Getter;
-import org.lwjgl.egl.EGL10;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
-import thewall.game.engine.DisplayManager;
+import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.display.DisplayUtils;
 import thewall.game.engine.display.Resolution;
 import thewall.game.engine.entity.Camera;
@@ -20,11 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.opengl.GL11.*;
 
 public class MasterRenderer {
-    private final static float FOV = 70;
+    private final static float FOV = 90;
     private final static float NEAR_PLANE = 0.1f;
     private final static float FAR_PLANE = 1200;
     private Matrix4f projectionMatrix;

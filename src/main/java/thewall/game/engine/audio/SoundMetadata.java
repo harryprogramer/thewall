@@ -21,9 +21,8 @@ import java.util.Map;
 
 public interface SoundMetadata {
     @NonBlocking
-    @NotNull
     @Contract(pure = true)
-    Map<String, Object> getMetadata();
+    @NotNull Map<String, Object> getMetadata();
 
     @Contract(pure = true)
     float getVolume();
@@ -31,13 +30,11 @@ public interface SoundMetadata {
     @Contract(pure = true)
     float getPitch();
 
-    @NotNull
     @NonBlocking
     @Contract(pure = true)
-    String getSoundPath();
+    @NotNull String getSoundPath();
 
-    @NotNull
     @Blocking
     @Contract(pure = true)
-    File getSoundFile();
+    @NotNull File getSoundFile();
 }

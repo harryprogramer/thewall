@@ -3,12 +3,11 @@ package thewall.game.engine;
 import lombok.Getter;
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.util.vector.Vector3f;
 import thewall.game.engine.audio.SoundManager;
 import thewall.game.engine.audio.SoundMaster;
+import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.entity.Camera;
 import thewall.game.engine.entity.Entity;
 import thewall.game.engine.entity.Light;
@@ -20,9 +19,6 @@ import thewall.game.engine.terrain.Terrain;
 
 import java.io.PrintWriter;
 import java.util.Objects;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;

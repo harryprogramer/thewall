@@ -1,6 +1,7 @@
 package thewall.game.engine.models;
 
 
+import de.matthiasmann.twl.utils.PNGDecoder;
 import javassist.bytecode.stackmap.TypeData;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
@@ -9,6 +10,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryStack;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -42,9 +44,9 @@ public class Loader {
 
     @SneakyThrows
     private int loadTexture4(String filename, int pixelFormat){
-        /*
+
         //load png file
-        PNGDecoder decoder = new PNGDecoder(TypeData.ClassName.class.getResourceAsStream(filename));
+        PNGDecoder decoder = new PNGDecoder(new FileInputStream("res/texture/" + filename + ".png"));
 
         //create a byte buffer big enough to store RGBA values
         ByteBuffer buffer = ByteBuffer.allocateDirect(4 * decoder.getWidth() * decoder.getHeight());
@@ -76,9 +78,6 @@ public class Loader {
 
         return id;
 
-         */
-
-        return 0;
     }
 
 
@@ -185,7 +184,7 @@ public class Loader {
 
          */
 
-        return loadTexture3(fileName, pixelFormat);
+        return loadTexture2(fileName, pixelFormat);
     }
 
     private void storeDataInAttributeList(int number, int coordinateSize ,float[] data){

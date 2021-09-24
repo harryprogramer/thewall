@@ -1,8 +1,6 @@
 package thewall.game.engine.render;
 
-import thewall.game.engine.DisplayManager;
-import thewall.game.engine.display.DisplayUtils;
-import thewall.game.engine.display.Resolution;
+import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.entity.Entity;
 import thewall.game.engine.models.RawModel;
 import thewall.game.engine.models.TexturedModel;
