@@ -1,5 +1,7 @@
 package thewall.game.engine.shaders;
 
+import org.lwjgl.util.vector.Vector;
+import org.lwjgl.util.vector.Vector3f;
 import thewall.game.engine.entity.Camera;
 import thewall.game.engine.entity.Light;
 import thewall.game.engine.utils.Maths;
@@ -15,6 +17,7 @@ public class StaticShader extends ShaderProgram {
     private int locationReflectivity;
     private int locationShaneDamper;
     private int location_useFakeLighting;
+    private int locationSkyColor;
 
     public StaticShader(){
         super("vertexShader.frag", "fragmentShader.vert");
@@ -30,6 +33,11 @@ public class StaticShader extends ShaderProgram {
         locationReflectivity = super.getUniformLocation("reflectivity");
         locationShaneDamper = super.getUniformLocation("shineDamper");
         location_useFakeLighting = super.getUniformLocation("useFakeLighting");
+        locationSkyColor = super.getUniformLocation("skyColor");
+    }
+
+    public void loadSkyColor(float r, float g, float b){
+        super.loadVector(locationSkyColor, new Vector3f(r, g, b));
     }
 
     public void loadTransformationMatrix(Matrix4f matrix4f){
