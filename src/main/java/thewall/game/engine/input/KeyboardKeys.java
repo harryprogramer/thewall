@@ -5,6 +5,7 @@ public enum KeyboardKeys {
     S_KEY,
     A_KEY,
     D_KEY,
-    SHIFT_KEY
+    SHIFT_KEY,
+    F3_KEY
     ;
 }

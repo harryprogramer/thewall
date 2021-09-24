@@ -1,6 +1,7 @@
 package thewall.game.engine.render;
 
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import thewall.game.engine.display.DisplayManager;
@@ -22,13 +23,13 @@ import java.util.Map;
 import static org.lwjgl.opengl.GL11.*;
 
 public class MasterRenderer {
-    private final static float FOV = 90;
+    private final static float FOV = 80;
     private final static float NEAR_PLANE = 0.1f;
     private final static float FAR_PLANE = 1200;
 
-    private static final float RED = 0.5f;
-    private static final float GREEN = 0.5f;
-    private static final float BLUE = 0.5f;
+    private static final float RED = 0.6f;
+    private static final float GREEN = 0.78f;
+    private static final float BLUE = 0.76f;
 
     private Matrix4f projectionMatrix;
     private final DisplayManager displayManager;
@@ -52,7 +53,7 @@ public class MasterRenderer {
 
     private final Map<TexturedModel, List<Entity>> entities = new HashMap<>();
 
-    public void processEntity(Entity entity){
+    public void processEntity(@NotNull Entity entity){
         TexturedModel entityModel = entity.getModel();
         List<Entity> batch = entities.get(entityModel);
         if(batch != null){

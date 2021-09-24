@@ -88,7 +88,7 @@ public class ScriptAPI {
         v8.add("console", v8Console);
         v8Console.registerJavaMethod(new Printer(), "print", "log", new Class<?>[]{String.class});
         v8.executeScript(content);
-        pluginName = ((V8Object) v8.get("name")).getString("name");
+        pluginName = ((V8Object) v8.get("name")).getString("pluginName");
         System.out.println("1234");
         /*
         try {

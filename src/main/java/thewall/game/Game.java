@@ -7,6 +7,8 @@ import thewall.game.engine.entity.Light;
 import thewall.game.engine.models.Loader;
 import thewall.game.engine.models.RawModel;
 import thewall.game.engine.models.TexturedModel;
+import thewall.game.engine.models.obj.thinmatrix.ModelData;
+import thewall.game.engine.models.obj.thinmatrix.OBJFileLoader;
 import thewall.game.engine.models.obj.thinmatrix.OBJLoader;
 import thewall.game.engine.render.MasterRenderer;
 import thewall.game.engine.render.SyncTimer;
@@ -77,17 +79,27 @@ public class Game {
         }
 
 
+
         displayManager.createDisplay();
-        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
         masterRenderer = new MasterRenderer(displayManager);
         Loader loader = new Loader();
         //OBJObject objObject = new OBJObject(new File("./res/models/cube"));
 
         //RawModel treeRawModel = loader.loadToVAO(ExampleModels.krzysztof, ExampleModels.krzysztofIndices, ExampleModels.krzysztofTextureCoords);
 
-        RawModel treeRawModel = OBJLoader.loadObjModel("models/tree", loader);
+        ModelData treeModelData = OBJFileLoader.loadOBJ("tree");
+        ModelData grassModelData = OBJFileLoader.loadOBJ("grassModel");
+        ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
+
+        RawModel treeRawModel = loader.loadToVAO(treeModelData.getVertices(), treeModelData.getIndices(),
+                treeModelData.getTextureCoords(), treeModelData.getNormals());
+
         TexturedModel treemodel = new TexturedModel(treeRawModel, new ModelTexture(loader.loadTexture("tree", GL_RGBA)));
-        TexturedModel grassModel = new TexturedModel(OBJLoader.loadObjModel("models/grassModel", loader), new ModelTexture(loader.loadTexture("grassTexture", GL_RGBA)));
+        TexturedModel grassModel = new TexturedModel(loader.loadToVAO(grassModelData.getVertices(), grassModelData.getIndices(),
+                grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(loader.loadTexture("grassTexture", GL_RGBA)));
+
+        TexturedModel lowPolyTreeModel = new TexturedModel(loader.loadToVAO(lowPolyTree.getVertices(), lowPolyTree.getIndices(),
+                lowPolyTree.getTextureCoords(), lowPolyTree.getNormals()),  new ModelTexture(loader.loadTexture("lowPolyTree", GL_RGBA)));
 
         ModelTexture texture = treemodel.getModelTexture();
 
@@ -111,18 +123,33 @@ public class Game {
         terrain.getTexture().setUseFakeLighting(true);
         terrain2.getTexture().setUseFakeLighting(true);
 
-
-        for(int i = 0; i < 500; i++){
+        /*
+        // drzewa default
+        for(int i = 0; i < 100; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            worldEntities.add(new Entity(treemodel, new Vector3f(x, 0, z), 0, 180, 0, 1));
+            float size = 1.2f + new Random().nextFloat() * (2.0f - 1.2f);
+            worldEntities.add(new Entity(treemodel, new Vector3f(x, 0, z), 0, 180, 0, size));
         }
 
-        for(int i = 0; i < 500; i++){
+         */
+
+
+        // trawa
+        for(int i = 0; i < 600; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            worldEntities.add(new Entity(grassModel, new Vector3f(x, 0, z), 0, 180, 0, 1));
+            worldEntities.add(new Entity(grassModel, new Vector3f(x, 0, z), 0, 180, 0, 3));
         }
+
+        // drzewa low poly
+        for(int i = 0; i < 600; i++){
+            int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
+            int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
+            float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);
+            worldEntities.add(new Entity(lowPolyTreeModel, new Vector3f(x, 0, z), 0, 180, 0, 1));
+        }
+
 
         int test = 0;
         while (!glfwWindowShouldClose(displayManager.getWindow())) {

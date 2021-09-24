@@ -14,11 +14,21 @@ import java.util.List;
 /**
  * OBJ loader to {@link RawModel}
  *
+ * @deprecated {@link OBJFileLoader}
+ *
+ * @see OBJFileLoader
+ *
  * @author thimatrix
+ * @author many
  * */
 
-public class OBJLoader {
+@Deprecated
+public final class OBJLoader {
+    private OBJLoader(){
+        throw new IllegalStateException("this class cannot have instance");
+    }
 
+    @Deprecated
     public static RawModel loadObjModel(String fileName, Loader loader) {
         FileReader fr = null;
         try {
@@ -34,10 +44,10 @@ public class OBJLoader {
         List<Vector2f> textures = new ArrayList<>();
         List<Vector3f> normals = new ArrayList<>();
         List<Integer> indices = new ArrayList<>();
-        float[] verticesArray = null;
+        float[] verticesArray;
         float[] normalsArray = null;
         float[] textureArray = null;
-        int[] indicesArray = null;
+        int[] indicesArray;
         try {
 
             while (true) {

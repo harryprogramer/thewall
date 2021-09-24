@@ -25,14 +25,16 @@ public class Camera {
      * @deprecated
      * */
     public void move(){
-        DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
-        DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
-        glfwGetCursorPos(Game.getDisplayManager().getWindow(), xBuffer, yBuffer);
-        double x = xBuffer.get(0);
-        double y = yBuffer.get(0);
+        if(glfwGetInputMode(Game.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED) {
+            DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
+            DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
+            glfwGetCursorPos(Game.getDisplayManager().getWindow(), xBuffer, yBuffer);
+            double x = xBuffer.get(0);
+            double y = yBuffer.get(0);
 
-        pitch = (float) y ;
-        yaw = (float) x;
+            pitch = (float) y;
+            yaw = (float) x;
+        }
 
         if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_W) == GLFW_PRESS){
             if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){

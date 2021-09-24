@@ -61,6 +61,14 @@ public class DisplayManager {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE ) {
                 glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
             }
+
+            if(key == GLFW_KEY_F3 && action == GLFW_RELEASE){
+                if(glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL){
+                    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                }else {
+                    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                }
+            }
         });
 
 
