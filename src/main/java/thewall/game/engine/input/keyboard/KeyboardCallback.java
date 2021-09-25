@@ -1,4 +1,4 @@
-package thewall.game.engine.input;
+package thewall.game.engine.input.keyboard;
 
 @FunctionalInterface
 public interface KeyboardCallback {

@@ -1,12 +1,8 @@
 package thewall.game;
 
-import org.lwjgl.util.vector.Vector3f;
 import thewall.game.engine.PogEngineApp;
 import thewall.game.engine.entity.Camera;
-import thewall.game.engine.entity.Entity;
-import thewall.game.engine.input.KeyboardKeys;
-import thewall.game.engine.models.TexturedModel;
-import thewall.game.engine.models.obj.thinmatrix.OBJLoader;
+import thewall.game.engine.input.keyboard.KeyboardKeys;
 import thewall.game.engine.terrain.Terrain;
 import thewall.game.engine.textures.ModelTexture;
 

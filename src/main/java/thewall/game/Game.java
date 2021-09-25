@@ -1,5 +1,6 @@
 package thewall.game;
 
+import thewall.game.engine.audio.SoundChannel;
 import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.entity.Camera;
 import thewall.game.engine.entity.Entity;
@@ -109,10 +110,8 @@ public class Game {
 
         Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
 
-        long startTime, tickStartTime;
 
-
-        //SoundChannel soundChannel = soundManager.playBackground(.3f, 0, "output.wav");
+        SoundChannel soundChannel = soundManager.playBackground(.3f, 0, "output.wav");
         Camera camera = new Camera();
 
         List<Entity> worldEntities = new ArrayList<>();
@@ -143,7 +142,7 @@ public class Game {
         }
 
         // drzewa low poly
-        for(int i = 0; i < 600; i++){
+        for(int i = 0; i < 400; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);

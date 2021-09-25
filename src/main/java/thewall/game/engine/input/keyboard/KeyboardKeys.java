@@ -1,4 +1,4 @@
-package thewall.game.engine.input;
+package thewall.game.engine.input.keyboard;
 
 public enum KeyboardKeys {
     W_KEY,
