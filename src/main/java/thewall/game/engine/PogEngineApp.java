@@ -11,7 +11,7 @@ import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.entity.Camera;
 import thewall.game.engine.entity.Entity;
 import thewall.game.engine.entity.Light;
-import thewall.game.engine.input.keyboard.KeyboardCallback;
+import thewall.game.engine.input.keyboard.TKeyboardCallback;
 import thewall.game.engine.input.keyboard.KeyboardKeys;
 import thewall.game.engine.models.Loader;
 import thewall.game.engine.render.MasterRenderer;
@@ -129,8 +129,8 @@ public abstract class PogEngineApp {
         logCallback = callback;
     }
 
-    public void setKeyboardCallback(KeyboardCallback keyboardCallback){
-        glfwSetKeyCallback(displayManager.getWindow(), (window, key, scancode, action, mods) -> keyboardCallback.invoke(keyToEnum(key), scancode, action, mods));
+    public void setKeyboardCallback(TKeyboardCallback TKeyboardCallback){
+        glfwSetKeyCallback(displayManager.getWindow(), (window, key, scancode, action, mods) -> TKeyboardCallback.invoke(keyToEnum(key), scancode, action, mods));
     }
 
     private void updateDisplay() throws Exception {

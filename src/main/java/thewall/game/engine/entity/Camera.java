@@ -31,7 +31,7 @@ public class Camera {
      * @deprecated
      * */
     public void move(){
-        if(glfwGetInputMode(Game.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED) {
+        if(glfwGetInputMode(Game.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED && glfwGetWindowAttrib(Game.getDisplayManager().getWindow(), GLFW_FOCUSED) == 1) {
             DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
             DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
             glfwGetCursorPos(Game.getDisplayManager().getWindow(), xBuffer, yBuffer);

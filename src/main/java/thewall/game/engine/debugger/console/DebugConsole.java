@@ -6,6 +6,7 @@ import lombok.extern.java.Log;
 import org.apache.logging.log4j.core.util.Log4jThreadFactory;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
+import thewall.game.Game;
 import thewall.game.engine.scheduler.TEngineThreadFactory;
 
 import javax.swing.*;
@@ -22,13 +23,14 @@ import java.util.logging.Level;
 
 public final class DebugConsole {
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor(TEngineThreadFactory.getInstance());
-    private final ConcurrentMap<Integer, LogData> logQueue = new ConcurrentHashMap<>();
+    private volatile List<LogData> logQueue = new ArrayList<>();
     private static boolean isGLFWInit = false;
 
     @Data
     static private class LogData {
         private final String text;
         private final LogLevel logLevel;
+        private final boolean isRaw;
     }
 
     public enum LogLevel {
@@ -38,10 +40,13 @@ public final class DebugConsole {
         DEBUG
     }
 
+    private boolean isWindowShowed = false;
     private final JFrame jFrame;
     private final JTextPane jTextField;
     private boolean debug = false;
     private boolean isLoggerEnabled = false;
+
+    private static final String welcomeMessage ="Welcome to gowno\n";
 
     @SneakyThrows
     public DebugConsole(){
@@ -51,6 +56,7 @@ public final class DebugConsole {
         DefaultCaret caret = (DefaultCaret) jTextField.getCaret();
         JScrollPane scroll = new JScrollPane(jTextField);
         jFrame.add(scroll, BorderLayout.CENTER);
+        jFrame.setFocusableWindowState(false);
         GraphicsEnvironment ge =
                 GraphicsEnvironment.getLocalGraphicsEnvironment();
         ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("./res/fonts/font.ttf")));
@@ -69,6 +75,7 @@ public final class DebugConsole {
         return isLoggerEnabled;
     }
 
+    @SneakyThrows
     public void startLogging(){
         if(isLoggerEnabled){
             throw new IllegalStateException("Logging is already working");
@@ -77,23 +84,24 @@ public final class DebugConsole {
     }
 
     private void loggerPulse(){
-        int index = 0;
-        if(!logQueue.isEmpty()) {
-            for (Iterator<LogData> it = logQueue.values().iterator(); it.hasNext(); ) {
+        if(isLoggerEnabled && isLoggerReady()) {
+            for (Iterator<LogData> it = logQueue.iterator(); it.hasNext(); ) {
                 LogData logData = it.next();
-                log(logData.getText(), logData.getLogLevel());
-                it.remove();
-
-                if(++index >= 30){
-                    break;
+                if(logData.isRaw()){
+                    appendToPane(logData.getText(), Color.WHITE);
+                }else {
+                    log(logData.getText(), logData.getLogLevel());
                 }
+                it.remove();
             }
         }
+    }
+    private boolean isLoggerReady(){
+        return jFrame.isShowing();
     }
 
     private void startLoggerQueue(){
         isLoggerEnabled = true;
-
         executor.scheduleAtFixedRate(() -> {
             try{
                 loggerPulse();
@@ -131,7 +139,7 @@ public final class DebugConsole {
     }
 
     private void invokeLog(String text, LogLevel logLevel){
-        logQueue.put(0, new LogData(text, logLevel));
+        executor.schedule(() -> logQueue.add(new LogData(text, logLevel, false)), 5, TimeUnit.MILLISECONDS);
     }
 
     private void log(String text, @NotNull LogLevel logLevel){
@@ -168,6 +176,7 @@ public final class DebugConsole {
 
                  */
 
+
                 if(logLevel != LogLevel.DEBUG){
                     appendToPane(String.format("[%s] [%s] %s", new DecimalFormat("##.###").format(GLFW.glfwGetTime()) , level, text), color);
                 }else {
@@ -202,8 +211,9 @@ public final class DebugConsole {
         }
     }
 
-    private static void showOnScreen( int screen, JFrame frame )
+    private void showOnScreen( int screen, JFrame frame )
     {
+
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice[] gd = ge.getScreenDevices();
         int width = 0, height = 0;
@@ -215,6 +225,9 @@ public final class DebugConsole {
                     ((height / 2) - (frame.getSize().height / 2)) + gd[screen].getDefaultConfiguration().getBounds().y
             );
             frame.setVisible(true);
+            isWindowShowed = true;
+            GLFW.glfwFocusWindow(Game.getDisplayManager().getWindow());
+
         } else {
             throw new RuntimeException( "No Screens Found" );
         }

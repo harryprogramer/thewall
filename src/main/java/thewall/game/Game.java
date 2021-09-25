@@ -1,5 +1,6 @@
 package thewall.game;
 
+import org.lwjgl.glfw.GLFW;
 import thewall.game.engine.audio.SoundChannel;
 import thewall.game.engine.debugger.TEngineDebugger;
 import thewall.game.engine.debugger.console.DebugConsole;
@@ -22,6 +23,7 @@ import lombok.Getter;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.util.vector.Vector3f;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,9 +63,10 @@ public class Game {
     }
 
     public static void main(String[] args) throws Exception {
-        TEngineDebugger.setPrintProxyDebugger(debug);
+        double startTime = System.currentTimeMillis();
+        //TEngineDebugger.setPrintProxyDebugger(debug);
         debug.startLogging();
-        System.out.println("Loading game...");
+        debug.info("Loading game...");
         class Dummy {
             public void m() {
             }
@@ -80,22 +83,22 @@ public class Game {
 
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         System.out.println(glfwGetVersionString());
-        GLFWErrorCallback.createPrint(System.err).set();
+        debug.info("Creating GLFW Error callback");
+        //GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit()) {
             System.err.println("open gl error");
         }
 
-        debug.showConsole();
-
-
 
         displayManager.createDisplay();
+        debug.info("Creating TEngine console window");
         masterRenderer = new MasterRenderer(displayManager);
         Loader loader = new Loader();
         //OBJObject objObject = new OBJObject(new File("./res/models/cube"));
 
         //RawModel treeRawModel = loader.loadToVAO(ExampleModels.krzysztof, ExampleModels.krzysztofIndices, ExampleModels.krzysztofTextureCoords);
 
+        debug.info("Loading object's");
         ModelData treeModelData = OBJFileLoader.loadOBJ("tree");
         ModelData grassModelData = OBJFileLoader.loadOBJ("grassModel");
         ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
@@ -103,6 +106,7 @@ public class Game {
         RawModel treeRawModel = loader.loadToVAO(treeModelData.getVertices(), treeModelData.getIndices(),
                 treeModelData.getTextureCoords(), treeModelData.getNormals());
 
+        debug.info("Loading textures");
         TexturedModel treemodel = new TexturedModel(treeRawModel, new ModelTexture(loader.loadTexture("tree", GL_RGBA)));
         TexturedModel grassModel = new TexturedModel(loader.loadToVAO(grassModelData.getVertices(), grassModelData.getIndices(),
                 grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(loader.loadTexture("grassTexture", GL_RGBA)));
@@ -141,8 +145,15 @@ public class Game {
 
          */
 
+        // ------------------ RENDER ZONE --------------------------
+
+        debug.info("Creating and loading models...");
+
+
+        debug.showConsole();
 
         // trawa
+
         for(int i = 0; i < 600; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
@@ -158,9 +169,13 @@ public class Game {
         }
 
 
-        glfwSetInputMode(displayManager.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        //glfwSetInputMode(displayManager.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+        debug.info(String.format("Loading done! in %s.s", new DecimalFormat("##.###").format(System.currentTimeMillis() - startTime / 1000.0)));
+
+        glfwFocusWindow(displayManager.getWindow());
+
         while (!glfwWindowShouldClose(displayManager.getWindow())) {
-            //debug.info("test");
             try {
 
                 //entity.increasePosition(0, 0, -0.006f);
@@ -184,7 +199,7 @@ public class Game {
                     glfwSetWindowTitle(displayManager.getWindow(), "FPS: " + frameCount);
                     fps = frameCount;
                     System.out.flush();
-                    debug.debug("FPS: " + frameCount);
+                    debug.info("FPS: " + frameCount);
                     System.out.printf("X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
                     //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
                     frameCount = 0;
