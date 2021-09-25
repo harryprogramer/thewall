@@ -3,7 +3,7 @@ package thewall.game.engine.textures;
 import lombok.Getter;
 import lombok.Setter;
 
-public class ModelTexture {
+public final class ModelTexture {
     private final int textureID;
 
     private float shineDamper = 1;

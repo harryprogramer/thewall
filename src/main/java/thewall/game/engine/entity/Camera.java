@@ -4,8 +4,10 @@ import org.lwjgl.BufferUtils;
 import thewall.game.Game;
 import lombok.Getter;
 import org.lwjgl.util.vector.Vector3f;
+import thewall.game.engine.debugger.console.DebugConsole;
 
 import java.nio.DoubleBuffer;
+import java.text.DecimalFormat;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -14,6 +16,10 @@ public class Camera {
     private final Vector3f position = new Vector3f(250, 2, 250);
     @Getter
     private float yaw, roll, pitch;
+
+    private static final float MOUSESENSTIVITY = 0.2f;
+
+    private double previousTime = glfwGetTime();
 
     public Camera(){}
 
@@ -34,8 +40,13 @@ public class Camera {
             double x = xBuffer.get(0);
             double y = yBuffer.get(0);
 
-            pitch = (float) (0.2f * y);
-            yaw = (float) (0.2f * x);
+            pitch = (float) (MOUSESENSTIVITY * y);
+            yaw = (float) (MOUSESENSTIVITY * x);
+            if(glfwGetTime() - previousTime > 0.5){
+                Game.getDebug().info(String.format("Mouse X: [%s]", new DecimalFormat("##.##").format(yaw)));
+                Game.getDebug().info(String.format("Mouse Y: [%s]", new DecimalFormat("##.##").format(pitch)));
+                previousTime = glfwGetTime();
+            }
         }
 
         if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_W) == GLFW_PRESS){

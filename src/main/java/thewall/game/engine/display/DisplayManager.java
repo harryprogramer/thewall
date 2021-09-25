@@ -55,7 +55,6 @@ public class DisplayManager {
         glfwMakeContextCurrent(window);
 
         glfwShowWindow(window);
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE ) {

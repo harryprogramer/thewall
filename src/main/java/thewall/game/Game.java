@@ -1,6 +1,8 @@
 package thewall.game;
 
 import thewall.game.engine.audio.SoundChannel;
+import thewall.game.engine.debugger.TEngineDebugger;
+import thewall.game.engine.debugger.console.DebugConsole;
 import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.entity.Camera;
 import thewall.game.engine.entity.Entity;
@@ -39,6 +41,8 @@ public class Game {
     @Getter
     private static final DisplayManager displayManager = new DisplayManager(1280, 720);
     private final static ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+    @Getter
+    private static final DebugConsole debug = new DebugConsole();
 
     static double previousTime = glfwGetTime();
     static int frameCount = 0;
@@ -57,6 +61,8 @@ public class Game {
     }
 
     public static void main(String[] args) throws Exception {
+        TEngineDebugger.setPrintProxyDebugger(debug);
+        debug.startLogging();
         System.out.println("Loading game...");
         class Dummy {
             public void m() {
@@ -78,6 +84,8 @@ public class Game {
         if (!glfwInit()) {
             System.err.println("open gl error");
         }
+
+        debug.showConsole();
 
 
 
@@ -111,7 +119,7 @@ public class Game {
         Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
 
 
-        SoundChannel soundChannel = soundManager.playBackground(.3f, 0, "output.wav");
+        //SoundChannel soundChannel = soundManager.playBackground(.3f, 0, "output.wav");
         Camera camera = new Camera();
 
         List<Entity> worldEntities = new ArrayList<>();
@@ -150,9 +158,11 @@ public class Game {
         }
 
 
-        int test = 0;
+        glfwSetInputMode(displayManager.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         while (!glfwWindowShouldClose(displayManager.getWindow())) {
+            //debug.info("test");
             try {
+
                 //entity.increasePosition(0, 0, -0.006f);
                 //entity.increaseRotation(0, 0.1f, 0);
                 camera.move();
@@ -173,19 +183,12 @@ public class Game {
                 if (currentTime - previousTime >= 1.0) {
                     glfwSetWindowTitle(displayManager.getWindow(), "FPS: " + frameCount);
                     fps = frameCount;
-                    System.out.print("\033[H\033[2J");
                     System.out.flush();
-                    System.out.println("FPS: " + frameCount);
-                    System.out.printf("X: [%s] Y: [%s] Z: [%s]%n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
+                    debug.debug("FPS: " + frameCount);
+                    System.out.printf("X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
                     //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
                     frameCount = 0;
                     previousTime = currentTime;
-                    test++;
-                    if (test > 3) {
-                        //if(soundChannel.isOpen()) {
-                        //    soundChannel.close();
-                        //}
-                    }
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -194,6 +197,7 @@ public class Game {
             //timer.sync(100);
         }
 
+        debug.closeConsole();
         masterRenderer.cleanUp();
         loader.cleanUp();
 
@@ -202,6 +206,8 @@ public class Game {
 
         glfwTerminate();
         Objects.requireNonNull(glfwSetErrorCallback(null)).free();
+
+
     }
 
     private static class ShutdownHook extends Thread {
