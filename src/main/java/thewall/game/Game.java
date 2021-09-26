@@ -135,7 +135,7 @@ public class Game {
 
         List<Entity> worldEntities = new ArrayList<>();
 
-        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass", GL_RGBA));
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass3", GL_RGBA));
         TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud", GL_RGBA));
         TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers", GL_RGBA));
         TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path", GL_RGBA));
