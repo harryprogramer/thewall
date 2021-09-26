@@ -1,5 +1,6 @@
 package thewall.game;
 
+import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import thewall.game.engine.audio.SoundChannel;
 import thewall.game.engine.debugger.TEngineDebugger;
@@ -21,7 +22,8 @@ import thewall.game.engine.terrain.Terrain;
 import thewall.game.engine.textures.ModelTexture;
 import lombok.Getter;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.util.vector.Vector3f;
+import thewall.game.engine.textures.TerrainTexture;
+import thewall.game.engine.textures.TerrainTexturePack;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -37,7 +39,6 @@ import java.util.logging.Logger;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-
 
 public class Game {
     @Getter
@@ -63,8 +64,14 @@ public class Game {
     }
 
     public static void main(String[] args) throws Exception {
+        /*
+        if(1 == 1) {
+            throw new RuntimeException("RIP 25.09.2021 22:46, problem z multiteksturowaniem, ogolne problemy zwiazane z przestzrzalym poradnikiem do lwjgl2 ");
+        }
+
+         */
         double startTime = System.currentTimeMillis();
-        //TEngineDebugger.setPrintProxyDebugger(debug);
+        TEngineDebugger.setPrintProxyDebugger(debug);
         debug.startLogging();
         debug.info("Loading game...");
         class Dummy {
@@ -128,11 +135,19 @@ public class Game {
 
         List<Entity> worldEntities = new ArrayList<>();
 
-        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass3", GL_RGBA)));
-        Terrain terrain2 = new Terrain(1, 0, loader, new ModelTexture(loader.loadTexture("grass3", GL_RGBA)));
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass", GL_RGBA));
+        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud", GL_RGBA));
+        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers", GL_RGBA));
+        TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path", GL_RGBA));
 
-        terrain.getTexture().setUseFakeLighting(true);
-        terrain2.getTexture().setUseFakeLighting(true);
+        TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
+        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap", GL_RGBA));
+
+        Terrain terrain = new Terrain(0, 0, loader, texturePack, blendMap);
+        Terrain terrain2 = new Terrain(1, 0, loader, texturePack, blendMap);
+
+        //grass.getTexture().setUseFakeLighting(true);
+        //terrain2.getTexture().setUseFakeLighting(true);
 
         /*
         // drzewa default
@@ -175,6 +190,7 @@ public class Game {
 
         glfwFocusWindow(displayManager.getWindow());
 
+        glfwSetInputMode(Game.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         while (!glfwWindowShouldClose(displayManager.getWindow())) {
             try {
 

@@ -4,20 +4,25 @@ import lombok.Getter;
 import thewall.game.engine.models.Loader;
 import thewall.game.engine.models.RawModel;
 import thewall.game.engine.textures.ModelTexture;
+import thewall.game.engine.textures.TerrainTexture;
+import thewall.game.engine.textures.TerrainTexturePack;
 
 public class Terrain {
     private static final float SIZE = 800;
     private static final int VERTEX_COUNT = 128;
 
     @Getter
-    private float x, z;
+    private final float x, z;
     @Getter
-    private RawModel model;
+    private final RawModel model;
     @Getter
-    private ModelTexture texture;
+    private final TerrainTexturePack texturePack;
+    @Getter
+    private final TerrainTexture blendMap;
 
-    public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture){
-        this.texture = texture;
+    public Terrain(int gridX, int gridZ, Loader loader, TerrainTexturePack texturePack, TerrainTexture blendMap){
+        this.texturePack = texturePack;
+        this.blendMap = blendMap;
         this.x = gridX * SIZE;
         this.z = gridZ * SIZE;
         this.model = generateTerrain(loader);
@@ -58,6 +63,6 @@ public class Terrain {
                 indices[pointer++] = bottomRight;
             }
         }
-        return loader.loadToVAO(vertices, indices, normals, textureCoords);
+        return loader.loadToVAO(vertices, indices, textureCoords, normals);
     }
 }

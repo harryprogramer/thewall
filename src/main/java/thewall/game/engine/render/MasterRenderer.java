@@ -2,8 +2,8 @@ package thewall.game.engine.render;
 
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
 import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.display.DisplayUtils;
 import thewall.game.engine.display.Resolution;
@@ -103,12 +103,22 @@ public class MasterRenderer {
         float frustum_length = FAR_PLANE - NEAR_PLANE;
 
         projectionMatrix = new Matrix4f();
+
+        projectionMatrix.m00(x_scale);
+        projectionMatrix.m11(y_scale);
+        projectionMatrix.m22(-((FAR_PLANE + NEAR_PLANE) / frustum_length));
+        projectionMatrix.m23(-1);
+        projectionMatrix.m32(-((2 * NEAR_PLANE * FAR_PLANE) / frustum_length));
+        projectionMatrix.m33(0);
+       /*
         projectionMatrix.m00 = x_scale;
         projectionMatrix.m11 = y_scale;
         projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustum_length);
         projectionMatrix.m23 = -1;
         projectionMatrix.m32 = -((2 * NEAR_PLANE * FAR_PLANE) / frustum_length);
         projectionMatrix.m33 = 0;
+
+        */
     }
 
     public void prepare(){

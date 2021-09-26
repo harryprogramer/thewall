@@ -1,10 +1,9 @@
 package thewall.game.engine.entity;
 
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import thewall.game.Game;
 import lombok.Getter;
-import org.lwjgl.util.vector.Vector3f;
-import thewall.game.engine.debugger.console.DebugConsole;
 
 import java.nio.DoubleBuffer;
 import java.text.DecimalFormat;

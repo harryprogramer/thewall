@@ -8,10 +8,13 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryStack;
+import thewall.game.engine.models.loader.TextureLoader;
+import thewall.game.engine.models.loader.texture.Texture;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -29,18 +32,33 @@ public class Loader {
     public RawModel loadToVAO(float[] positions, int[] indices, float[] textureCoords, float[] normals){
         int vaoID = createVAO();
         bindIndicesBuffer(indices);
-        storeDataInAttributeList(0, 3 ,positions);
-        storeDataInAttributeList(1, 2, textureCoords);
-        storeDataInAttributeList(2, 3, normals);
+        storeDataInAttributeList(0,3,positions);
+        storeDataInAttributeList(1,2,textureCoords);
+        storeDataInAttributeList(2,3,normals);
         unbindVAO();
         return new RawModel(vaoID, indices.length);
     }
 
     private int createVAO(){
         int vaoID = GL30.glGenVertexArrays();
+        vaos.add(vaoID);
         GL30.glBindVertexArray(vaoID);
         return vaoID;
     }
+
+    @SneakyThrows
+    private int loadTexture5(String filename, int pixelFormat){
+        int id = 0;
+
+        Texture texture = TextureLoader.getTexture("PNG",
+                new FileInputStream("res/texture/" + filename + ".png"));
+
+        id = texture.getTextureID();
+        textures.add(id);
+        return id;
+    }
+
+
 
     @SneakyThrows
     private int loadTexture4(String filename, int pixelFormat){
@@ -67,9 +85,8 @@ public class Loader {
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         //set the texture parameters, can be GL_LINEAR or GL_NEAREST
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // Linear Filtering
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // Linear Filter
         //upload texture
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, decoder.getWidth(), decoder.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 
@@ -108,7 +125,7 @@ public class Loader {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(0), height.get(0),
                         0, GL_RGBA, GL_UNSIGNED_BYTE, image);
             } else {
-                assert false : "Error: (Texture) Unknown number of channesl '" + channels.get(0) + "'";
+                assert false : "Error: (Texture) Unknown number of channels '" + channels.get(0) + "'";
             }
         } else {
             assert false : "Error: (Texture) Could not load image '" + filename + "'";
@@ -155,40 +172,13 @@ public class Loader {
     }
 
     public int loadTexture(String fileName, int pixelFormat){
-        /*
-        int textureID;
-        textureID = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, textureID);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-
-        IntBuffer width = BufferUtils.createIntBuffer(1);
-        IntBuffer height = BufferUtils.createIntBuffer(1);
-        IntBuffer channels = BufferUtils.createIntBuffer(1);
-        ByteBuffer image = stbi_load("res/texture/" + fileName + ".png", width, height, channels, 0);
-
-        if (image != null){
-            glTexImage2D(GL_TEXTURE_2D, 0, pixelFormat, width.get(0), height.get(0), 1, GL_RGBA, GL_UNSIGNED_BYTE, image);
-        }else {
-            throw new RuntimeException("Error: Could not load image '" + fileName + "'");
-        }
-
-        stbi_image_free(image); // free malloc
-
-        textures.add(textureID);
-        return textureID;
-
-         */
-
-        return loadTexture2(fileName, pixelFormat);
+        return loadTexture4(fileName, pixelFormat);
     }
 
     private void storeDataInAttributeList(int number, int coordinateSize ,float[] data){
         int vboID = GL15.glGenBuffers();
+        vbos.add(vboID);
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
         FloatBuffer floatBuffer = storeDataInFloatBuffer(data);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, floatBuffer, GL15.GL_STATIC_DRAW);

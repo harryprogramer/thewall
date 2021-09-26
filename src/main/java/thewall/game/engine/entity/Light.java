@@ -1,7 +1,7 @@
 package thewall.game.engine.entity;
 
 import lombok.Data;
-import org.lwjgl.util.vector.Vector3f;
+import org.joml.Vector3f;
 
 @Data
 public class Light {

@@ -1,13 +1,13 @@
 package thewall.game.engine.shaders;
 
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import thewall.game.engine.utils.ResourceUtils;
 import lombok.SneakyThrows;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
 
 import java.nio.FloatBuffer;
 
@@ -65,13 +65,17 @@ public abstract class ShaderProgram {
         GL20.glUniform3f(location, vector3f.x, vector3f.y, vector3f.z);
     }
 
+    protected void loadInt(int location , @NotNull int value){
+        GL20.glUniform1i(location, value);
+    }
+
     protected void loadBoolean(int location, boolean value){
         GL20.glUniform1f(location, value ? 1 : 0);
     }
 
     protected void loadMatrix(int location, @NotNull Matrix4f matrix4f){
-        matrix4f.store(matrixBuffer);
-        matrixBuffer.flip();
+        matrix4f.get(matrixBuffer);
+        //matrixBuffer.flip();
         GL20.glUniformMatrix4fv(location, false, matrixBuffer);
     }
 

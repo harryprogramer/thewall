@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.util.vector.Vector3f;
+import org.joml.Vector3f;
 import thewall.game.engine.audio.SoundManager;
 import thewall.game.engine.audio.SoundMaster;
 import thewall.game.engine.display.DisplayManager;

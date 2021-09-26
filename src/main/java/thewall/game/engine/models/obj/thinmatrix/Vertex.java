@@ -1,7 +1,7 @@
 package thewall.game.engine.models.obj.thinmatrix;
 
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.util.vector.Vector3f;
+import org.joml.Vector3f;
 
 public class Vertex {
     private static final int NO_INDEX = -1;
@@ -16,7 +16,7 @@ public class Vertex {
     protected Vertex(int index, @NotNull Vector3f position){
         this.index = index;
         this.position = position;
-        this.length = position.length();
+        this.length = position.length() ;
     }
 
     public int getIndex(){

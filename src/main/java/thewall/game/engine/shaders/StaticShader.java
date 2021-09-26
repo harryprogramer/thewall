@@ -1,12 +1,11 @@
 package thewall.game.engine.shaders;
 
-import org.lwjgl.util.vector.Vector;
-import org.lwjgl.util.vector.Vector3f;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import thewall.game.engine.entity.Camera;
 import thewall.game.engine.entity.Light;
 import thewall.game.engine.utils.Maths;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.util.vector.Matrix4f;
 
 public class StaticShader extends ShaderProgram {
     private int locationTransformationMatrix;

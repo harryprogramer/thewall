@@ -1,9 +1,9 @@
 package thewall.game.engine.models.obj.thinmatrix;
 
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import thewall.game.engine.models.Loader;
 import thewall.game.engine.models.RawModel;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

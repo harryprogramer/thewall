@@ -1,8 +1,8 @@
 package thewall.game.engine.entity;
 
+import org.joml.Vector3f;
 import thewall.game.engine.models.TexturedModel;
 import lombok.Getter;
-import org.lwjgl.util.vector.Vector3f;
 
 public class Entity {
     @Getter

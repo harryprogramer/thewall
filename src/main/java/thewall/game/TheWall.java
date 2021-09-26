@@ -22,7 +22,7 @@ public class TheWall extends PogEngineApp {
 
     @Override
     public void enginePulse() {
-        rndrProcessTerrain(new Terrain(1, 0, getLoader(), new ModelTexture(getLoader().loadTexture("grass3", GL_RGBA))));
+        //rndrProcessTerrain(new Terrain(1, 0, getLoader(), new ModelTexture(getLoader().loadTexture("grass3", GL_RGBA))));
 
     }
 

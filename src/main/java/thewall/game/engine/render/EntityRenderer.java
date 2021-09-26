@@ -1,5 +1,6 @@
 package thewall.game.engine.render;
 
+import org.joml.Matrix4f;
 import thewall.game.engine.display.DisplayManager;
 import thewall.game.engine.entity.Entity;
 import thewall.game.engine.models.RawModel;
@@ -13,7 +14,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
-import org.lwjgl.util.vector.Matrix4f;
 
 import java.util.List;
 import java.util.Map;
