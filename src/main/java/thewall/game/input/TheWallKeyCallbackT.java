@@ -1,7 +1,7 @@
 package thewall.game.input;
 
-import thewall.game.engine.input.keyboard.TKeyboardCallback;
-import thewall.game.engine.input.keyboard.KeyboardKeys;
+import thewall.game.tengine.input.keyboard.TKeyboardCallback;
+import thewall.game.tengine.input.keyboard.KeyboardKeys;
 
 public class TheWallKeyCallbackT implements TKeyboardCallback {
 

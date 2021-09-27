@@ -1,14 +1,10 @@
 package thewall.game;
 
-import thewall.game.engine.PogEngineApp;
-import thewall.game.engine.entity.Camera;
-import thewall.game.engine.input.keyboard.KeyboardKeys;
-import thewall.game.engine.terrain.Terrain;
-import thewall.game.engine.textures.ModelTexture;
+import thewall.game.tengine.TEngineApp;
+import thewall.game.tengine.entity.Camera;
+import thewall.game.tengine.input.keyboard.KeyboardKeys;
 
-import static org.lwjgl.opengl.GL11.GL_RGBA;
-
-public class TheWall extends PogEngineApp {
+public class TheWall extends TEngineApp {
     Camera camera;
     @Override
     public void onEnable() {

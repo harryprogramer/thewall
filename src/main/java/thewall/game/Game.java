@@ -1,29 +1,28 @@
 package thewall.game;
 
 import org.joml.Vector3f;
-import org.lwjgl.glfw.GLFW;
-import thewall.game.engine.audio.SoundChannel;
-import thewall.game.engine.debugger.TEngineDebugger;
-import thewall.game.engine.debugger.console.DebugConsole;
-import thewall.game.engine.display.DisplayManager;
-import thewall.game.engine.entity.Camera;
-import thewall.game.engine.entity.Entity;
-import thewall.game.engine.entity.Light;
-import thewall.game.engine.models.Loader;
-import thewall.game.engine.models.RawModel;
-import thewall.game.engine.models.TexturedModel;
-import thewall.game.engine.models.obj.thinmatrix.ModelData;
-import thewall.game.engine.models.obj.thinmatrix.OBJFileLoader;
-import thewall.game.engine.models.obj.thinmatrix.OBJLoader;
-import thewall.game.engine.render.MasterRenderer;
-import thewall.game.engine.render.SyncTimer;
-import thewall.game.engine.audio.SoundManager;
-import thewall.game.engine.terrain.Terrain;
-import thewall.game.engine.textures.ModelTexture;
+import thewall.game.tengine.debugger.TEngineDebugger;
+import thewall.game.tengine.debugger.console.DebugConsole;
+import thewall.game.tengine.display.DisplayManager;
+import thewall.game.tengine.entity.Camera;
+import thewall.game.tengine.entity.Entity;
+import thewall.game.tengine.entity.Light;
+import thewall.game.tengine.entity.Player;
+import thewall.game.tengine.models.Loader;
+import thewall.game.tengine.models.RawModel;
+import thewall.game.tengine.models.TexturedModel;
+import thewall.game.tengine.models.obj.thinmatrix.ModelData;
+import thewall.game.tengine.models.obj.thinmatrix.OBJFileLoader;
+import thewall.game.tengine.models.obj.thinmatrix.OBJLoader;
+import thewall.game.tengine.render.MasterRenderer;
+import thewall.game.tengine.render.SyncTimer;
+import thewall.game.tengine.audio.SoundManager;
+import thewall.game.tengine.terrain.Terrain;
+import thewall.game.tengine.textures.ModelTexture;
 import lombok.Getter;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import thewall.game.engine.textures.TerrainTexture;
-import thewall.game.engine.textures.TerrainTexturePack;
+import thewall.game.tengine.textures.TerrainTexture;
+import thewall.game.tengine.textures.TerrainTexturePack;
+import thewall.game.tengine.utils.Maths;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -96,6 +95,9 @@ public class Game {
             System.err.println("open gl error");
         }
 
+        debug.info("Indexing math...");
+        Maths.generateIndexedCosSineTable();
+
 
         displayManager.createDisplay();
         debug.info("Creating TEngine console window");
@@ -114,14 +116,19 @@ public class Game {
                 treeModelData.getTextureCoords(), treeModelData.getNormals());
 
         debug.info("Loading textures");
-        TexturedModel treemodel = new TexturedModel(treeRawModel, new ModelTexture(loader.loadTexture("tree", GL_RGBA)));
+        TexturedModel treemodel = new TexturedModel(treeRawModel, new ModelTexture(loader.loadTexture("tree", GL_RGBA, GL_NEAREST)));
         TexturedModel grassModel = new TexturedModel(loader.loadToVAO(grassModelData.getVertices(), grassModelData.getIndices(),
-                grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(loader.loadTexture("grassTexture", GL_RGBA)));
+                grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(loader.loadTexture("grassTexture", GL_RGBA, GL_NEAREST)));
 
         TexturedModel lowPolyTreeModel = new TexturedModel(loader.loadToVAO(lowPolyTree.getVertices(), lowPolyTree.getIndices(),
-                lowPolyTree.getTextureCoords(), lowPolyTree.getNormals()),  new ModelTexture(loader.loadTexture("lowPolyTree", GL_RGBA)));
+                lowPolyTree.getTextureCoords(), lowPolyTree.getNormals()),  new ModelTexture(loader.loadTexture("lowPolyTree", GL_RGBA,GL_NEAREST )));
 
         ModelTexture texture = treemodel.getModelTexture();
+
+        ModelData modelData = OBJFileLoader.loadOBJ("bunny");
+        RawModel bunnyModel = loader.loadToVAO(modelData.getVertices(), modelData.getIndices(), modelData.getTextureCoords(), modelData.getNormals());
+        Player player = new Player(new TexturedModel(bunnyModel,new ModelTexture(loader.loadTexture("white", GL_RGBA, GL_LINEAR))),
+                new Vector3f(300, 0, 600), 0, 0, 0, 1);
 
         texture.setShineDamper(10);
         texture.setReflectivity(1);
@@ -135,13 +142,13 @@ public class Game {
 
         List<Entity> worldEntities = new ArrayList<>();
 
-        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass3", GL_RGBA));
-        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud", GL_RGBA));
-        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers", GL_RGBA));
-        TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path", GL_RGBA));
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass3", GL_RGBA, GL_LINEAR));
+        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud", GL_RGBA, GL_LINEAR));
+        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers", GL_RGBA, GL_LINEAR));
+        TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path", GL_RGBA, GL_LINEAR));
 
         TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
-        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap", GL_RGBA));
+        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap", GL_RGBA, GL_LINEAR));
 
         Terrain terrain = new Terrain(0, 0, loader, texturePack, blendMap);
         Terrain terrain2 = new Terrain(1, 0, loader, texturePack, blendMap);
@@ -196,7 +203,10 @@ public class Game {
 
                 //entity.increasePosition(0, 0, -0.006f);
                 //entity.increaseRotation(0, 0.1f, 0);
-                camera.move();
+                //+camera.move();
+                player.tick();
+
+                masterRenderer.processEntity(player);
 
                 displayManager.updateDisplay();
 
@@ -214,9 +224,11 @@ public class Game {
                 if (currentTime - previousTime >= 1.0) {
                     glfwSetWindowTitle(displayManager.getWindow(), "FPS: " + frameCount);
                     fps = frameCount;
-                    System.out.flush();
-                    debug.info("FPS: " + frameCount);
-                    System.out.printf("X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
+                    if(frameCount <= 30){
+                        debug.warn("FPS drop detected, current framerate: " + frameCount);
+                    }
+                    System.out.printf("Camera: X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
+                    System.out.printf("Player: X: [%s] Y: [%s] Z: [%s]\n", player.getPosition().x, player.getPosition().y, player.getPosition().z);
                     //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
                     frameCount = 0;
                     previousTime = currentTime;
