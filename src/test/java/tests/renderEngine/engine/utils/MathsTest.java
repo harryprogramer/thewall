@@ -7,6 +7,6 @@ import thewall.game.tengine.utils.Maths;
 class MathsTest {
     @Test
     void test(){
-        System.out.println(Maths.createViewMatrix(new Camera()));
+        //System.out.println(Maths.createViewMatrix(new Camera()));
     }
 }

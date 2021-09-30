@@ -8,7 +8,6 @@ import org.joml.Vector3f;
 import thewall.game.tengine.audio.SoundManager;
 import thewall.game.tengine.audio.SoundMaster;
 import thewall.game.tengine.display.DisplayManager;
-import thewall.game.tengine.entity.Camera;
 import thewall.game.tengine.entity.Entity;
 import thewall.game.tengine.entity.Light;
 import thewall.game.tengine.input.keyboard.TKeyboardCallback;
@@ -19,7 +18,6 @@ import thewall.game.tengine.terrain.Terrain;
 
 import java.io.PrintWriter;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -32,9 +30,16 @@ public abstract class TEngineApp {
     private int frameCount;
 
     @Getter
-    private Light rndrLight = new Light(new Vector3f(0, 0, 0) ,new Vector3f(0, 0, 0));
+    private final String name;
+
+    public TEngineApp(String name){
+        this.name = name;
+    }
+
     @Getter
-    private Camera rndrCamera = new Camera();
+    private Light rndrLight = new Light(new Vector3f(0, 0, 0) ,new Vector3f(0, 0, 0));
+    //@Getter
+    //private Camera rndrCamera = new Camera();
 
     @Getter
     private final Loader loader = new Loader();
@@ -53,11 +58,10 @@ public abstract class TEngineApp {
     /**
      * Initialize engine and create display
      * */
-    public void startEngine() throws InterruptedException {
+    public void startEngine() {
         onEnable();
         initializeEngine();
         startEnginePulse();
-        TimeUnit.SECONDS.sleep(1);
     }
 
     /**
@@ -80,6 +84,7 @@ public abstract class TEngineApp {
     public void setWindowTitle(String windowTitle){
         glfwSetWindowTitle(displayManager.getWindow(), windowTitle);
     }
+
 
     private void initializeEngine(){
         if (!glfwInit()) {
@@ -152,7 +157,7 @@ public abstract class TEngineApp {
         while(!glfwWindowShouldClose(displayManager.getWindow())){
             enginePulse();
             updateDisplay();
-            renderer.render(rndrLight, rndrCamera);
+            //renderer.render(rndrLight, rndrCamera);
         }
     }
 
@@ -168,21 +173,21 @@ public abstract class TEngineApp {
          renderThread.start();
     }
 
-    public void rndrProcessTerrain(Terrain terrain){
+    public void processTerrain(Terrain terrain){
         renderer.processTerrain(terrain);
     }
 
-    public void rndrProcessEntity(Entity entity){
+    public void processEntity(Entity entity){
         renderer.processEntity(entity);
     }
 
-    public void rndrProcessLight(Light light){
+    public void processLight(Light light){
         this.rndrLight = light;
     }
 
-    public void rndrProcessCamera(Camera camera){
-        this.rndrCamera = camera;
-    }
+    //public void rndrProcessCamera(Camera camera){
+    //    this.rndrCamera = camera;
+    //}
 
     @Contract(pure = true)
     private @Nullable KeyboardKeys keyToEnum(int code){
@@ -198,6 +203,7 @@ public abstract class TEngineApp {
             default -> {return null;}
         }
     }
+
 
     public abstract void onEnable();
 

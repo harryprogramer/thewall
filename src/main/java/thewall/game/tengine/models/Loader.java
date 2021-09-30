@@ -7,8 +7,6 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryStack;
-import thewall.game.tengine.models.loader.TextureLoader;
-import thewall.game.tengine.models.loader.texture.Texture;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,14 +44,8 @@ public class Loader {
 
     @SneakyThrows
     private int loadTexture5(String filename, int pixelFormat){
-        int id = 0;
-
-        Texture texture = TextureLoader.getTexture("PNG",
-                new FileInputStream("res/texture/" + filename + ".png"));
-
-        id = texture.getTextureID();
-        textures.add(id);
-        return id;
+        //reserved
+        return 0;
     }
 
 

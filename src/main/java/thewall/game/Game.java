@@ -69,7 +69,12 @@ public class Game {
         }
 
          */
+
         double startTime = System.currentTimeMillis();
+        glfwDefaultWindowHints();
+        glfwWindowHint(GLFW_DEPTH_BITS, 0);
+        glfwWindowHint(GLFW_STENCIL_BITS, 0);
+        glfwWindowHint(GLFW_ALPHA_BITS, 0);
         TEngineDebugger.setPrintProxyDebugger(debug);
         debug.startLogging();
         debug.info("Loading game...");
@@ -138,7 +143,7 @@ public class Game {
 
 
         //SoundChannel soundChannel = soundManager.playBackground(.3f, 0, "output.wav");
-        Camera camera = new Camera();
+        Camera camera = new Camera(player);
 
         List<Entity> worldEntities = new ArrayList<>();
 
@@ -203,7 +208,7 @@ public class Game {
 
                 //entity.increasePosition(0, 0, -0.006f);
                 //entity.increaseRotation(0, 0.1f, 0);
-                //+camera.move();
+                camera.move();
                 player.tick();
 
                 masterRenderer.processEntity(player);

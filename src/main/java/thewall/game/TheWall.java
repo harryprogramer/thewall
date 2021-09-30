@@ -6,6 +6,11 @@ import thewall.game.tengine.input.keyboard.KeyboardKeys;
 
 public class TheWall extends TEngineApp {
     Camera camera;
+
+    public TheWall() {
+        super("The Wall");
+    }
+
     @Override
     public void onEnable() {
 
@@ -24,8 +29,8 @@ public class TheWall extends TEngineApp {
 
     public static void main(String[] args) throws InterruptedException {
         TheWall theWall = new TheWall();
-        theWall.camera = new Camera();
-        theWall.rndrProcessCamera(theWall.camera);
+        //theWall.camera = new Camera();
+        //theWall.rndrProcessCamera(theWall.camera);
         //theWall.rndrProcessEntity(new Entity(new TexturedModel(OBJLoader.loadObjModel("models/tree", theWall.getLoader()), new ModelTexture(the.loadTexture("stallTexture", GL_RGBA)));, new Vector3f(250, 2, 250), 0, 180, 0, 1););
         theWall.startEngine();
         theWall.setKeyboardCallback((key, scancode, action, mods) -> {

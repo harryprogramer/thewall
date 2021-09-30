@@ -20,7 +20,11 @@ public class Camera {
 
     private double previousTime = glfwGetTime();
 
-    public Camera(){}
+    private float distanceFromPlayer = 50;
+    private float angleAroundPlayer = 0;
+
+
+    public Camera(Player player){}
 
 
     @Deprecated
@@ -30,6 +34,7 @@ public class Camera {
      * @deprecated
      * */
     public void move(){
+        /*
         if(glfwGetInputMode(Game.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED && glfwGetWindowAttrib(Game.getDisplayManager().getWindow(), GLFW_FOCUSED) == 1) {
             DoubleBuffer xBuffer = BufferUtils.createDoubleBuffer(1);
             DoubleBuffer yBuffer = BufferUtils.createDoubleBuffer(1);
@@ -48,34 +53,36 @@ public class Camera {
             }
         }
 
-        if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_W) == GLFW_PRESS){
+         */
+
+        if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_UP) == GLFW_PRESS){
             if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.z -= 0.5f;
             }
             position.z -= 0.1f;
         }
 
-        if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_D) == GLFW_PRESS){
+        if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_RIGHT) == GLFW_PRESS){
             if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.x += 0.5f;
             }
             position.x += 0.1f;
         }
 
-        if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_A) == GLFW_PRESS){
+        if(glfwGetKey(Game.getDisplayManager().getWindow(),  GLFW_KEY_LEFT) == GLFW_PRESS){
             if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.x -= 0.5f;
             }
             position.x -= 0.1f;
         }
 
-        if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_S) == GLFW_PRESS){
+        if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_DOWN) == GLFW_PRESS){
             if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.z += 0.5f;
             }
             position.z += 0.1f;
         }
-
+        /*
         if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
             if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.y -= 0.5f;
@@ -89,5 +96,12 @@ public class Camera {
             }
             position.y += 0.1f;
         }
+
+         */
     }
+
+    private void calculateZoom(){
+        //float zoomLevel =
+    }
+
 }
