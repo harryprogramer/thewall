@@ -3,6 +3,7 @@ package thewall.engine.tengine.input.keyboard;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -47,6 +48,31 @@ public enum KeyboardKeys {
             default -> {
                 logger.warn("Unknown key id: " + code);
                 return null;
+            }
+        }
+    }
+
+    public static int enumToKey(@NotNull KeyboardKeys key){
+        switch (key){
+            case ESCAPE_KEY -> {
+                return GLFW_KEY_ESCAPE;
+            }
+
+            case A_KEY -> {
+                return GLFW_KEY_A;
+            }
+
+            case D_KEY -> {
+                return GLFW_KEY_D;
+            }
+
+            case W_KEY -> {
+                return GLFW_KEY_W;
+            }
+
+            default -> {
+                logger.warn("Unknown enum key: " + key.name());
+                return 0;
             }
         }
     }

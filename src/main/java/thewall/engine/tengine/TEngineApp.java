@@ -15,8 +15,13 @@ import thewall.engine.tengine.display.DisplayResizeCallback;
 import thewall.engine.tengine.entity.Entity;
 import thewall.engine.tengine.entity.Light;
 import thewall.engine.tengine.errors.InitializationException;
+import thewall.engine.tengine.input.InputProvider;
+import thewall.engine.tengine.input.keyboard.Keyboard;
+import thewall.engine.tengine.input.keyboard.TGLFWKeyboard;
 import thewall.engine.tengine.input.keyboard.TKeyboardCallback;
 import thewall.engine.tengine.input.keyboard.KeyboardKeys;
+import thewall.engine.tengine.input.mouse.Mouse;
+import thewall.engine.tengine.input.mouse.TGLFWMouse;
 import thewall.engine.tengine.models.Loader;
 import thewall.engine.tengine.render.MasterRenderer;
 import thewall.engine.tengine.runtime.AbstractRuntime;
@@ -71,6 +76,16 @@ public abstract class TEngineApp {
     @Getter
     @Setter
     private volatile MasterRenderer renderer;
+
+    private volatile Keyboard keyboard;
+    private volatile Mouse mouse;
+    private InputProvider input;
+
+    public InputProvider input(){
+        checkInit();
+        checkStart();
+        return input;
+    }
 
     /**
      * Set window size
@@ -196,6 +211,10 @@ public abstract class TEngineApp {
         while (app.displayManager == null || app.displayManager.getWindow() == 0){
             Thread.onSpinWait();
         }
+
+        app.keyboard = new TGLFWKeyboard(app);
+        app.mouse = new TGLFWMouse(app);
+        app.input = new InputProvider(app.keyboard, app.mouse);
         return runtime;
     }
 

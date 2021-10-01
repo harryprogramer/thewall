@@ -19,7 +19,11 @@ public abstract class AbstractRuntime<P> {
         if(program == null){
             throw new NullPointerException();
         }
-        start(program);
+        try {
+            start(program);
+        }catch (Exception e){
+            logger.fatal("Runtime error, cannot start runtime", e);
+        }
     }
 
     public void forceStop(){

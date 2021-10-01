@@ -8,6 +8,7 @@ import thewall.engine.tengine.TEngineApp;
 import thewall.engine.tengine.entity.Entity;
 import thewall.engine.tengine.entity.Light;
 import thewall.engine.tengine.entity.Player;
+import thewall.engine.tengine.input.keyboard.KeyboardKeys;
 import thewall.engine.tengine.models.RawModel;
 import thewall.engine.tengine.models.TexturedModel;
 import thewall.engine.tengine.models.obj.thinmatrix.ModelData;
@@ -128,7 +129,7 @@ public class TheWall extends TEngineApp {
     public void enginePulse() {
         player.tick();
 
-        // player.getCamera().move();
+        player.getCamera().move();
 
         getRenderer().processEntity(player);
 
@@ -148,6 +149,7 @@ public class TheWall extends TEngineApp {
             if (frameCount <= 30) {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
+            logger.info(input().getMouse().getCursorPosition().getXPos());
             //System.out.printf("Camera: X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
             System.out.printf("Player: X: [%s] Y: [%s] Z: [%s]\n", player.getPosition().x, player.getPosition().y, player.getPosition().z);
             //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
@@ -158,6 +160,7 @@ public class TheWall extends TEngineApp {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        logger.info("Starting up");
         //theWall.camera = new Camera();
         //theWall.rndrProcessCamera(theWall.camera);
         //theWall.rndrProcessEntity(new Entity(new TexturedModel(OBJLoader.loadObjModel("models/tree", theWall.getLoader()), new ModelTexture(the.loadTexture("stallTexture", GL_RGBA)));, new Vector3f(250, 2, 250), 0, 180, 0, 1););

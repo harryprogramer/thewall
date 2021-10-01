@@ -136,7 +136,6 @@ public class DisplayManager {
     }
 
     public void disableVSync(){
-        glfwMakeContextCurrent(window);
         glfwSwapInterval(0);
     }
 
