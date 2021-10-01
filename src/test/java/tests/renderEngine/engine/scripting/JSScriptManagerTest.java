@@ -2,9 +2,9 @@ package tests.renderEngine.engine.scripting;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import thewall.game.tengine.scripting.JSScriptManager;
-import thewall.game.tengine.scripting.ScriptManager;
-import thewall.game.tengine.scripting.ScriptPlugin;
+import thewall.engine.tengine.scripting.JSScriptManager;
+import thewall.engine.tengine.scripting.ScriptManager;
+import thewall.engine.tengine.scripting.ScriptPlugin;
 
 import java.io.File;
 import java.io.FileNotFoundException;

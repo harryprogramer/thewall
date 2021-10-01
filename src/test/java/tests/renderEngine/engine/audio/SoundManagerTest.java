@@ -2,8 +2,8 @@ package tests.renderEngine.engine.audio;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import thewall.game.tengine.audio.SoundChannel;
-import thewall.game.tengine.audio.SoundManager;
+import thewall.engine.tengine.audio.SoundChannel;
+import thewall.engine.tengine.audio.SoundManager;
 
 class SoundManagerTest {
     private SoundManager soundManager;

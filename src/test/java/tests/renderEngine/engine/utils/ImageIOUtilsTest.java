@@ -1,7 +1,7 @@
 package tests.renderEngine.engine.utils;
 
 import org.junit.jupiter.api.Test;
-import thewall.game.tengine.utils.ImageIOUtils;
+import thewall.engine.tengine.utils.ImageIOUtils;
 
 import java.io.IOException;
 

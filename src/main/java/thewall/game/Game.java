@@ -1,36 +1,32 @@
 package thewall.game;
 
 import org.joml.Vector3f;
-import thewall.game.tengine.debugger.TEngineDebugger;
-import thewall.game.tengine.debugger.console.DebugConsole;
-import thewall.game.tengine.display.DisplayManager;
-import thewall.game.tengine.entity.Camera;
-import thewall.game.tengine.entity.Entity;
-import thewall.game.tengine.entity.Light;
-import thewall.game.tengine.entity.Player;
-import thewall.game.tengine.models.Loader;
-import thewall.game.tengine.models.RawModel;
-import thewall.game.tengine.models.TexturedModel;
-import thewall.game.tengine.models.obj.thinmatrix.ModelData;
-import thewall.game.tengine.models.obj.thinmatrix.OBJFileLoader;
-import thewall.game.tengine.models.obj.thinmatrix.OBJLoader;
-import thewall.game.tengine.render.MasterRenderer;
-import thewall.game.tengine.render.SyncTimer;
-import thewall.game.tengine.audio.SoundManager;
-import thewall.game.tengine.terrain.Terrain;
-import thewall.game.tengine.textures.ModelTexture;
+import thewall.engine.tengine.debugger.TEngineDebugger;
+import thewall.engine.tengine.debugger.console.DebugConsole;
+import thewall.engine.tengine.display.DisplayManager;
+import thewall.engine.tengine.entity.Entity;
+import thewall.engine.tengine.entity.Light;
+import thewall.engine.tengine.entity.Player;
+import thewall.engine.tengine.models.Loader;
+import thewall.engine.tengine.models.RawModel;
+import thewall.engine.tengine.models.TexturedModel;
+import thewall.engine.tengine.models.obj.thinmatrix.ModelData;
+import thewall.engine.tengine.models.obj.thinmatrix.OBJFileLoader;
+import thewall.engine.tengine.render.MasterRenderer;
+import thewall.engine.tengine.render.SyncTimer;
+import thewall.engine.tengine.audio.SoundManager;
+import thewall.engine.tengine.terrain.Terrain;
+import thewall.engine.tengine.textures.ModelTexture;
 import lombok.Getter;
-import thewall.game.tengine.textures.TerrainTexture;
-import thewall.game.tengine.textures.TerrainTexturePack;
-import thewall.game.tengine.utils.Maths;
+import thewall.engine.tengine.textures.TerrainTexture;
+import thewall.engine.tengine.textures.TerrainTexturePack;
+import thewall.engine.tengine.utils.Maths;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,12 +35,12 @@ import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
+@Deprecated
 public class Game {
     @Getter
     private static final DisplayManager displayManager = new DisplayManager(1280, 720);
-    private final static ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     @Getter
-    private static final DebugConsole debug = new DebugConsole();
+    private static final DebugConsole debug = DebugConsole.getConsole();
 
     static double previousTime = glfwGetTime();
     static int frameCount = 0;
@@ -76,7 +72,6 @@ public class Game {
         glfwWindowHint(GLFW_STENCIL_BITS, 0);
         glfwWindowHint(GLFW_ALPHA_BITS, 0);
         TEngineDebugger.setPrintProxyDebugger(debug);
-        debug.startLogging();
         debug.info("Loading game...");
         class Dummy {
             public void m() {
@@ -142,8 +137,6 @@ public class Game {
         Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
 
 
-        //SoundChannel soundChannel = soundManager.playBackground(.3f, 0, "output.wav");
-        Camera camera = new Camera(player);
 
         List<Entity> worldEntities = new ArrayList<>();
 
@@ -201,15 +194,16 @@ public class Game {
         debug.info(String.format("Loading done! in %s.s", new DecimalFormat("##.###").format(System.currentTimeMillis() - startTime / 1000.0)));
 
         glfwFocusWindow(displayManager.getWindow());
-
-        glfwSetInputMode(Game.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        glfwSwapInterval(0);
+        //glfwSetInputMode(Game.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         while (!glfwWindowShouldClose(displayManager.getWindow())) {
             try {
 
                 //entity.increasePosition(0, 0, -0.006f);
                 //entity.increaseRotation(0, 0.1f, 0);
-                camera.move();
                 player.tick();
+                player.getCamera().move();
+
 
                 masterRenderer.processEntity(player);
 
@@ -222,7 +216,7 @@ public class Game {
                 for(Entity ent : worldEntities){
                     masterRenderer.processEntity(ent);
                 }
-                masterRenderer.render(light, camera);
+                masterRenderer.render(light, player.getCamera());
 
                 double currentTime = glfwGetTime();
                 frameCount++;
@@ -232,7 +226,7 @@ public class Game {
                     if(frameCount <= 30){
                         debug.warn("FPS drop detected, current framerate: " + frameCount);
                     }
-                    System.out.printf("Camera: X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
+                    //System.out.printf("Camera: X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
                     System.out.printf("Player: X: [%s] Y: [%s] Z: [%s]\n", player.getPosition().x, player.getPosition().y, player.getPosition().z);
                     //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
                     frameCount = 0;

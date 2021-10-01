@@ -1,0 +1,590 @@
+2021-10-01 11:02:35.961 [main] - Initializing engine...
+2021-10-01 11:02:36.031 [TEngine Main Thread] - Starting runtime for [TEngine Game App Runtime]
+2021-10-01 11:02:36.999 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:38.007 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:39.009 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:39.021 [TEngine Main Thread] - Unknown key id: 265
+2021-10-01 11:02:39.022 [TEngine Main Thread] - Error while pulsing engine
+java.lang.IllegalArgumentException: Argument for @NotNull parameter 'key' of thewall/game/input/KeyboardCallback.invoke must not be null
+	at thewall.game.input.KeyboardCallback.$$$reportNull$$$0(KeyboardCallback.java) ~[classes/:?]
+	at thewall.game.input.KeyboardCallback.invoke(KeyboardCallback.java) ~[classes/:?]
+	at thewall.engine.tengine.TEngineApp.lambda$setKeyboardCallback$0(TEngineApp.java:118) ~[classes/:?]
+	at org.lwjgl.glfw.GLFWKeyCallbackI.callback(GLFWKeyCallbackI.java:37) ~[lwjgl-glfw-3.2.3.jar:build 13]
+	at org.lwjgl.system.JNI.invokeV(Native Method) ~[lwjgl-3.2.3.jar:build 13]
+	at org.lwjgl.glfw.GLFW.glfwPollEvents(GLFW.java:3094) ~[lwjgl-glfw-3.2.3.jar:build 13]
+	at thewall.engine.tengine.display.DisplayManager.updateDisplay(DisplayManager.java:119) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.engineLoop(TEngineAppRuntime.java:119) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:70) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:22) ~[classes/:?]
+	at thewall.engine.tengine.runtime.AbstractRuntime.execute(AbstractRuntime.java:22) ~[classes/:?]
+	at thewall.engine.tengine.TEngineApp.lambda$startRuntime$2(TEngineApp.java:192) ~[classes/:?]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-10-01 11:02:39.351 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:39.485 [TEngine Main Thread] - Unknown key id: 265
+2021-10-01 11:02:39.516 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:40.015 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:40.685 [TEngine Main Thread] - Unknown key id: 265
+2021-10-01 11:02:40.850 [TEngine Main Thread] - Unknown key id: 265
+2021-10-01 11:02:41.016 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:41.385 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:41.886 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:41.921 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:41.954 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:41.986 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.020 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.032 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:42.060 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.086 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.120 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.161 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.185 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.220 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.261 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.286 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.325 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.361 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.385 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.427 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.450 [TEngine Main Thread] - Unknown key id: 263
+2021-10-01 11:02:42.570 [TEngine Main Thread] - Unknown key id: 262
+2021-10-01 11:02:42.796 [TEngine Main Thread] - Unknown key id: 262
+2021-10-01 11:02:43.032 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:43.116 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.621 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.646 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.685 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.720 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.745 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.787 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.820 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.853 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.881 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.916 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.945 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:43.985 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:44.020 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:44.034 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:44.046 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:44.100 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:44.131 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:44.150 [TEngine Main Thread] - Unknown key id: 264
+2021-10-01 11:02:44.445 [TEngine Main Thread] - Unknown key id: 70
+2021-10-01 11:02:44.675 [TEngine Main Thread] - Unknown key id: 70
+2021-10-01 11:02:44.880 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.041 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:45.381 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.411 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.450 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.481 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.511 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.550 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.577 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.621 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.650 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.686 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.716 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.750 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.786 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:45.787 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.041 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:46.220 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.721 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.751 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.785 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.818 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.850 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.883 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.916 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.952 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:46.985 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:47.020 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:47.048 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:47.050 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:47.085 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:47.111 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:47.150 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:47.162 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:47.671 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.050 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:48.175 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.201 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.235 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.265 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.300 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.335 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.365 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.400 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.435 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.466 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.501 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.539 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.565 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.601 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.644 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.670 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.700 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.735 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.770 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.800 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.836 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.866 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.900 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.902 [TEngine Main Thread] - IllegalArgumentException is still throwing in the engine loop, more then 100 times
+2021-10-01 11:02:48.936 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:48.966 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.000 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.036 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.056 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:49.065 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.096 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.135 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.171 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.203 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.230 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.271 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.301 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.335 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.371 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.403 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.436 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.466 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.500 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.536 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.570 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.600 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.636 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.667 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.700 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.734 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.766 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.800 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.835 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.875 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.900 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.935 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:49.970 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.005 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.035 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.066 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:50.070 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.100 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.135 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.169 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.200 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.242 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.268 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.300 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.336 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.365 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.400 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.435 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.469 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.500 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.535 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.565 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.605 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.637 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.670 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.700 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.736 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.770 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.800 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.836 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.870 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.900 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.935 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:50.946 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:51.074 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:52.075 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:52.826 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.082 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:53.326 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.360 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.395 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.431 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.461 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.495 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.536 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.560 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.600 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.636 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:53.795 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:54.082 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:55.083 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:56.083 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:56.656 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:56.870 [TEngine Main Thread] - Unknown key id: 71
+2021-10-01 11:02:57.061 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.091 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:57.561 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.595 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.635 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.660 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.700 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.737 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.761 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.792 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.827 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.860 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.896 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.935 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.960 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:57.975 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:02:58.092 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:58.150 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.651 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.686 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.720 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.750 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.786 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.816 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.822 [TEngine Main Thread] - Unknown key id: 78
+2021-10-01 11:02:58.970 [TEngine Main Thread] - Unknown key id: 341
+2021-10-01 11:02:58.971 [TEngine Main Thread] - IllegalArgumentException is still throwing in the engine loop, more then 200 times
+2021-10-01 11:02:59.098 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:02:59.760 [TEngine Main Thread] - Unknown key id: 341
+2021-10-01 11:03:00.100 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:01.107 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:02.108 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:03.117 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:04.124 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:04.535 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.035 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.061 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.101 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.124 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:05.130 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.162 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.200 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.235 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.270 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.298 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.335 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.365 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.401 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.435 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.461 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.497 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.497 [TEngine Main Thread] - Unknown key id: 32
+2021-10-01 11:03:05.681 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.125 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:06.177 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.210 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.246 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.276 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.318 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.343 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.376 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.408 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.445 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.476 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.513 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.543 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.581 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.610 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.640 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.676 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.710 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.739 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.775 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.811 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.845 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.871 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.910 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.936 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:06.975 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.010 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.035 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.070 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.100 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.131 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:07.137 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.170 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.211 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.240 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.270 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.310 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.335 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.370 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.410 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.435 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.475 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.502 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.536 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.572 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.610 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.635 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.675 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.710 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.740 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.776 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.810 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.842 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.870 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.910 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.935 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:07.976 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.011 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.035 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.070 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.111 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.131 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:08.146 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.170 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.211 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.235 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.275 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.310 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.335 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.370 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.410 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.435 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.470 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:08.491 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:08.601 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.100 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.132 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:09.135 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.165 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.200 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.235 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.265 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.301 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.335 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.365 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.401 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.401 [TEngine Main Thread] - IllegalArgumentException is still throwing in the engine loop, more then 300 times
+2021-10-01 11:03:09.435 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.476 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.500 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.535 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.565 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.605 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.635 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.666 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.700 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.735 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.771 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.801 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:09.835 [TEngine Main Thread] - Unknown key id: 59
+2021-10-01 11:03:10.011 [TEngine Main Thread] - Unknown key id: 59
+2021-10-01 11:03:10.141 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:10.271 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:10.286 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:10.310 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:11.149 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:11.240 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:11.271 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:11.342 [TEngine Main Thread] - Unknown key id: 76
+2021-10-01 11:03:11.361 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:11.851 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:11.886 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:11.916 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:11.951 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:11.985 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.015 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.050 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.086 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.115 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.150 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.166 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:12.190 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.225 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.251 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.285 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.316 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.350 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.386 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.416 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.450 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.485 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.523 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.551 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.585 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.615 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.650 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.686 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.719 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.750 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.785 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.826 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.850 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.885 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.915 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.950 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:12.985 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.020 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.058 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.085 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.115 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.151 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.172 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:13.185 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.215 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.250 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.285 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.316 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.350 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.380 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.417 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.450 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.485 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.515 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.551 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.585 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.621 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.650 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.686 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.720 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.751 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.785 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.815 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.851 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.886 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.910 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.950 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:13.985 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.011 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.045 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.085 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.110 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.151 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.173 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:14.175 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.210 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.251 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.275 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.310 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.345 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.375 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.410 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.442 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.442 [TEngine Main Thread] - IllegalArgumentException is still throwing in the engine loop, more then 400 times
+2021-10-01 11:03:14.475 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.510 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.551 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.575 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.610 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.641 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.676 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.710 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.746 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.775 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.810 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.841 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.875 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.910 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.941 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:14.971 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:15.010 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:15.026 [TEngine Main Thread] - Unknown key id: 76
+2021-10-01 11:03:15.040 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:15.046 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:15.047 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:15.065 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:15.181 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:16.185 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:16.475 [TEngine Main Thread] - Unknown key id: 74
+2021-10-01 11:03:16.511 [TEngine Main Thread] - Unknown key id: 75
+2021-10-01 11:03:16.886 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.195 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:17.385 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.421 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.450 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.485 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.525 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.551 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.585 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.615 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.651 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.685 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.720 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.756 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.785 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.815 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.850 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.885 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.921 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.946 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:17.985 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.015 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.050 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.085 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.117 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.150 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.185 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.198 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:18.216 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.255 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.285 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.315 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.355 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.385 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.420 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.451 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.485 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.515 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.551 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.585 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.615 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.650 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.686 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.715 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.750 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.785 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.811 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.851 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.885 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.916 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.946 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:18.975 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.010 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.050 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.076 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.110 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.150 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.176 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.205 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-01 11:03:19.210 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.250 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.275 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.310 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.340 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.376 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.410 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.445 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.476 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.510 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.541 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.576 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.610 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.640 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.675 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.706 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.740 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.776 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.810 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.840 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.875 [TEngine Main Thread] - Unknown key id: 72
+2021-10-01 11:03:19.875 [TEngine Main Thread] - IllegalArgumentException is still throwing in the engine loop, more then 500 times
+2021-10-01 11:03:19.875 [TEngine Main Thread] - Too much error for this same exception, shutting down...
+2021-10-01 11:03:19.876 [TEngine Main Thread] - Error stacktrace
+java.lang.IllegalArgumentException: Argument for @NotNull parameter 'key' of thewall/game/input/KeyboardCallback.invoke must not be null
+	at thewall.game.input.KeyboardCallback.$$$reportNull$$$0(KeyboardCallback.java) ~[classes/:?]
+	at thewall.game.input.KeyboardCallback.invoke(KeyboardCallback.java) ~[classes/:?]
+	at thewall.engine.tengine.TEngineApp.lambda$setKeyboardCallback$0(TEngineApp.java:118) ~[classes/:?]
+	at org.lwjgl.glfw.GLFWKeyCallbackI.callback(GLFWKeyCallbackI.java:37) ~[lwjgl-glfw-3.2.3.jar:build 13]
+	at org.lwjgl.system.JNI.invokeV(Native Method) ~[lwjgl-3.2.3.jar:build 13]
+	at org.lwjgl.glfw.GLFW.glfwPollEvents(GLFW.java:3094) ~[lwjgl-glfw-3.2.3.jar:build 13]
+	at thewall.engine.tengine.display.DisplayManager.updateDisplay(DisplayManager.java:119) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.engineLoop(TEngineAppRuntime.java:119) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:70) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:22) ~[classes/:?]
+	at thewall.engine.tengine.runtime.AbstractRuntime.execute(AbstractRuntime.java:22) ~[classes/:?]
+	at thewall.engine.tengine.TEngineApp.lambda$startRuntime$2(TEngineApp.java:192) ~[classes/:?]
+	at java.lang.Thread.run(Thread.java:831) [?:?]
+2021-10-01 11:03:19.876 [TEngine Main Thread] - Stopping runtime for [TEngine Game App Runtime]
+2021-10-01 11:03:19.877 [TEngine Main Thread] - Shutting down [The Wall] ...
+2021-10-01 11:03:19.911 [TEngine Main Thread] - Disabling debug logging, stand by
+2021-10-01 11:03:19.912 [TEngine Main Thread] - Closing debug window
+2021-10-01 11:03:19.928 [TEngine Main Thread] - Closing app...
