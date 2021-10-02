@@ -42,7 +42,9 @@ public class Player extends Entity {
     }
 
     public void tick(){
-        checkInputs();
+        if(TheWall.getTheWall().input().getMouse().isCursorDisabled()) {
+            checkInputs();
+        }
 
         super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
         float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
@@ -74,7 +76,6 @@ public class Player extends Entity {
         CursorPosition pos = input.getMouse().getCursorPosition();
         newMouseX = pos.getXPos();
         newMouseY = pos.getYPos();
-
         float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * moveSpeed;
         float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * moveSpeed;
 
@@ -116,7 +117,17 @@ public class Player extends Entity {
         float dx = (float) (newMouseX - oldMouseX);
         float dy = (float) (newMouseY - oldMouseY);
 
-        camera.getRotation().add(new Vector3f(-dy * mouseSensitivity, -dx * mouseSensitivity, 0));
+
+        Vector3f finalRotation = camera.getRotation();
+        finalRotation.add(new Vector3f(-dy * mouseSensitivity, -dx * mouseSensitivity, 0));
+
+        if(finalRotation.x >= 90){
+            finalRotation.x = 90f;
+        }else if(finalRotation.x < -90){
+            finalRotation.x = -90f;
+        }
+
+        camera.getRotation().set(finalRotation);
 
         oldMouseX = newMouseX;
         oldMouseY = newMouseY;

@@ -199,7 +199,6 @@ public abstract class TEngineApp {
 
     public void stop(){
         runtime.forceStop();
-        System.exit(1);
     }
 
     private static @NotNull AbstractRuntime<TEngineApp> startRuntime(TEngineApp app){
@@ -227,6 +226,8 @@ public abstract class TEngineApp {
         AbstractRuntime<TEngineApp> runtime;
         runtime = startRuntime(app);
         app.runtime = runtime;
+
+        Runtime.getRuntime().addShutdownHook(new Thread(app::stop));
     }
 
     private static void checkInit(){

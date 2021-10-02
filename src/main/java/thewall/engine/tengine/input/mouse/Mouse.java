@@ -22,4 +22,8 @@ public interface Mouse {
     void hideCursor();
 
     void showCursor();
+
+    boolean isCursorDisabled();
+
+    boolean isCursorHidden();
 }

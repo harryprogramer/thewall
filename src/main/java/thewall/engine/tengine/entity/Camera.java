@@ -16,7 +16,7 @@ public class Camera {
     private float pitch;
 
     @Getter
-    private Vector3f rotation = new Vector3f();
+    private Vector3f rotation = new Vector3f(0, -45, 0);
 
     private static final float MOUSESENSTIVITY = 0.2f;
 

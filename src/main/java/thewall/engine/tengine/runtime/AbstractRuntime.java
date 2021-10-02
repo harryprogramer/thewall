@@ -28,7 +28,7 @@ public abstract class AbstractRuntime<P> {
 
     public void forceStop(){
         logger.info("Stopping runtime for [" + name + "]");
-        stop();
+        executeTask(this::stop);
     }
 
     public boolean checkThread(){

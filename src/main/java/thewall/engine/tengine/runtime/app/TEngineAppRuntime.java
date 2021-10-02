@@ -14,6 +14,7 @@ import thewall.engine.tengine.runtime.AbstractRuntime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.*;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -28,6 +29,8 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     private TEngineApp tEngineApp;
     volatile boolean isInit = false;
     private Thread runtimeThread = null;
+
+    volatile boolean isClosing = false;
 
     private final List<Runnable> rendererTasks = new ArrayList<>();
 
@@ -72,12 +75,14 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
 
     @Override
     protected void stop() {
+        isClosing = true;
         logger.info("Shutting down [" + tEngineApp.getName() + "] ...");
         stopEngine();
         tEngineApp.onDisable();
         tEngineApp.getDebugConsole().stopLogging();
         tEngineApp.getDebugConsole().closeConsole();
         logger.info("Closing app...");
+        System.exit(-1);
     }
 
     private void stopEngine(){
@@ -86,39 +91,35 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
 
         glfwFreeCallbacks(tEngineApp.getDisplayManager().getWindow());
         glfwDestroyWindow(tEngineApp.getDisplayManager().getWindow());
-
         glfwTerminate();
-        GLFWErrorCallback callback = glfwSetErrorCallback(null);
-        if(callback != null){
-            callback.free();
+        try {
+            Objects.requireNonNull(glfwSetErrorCallback(null)).free();
+        }catch (Exception ignored){
+
         }
         scheduler.shutdown();
     }
 
     private void engineLoop(){
-        while (true) {
+        while (!glfwWindowShouldClose(tEngineApp.getDisplayManager().getWindow())) {
             try {
-                if(glfwWindowShouldClose(tEngineApp.getDisplayManager().getWindow())){
-                    logger.info("Closing...");
-                    stop();
-                    return;
+                if(isClosing){
+                    break;
                 }
-
-                if(!rendererTasks.isEmpty()){
-                    for (Iterator<Runnable> it = rendererTasks.iterator(); it.hasNext(); ) {
-                        Runnable task = it.next();
-                        try {
-                            task.run();
-                        }catch (Exception e){
-                            logger.warn("Render task error", e);
+                    if (!rendererTasks.isEmpty()) {
+                        for (Iterator<Runnable> it = rendererTasks.iterator(); it.hasNext(); ) {
+                            Runnable task = it.next();
+                            try {
+                                task.run();
+                            } catch (Exception e) {
+                                logger.warn("Render task error", e);
+                            }
+                            it.remove();
                         }
-                        it.remove();
                     }
-                }
 
-                tEngineApp.getDisplayManager().updateDisplay();
-                tEngineApp.enginePulse();
-
+                    tEngineApp.getDisplayManager().updateDisplay();
+                    tEngineApp.enginePulse();
             }catch (Exception e){
                 if(lastError != null){
                     if(e.getClass() == lastError.getClass()){

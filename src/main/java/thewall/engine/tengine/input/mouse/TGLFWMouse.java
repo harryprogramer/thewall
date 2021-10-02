@@ -45,7 +45,7 @@ public class TGLFWMouse implements Mouse{
 
     @Override
     public void setCursorPosition(double posX, double posY) {
-
+        glfwSetCursorPos(app.getDisplayManager().getWindow(), posX, posY);
     }
 
     @Override
@@ -75,7 +75,17 @@ public class TGLFWMouse implements Mouse{
     }
 
     @Override
+    public boolean isCursorDisabled() {
+        return glfwGetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED;
+    }
+
+    @Override
     public void disableCursor() {
         glfwSetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    }
+
+    @Override
+    public boolean isCursorHidden() {
+        return glfwGetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_HIDDEN;
     }
 }
