@@ -1,26 +1,15 @@
-2021-10-02 14:26:56.842 [main] - Starting up
-2021-10-02 14:26:56.848 [main] - Initializing engine...
-2021-10-02 14:26:56.968 [TEngine Main Thread] - Starting runtime for [TEngine Game App Runtime]
-2021-10-02 14:26:57.907 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:26:58.907 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:26:59.909 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:00.913 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:01.916 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:02.916 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:03.918 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:04.921 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:05.922 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:06.932 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:07.937 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:08.945 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:09.948 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:10.952 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:11.957 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:12.957 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:13.962 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-02 14:27:14.624 [TEngine Main Thread] - Stopping runtime for [TEngine Game App Runtime]
-2021-10-02 14:27:14.629 [TEngine Main Thread] - Shutting down [The Wall] ...
-2021-10-02 14:27:14.691 [TEngine Main Thread] - Disabling debug logging, stand by
-2021-10-02 14:27:14.693 [TEngine Main Thread] - Closing debug window
-2021-10-02 14:27:14.724 [TEngine Main Thread] - Closing app...
-2021-10-02 14:27:14.726 [Thread-1] - Stopping runtime for [TEngine Game App Runtime]
+2021-10-02 14:30:07.617 [main] - Starting up
+2021-10-02 14:30:07.622 [main] - Initializing engine...
+2021-10-02 14:30:07.692 [TEngine Main Thread] - Starting runtime for [TEngine Game App Runtime]
+2021-10-02 14:30:08.657 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 14:30:09.661 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 14:30:10.663 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 14:30:11.664 [TEngine Main Thread] - Player: X: [300.0] Y: [1.8318] Z: [600.0]
+2021-10-02 14:30:12.668 [TEngine Main Thread] - Player: X: [300.0] Y: [3.3461945] Z: [600.0]
+2021-10-02 14:30:13.672 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 14:30:13.845 [TEngine Main Thread] - Stopping runtime for [TEngine Game App Runtime]
+2021-10-02 14:30:13.858 [TEngine Main Thread] - Shutting down [The Wall] ...
+2021-10-02 14:30:13.913 [TEngine Main Thread] - Disabling debug logging, stand by
+2021-10-02 14:30:13.914 [TEngine Main Thread] - Closing debug window
+2021-10-02 14:30:13.917 [TEngine Main Thread] - Closing app...
+2021-10-02 14:30:13.919 [Thread-1] - Stopping runtime for [TEngine Game App Runtime]

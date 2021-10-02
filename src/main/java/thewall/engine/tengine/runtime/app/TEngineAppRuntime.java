@@ -31,6 +31,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     private Thread runtimeThread = null;
 
     volatile boolean isClosing = false;
+    volatile boolean isClosed = false;
 
     private final List<Runnable> rendererTasks = new ArrayList<>();
 
@@ -74,15 +75,18 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     }
 
     @Override
-    protected void stop() {
-        isClosing = true;
-        logger.info("Shutting down [" + tEngineApp.getName() + "] ...");
-        stopEngine();
-        tEngineApp.onDisable();
-        tEngineApp.getDebugConsole().stopLogging();
-        tEngineApp.getDebugConsole().closeConsole();
-        logger.info("Closing app...");
-        System.exit(-1);
+    protected synchronized void stop() {
+        if(!isClosed) {
+            isClosing = true;
+            logger.info("Shutting down [" + tEngineApp.getName() + "] ...");
+            stopEngine();
+            tEngineApp.onDisable();
+            tEngineApp.getDebugConsole().stopLogging();
+            tEngineApp.getDebugConsole().closeConsole();
+            logger.info("Closing app...");
+            isClosed = true;
+            System.exit(-1);
+        }
     }
 
     private void stopEngine(){
@@ -144,6 +148,8 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
                 logger.warn("Error syncing fps limit", ex);
             }
         }
+
+        stop();
     }
 
 
