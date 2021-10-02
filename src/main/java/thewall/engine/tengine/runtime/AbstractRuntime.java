@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 public abstract class AbstractRuntime<P> {
     @Getter
     private final String name;
@@ -16,14 +18,9 @@ public abstract class AbstractRuntime<P> {
 
     public void execute(P program){
         logger.info("Starting runtime for [" + name + "]");
-        if(program == null){
-            throw new NullPointerException();
-        }
-        try {
-            start(program);
-        }catch (Exception e){
-            logger.fatal("Runtime error, cannot start runtime", e);
-        }
+        Objects.requireNonNull(program);
+        start(program);
+
     }
 
     public void forceStop(){

@@ -72,6 +72,7 @@ public final class DebugConsole {
     }
 
     public void showConsole(){
+        logger.info("Showing up debug console");
         showOnScreen(1, jFrame);
     }
 
@@ -110,9 +111,9 @@ public final class DebugConsole {
             try{
                 loggerPulse();
             }catch (Exception e){
-
+                logger.warn("Debug console error", e);
             }
-        }, 0, 50, TimeUnit.MILLISECONDS);
+        }, 0, 10, TimeUnit.MILLISECONDS);
     }
 
     public void stopLogging(){
@@ -123,6 +124,7 @@ public final class DebugConsole {
         isLoggerEnabled = false;
         executor.shutdown();
     }
+
 
     public void fatal(String text){
         invokeLog(text, LogLevel.FATAL);
@@ -140,10 +142,12 @@ public final class DebugConsole {
         debug = isLogging;
     }
 
+    @Deprecated
     public void debug(String text){
         invokeLog(text, LogLevel.DEBUG);
     }
 
+    @Deprecated
     private void invokeLog(String text, LogLevel logLevel){
         if(!executor.isShutdown()) {
             executor.schedule(() -> logQueue.add(new LogData(text, logLevel, false)), 5, TimeUnit.MILLISECONDS);

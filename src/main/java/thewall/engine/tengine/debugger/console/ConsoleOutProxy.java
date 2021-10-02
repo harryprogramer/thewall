@@ -45,21 +45,20 @@ public final class ConsoleOutProxy extends PrintStream {
         private void flushConsole(){
             StringBuilder stringBuilder = new StringBuilder();
             for(char character : characters){
-                if(character == 0x0A){
+                if(character == 0x0A || character == 0x0D){
                     continue;
                 }
-                stringBuilder.append(character);
+                stringBuilder.append((character));
             }
             console.info(stringBuilder.toString().trim());
             logger.info(stringBuilder.toString().trim());
-
             characters.clear();
         }
 
         @Override
         public void write(int b) throws IOException {
             if(systemOut != null && console != null){
-                if(characters.size() > 2048){
+                if(characters.size() > 4096){
                     console.warn("Buffer print limit, over 2048 characters, flushing out...");
                     flushConsole();
                     return;

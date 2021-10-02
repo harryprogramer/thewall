@@ -1,0 +1,35 @@
+[thewall.engine.tengine.TEngineApp] [08:19:17] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.tengine.debugger.console.DebugConsole] [08:19:17] main/INFO ] - Showing up debug console
+[thewall.engine.tengine.runtime.AbstractRuntime] [08:19:17] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[System.out] [08:19:17] TEngine Main Thread/INFO ] - 
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:18] TEngine Main Thread/WARN ] - Error while pulsing engine
+java.lang.NullPointerException: Cannot invoke "thewall.engine.tengine.input.InputProvider.getMouse()" because the return value of "thewall.game.TheWall.input()" is null
+	at thewall.engine.tengine.entity.Player.tick(Player.java:45) ~[classes/:?]
+	at thewall.game.TheWall.enginePulse(TheWall.java:131) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.engineLoop(TEngineAppRuntime.java:117) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:65) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:23) ~[classes/:?]
+	at thewall.engine.tengine.runtime.AbstractRuntime.execute(AbstractRuntime.java:23) ~[classes/:?]
+	at thewall.engine.tengine.TEngineApp.lambda$startRuntime$2(TEngineApp.java:229) ~[classes/:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:26] TEngine Main Thread/WARN ] - NullPointerException is still throwing in the engine loop, more then 100 times
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:28] TEngine Main Thread/WARN ] - NullPointerException is still throwing in the engine loop, more then 200 times
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:30] TEngine Main Thread/WARN ] - NullPointerException is still throwing in the engine loop, more then 300 times
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:31] TEngine Main Thread/WARN ] - NullPointerException is still throwing in the engine loop, more then 400 times
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:33] TEngine Main Thread/WARN ] - NullPointerException is still throwing in the engine loop, more then 500 times
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:33] TEngine Main Thread/FATAL] - Too much error for this same exception, shutting down...
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:33] TEngine Main Thread/FATAL] - Error stacktrace
+java.lang.NullPointerException: Cannot invoke "thewall.engine.tengine.input.InputProvider.getMouse()" because the return value of "thewall.game.TheWall.input()" is null
+	at thewall.engine.tengine.entity.Player.tick(Player.java:45) ~[classes/:?]
+	at thewall.game.TheWall.enginePulse(TheWall.java:131) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.engineLoop(TEngineAppRuntime.java:117) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:65) ~[classes/:?]
+	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:23) ~[classes/:?]
+	at thewall.engine.tengine.runtime.AbstractRuntime.execute(AbstractRuntime.java:23) ~[classes/:?]
+	at thewall.engine.tengine.TEngineApp.lambda$startRuntime$2(TEngineApp.java:229) ~[classes/:?]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+[thewall.engine.tengine.runtime.AbstractRuntime] [08:19:33] TEngine Main Thread/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:33] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
+[thewall.engine.tengine.debugger.console.DebugConsole] [08:19:33] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
+[thewall.engine.tengine.debugger.console.DebugConsole] [08:19:33] TEngine Main Thread/INFO ] - Closing debug window
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:19:33] TEngine Main Thread/INFO ] - Closing app...

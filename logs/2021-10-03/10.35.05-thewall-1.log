@@ -1,0 +1,87 @@
+[thewall.engine.tengine.TEngineApp] [10:35:05] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:35:05] main/INFO ] - Showing up debug console
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:35:05] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[System.out] [10:35:05] TEngine Main Thread/INFO ] - 13
+[System.out] [10:35:05] TEngine Main Thread/INFO ] - 13
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:35:06] TEngine Main Thread/INFO ] - GPU: Intel(R) HD Graphics 630
+[thewall.game.TheWall] [10:35:06] TEngine Main Thread/WARN ] - FPS drop detected, current framerate: 10
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 80
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 108
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 97
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 121
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 101
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 114
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 88
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 91
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 51
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 46
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 93
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 89
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 91
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 46
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 93
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 90
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 91
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 54
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 46
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:06] TEngine Main Thread/INFO ] - 93
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 80
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 108
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 97
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 121
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 101
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 114
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 88
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 91
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 51
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 46
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 93
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 89
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 91
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 46
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 93
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 90
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 58
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 32
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 91
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 54
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 46
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 48
+[System.out] [10:35:07] TEngine Main Thread/INFO ] - 93
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:35:08] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:35:08] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:35:08] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:35:08] TEngine Main Thread/INFO ] - Closing debug window

@@ -1,0 +1,88 @@
+[thewall.engine.tengine.TEngineApp] [10:52:22] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:52:22] main/INFO ] - Showing up debug console
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:52:22] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[System.out] [10:52:23] TEngine Main Thread/INFO ] - 
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:52:23] TEngine Main Thread/INFO ] - GPU: Intel(R) HD Graphics 630
+[thewall.game.TheWall] [10:52:23] TEngine Main Thread/WARN ] - FPS drop detected, current framerate: 7
+[thewall.game.TheWall] [10:52:23] TEngine Main Thread/INFO ] - Frame time: 1.631617892408458E12ms.
+[thewall.game.TheWall] [10:52:24] TEngine Main Thread/INFO ] - Frame time: 1.631617893407449E12ms.
+[thewall.game.TheWall] [10:52:25] TEngine Main Thread/INFO ] - Frame time: 1.631617894408448E12ms.
+[thewall.game.TheWall] [10:52:26] TEngine Main Thread/INFO ] - Frame time: 1.631617895409445E12ms.
+[thewall.game.TheWall] [10:52:27] TEngine Main Thread/INFO ] - Frame time: 1.631617896407445E12ms.
+[thewall.game.TheWall] [10:52:28] TEngine Main Thread/INFO ] - Frame time: 1.631617897413439E12ms.
+[thewall.game.TheWall] [10:52:29] TEngine Main Thread/INFO ] - Frame time: 1.631617898413438E12ms.
+[thewall.game.TheWall] [10:52:30] TEngine Main Thread/INFO ] - Frame time: 1.63161789942043E12ms.
+[thewall.game.TheWall] [10:52:31] TEngine Main Thread/INFO ] - Frame time: 1.631617900424425E12ms.
+[thewall.game.TheWall] [10:52:32] TEngine Main Thread/INFO ] - Frame time: 1.631617901430419E12ms.
+[thewall.game.TheWall] [10:52:33] TEngine Main Thread/INFO ] - Frame time: 1.631617902433414E12ms.
+[thewall.game.TheWall] [10:52:34] TEngine Main Thread/INFO ] - Frame time: 1.631617903439407E12ms.
+[thewall.game.TheWall] [10:52:35] TEngine Main Thread/INFO ] - Frame time: 1.631617904440405E12ms.
+[thewall.game.TheWall] [10:52:36] TEngine Main Thread/INFO ] - Frame time: 1.631617905442404E12ms.
+[thewall.game.TheWall] [10:52:37] TEngine Main Thread/INFO ] - Frame time: 1.631617906445398E12ms.
+[thewall.game.TheWall] [10:52:38] TEngine Main Thread/INFO ] - Frame time: 1.631617907445398E12ms.
+[thewall.game.TheWall] [10:52:39] TEngine Main Thread/INFO ] - Frame time: 1.631617908446395E12ms.
+[thewall.game.TheWall] [10:52:40] TEngine Main Thread/INFO ] - Frame time: 1.631617909446395E12ms.
+[thewall.game.TheWall] [10:52:41] TEngine Main Thread/INFO ] - Frame time: 1.63161791044939E12ms.
+[thewall.game.TheWall] [10:52:42] TEngine Main Thread/INFO ] - Frame time: 1.631617911449389E12ms.
+[thewall.game.TheWall] [10:52:43] TEngine Main Thread/INFO ] - Frame time: 1.631617912456381E12ms.
+[thewall.game.TheWall] [10:52:44] TEngine Main Thread/INFO ] - Frame time: 1.631617913457379E12ms.
+[thewall.game.TheWall] [10:52:45] TEngine Main Thread/INFO ] - Frame time: 1.631617914461374E12ms.
+[thewall.game.TheWall] [10:52:46] TEngine Main Thread/INFO ] - Frame time: 1.631617915466368E12ms.
+[thewall.game.TheWall] [10:52:47] TEngine Main Thread/INFO ] - Frame time: 1.63161791647336E12ms.
+[thewall.game.TheWall] [10:52:48] TEngine Main Thread/INFO ] - Frame time: 1.631617917474359E12ms.
+[thewall.game.TheWall] [10:52:49] TEngine Main Thread/INFO ] - Frame time: 1.631617918478353E12ms.
+[thewall.game.TheWall] [10:52:50] TEngine Main Thread/INFO ] - Frame time: 1.631617919478352E12ms.
+[thewall.game.TheWall] [10:52:51] TEngine Main Thread/INFO ] - Frame time: 1.631617920480349E12ms.
+[thewall.game.TheWall] [10:52:52] TEngine Main Thread/INFO ] - Frame time: 1.631617921485343E12ms.
+[thewall.game.TheWall] [10:52:53] TEngine Main Thread/INFO ] - Frame time: 1.631617922484343E12ms.
+[thewall.game.TheWall] [10:52:54] TEngine Main Thread/INFO ] - Frame time: 1.631617923488338E12ms.
+[thewall.game.TheWall] [10:52:55] TEngine Main Thread/INFO ] - Frame time: 1.631617924489336E12ms.
+[thewall.game.TheWall] [10:52:56] TEngine Main Thread/INFO ] - Frame time: 1.631617925497327E12ms.
+[thewall.game.TheWall] [10:52:57] TEngine Main Thread/INFO ] - Frame time: 1.631617926496327E12ms.
+[thewall.game.TheWall] [10:52:58] TEngine Main Thread/INFO ] - Frame time: 1.631617927503319E12ms.
+[thewall.game.TheWall] [10:52:59] TEngine Main Thread/INFO ] - Frame time: 1.631617928504317E12ms.
+[thewall.game.TheWall] [10:53:00] TEngine Main Thread/INFO ] - Frame time: 1.631617929502318E12ms.
+[thewall.game.TheWall] [10:53:01] TEngine Main Thread/INFO ] - Frame time: 1.631617930510308E12ms.
+[thewall.game.TheWall] [10:53:02] TEngine Main Thread/INFO ] - Frame time: 1.631617931515304E12ms.
+[thewall.game.TheWall] [10:53:03] TEngine Main Thread/INFO ] - Frame time: 1.631617932524293E12ms.
+[thewall.game.TheWall] [10:53:04] TEngine Main Thread/INFO ] - Frame time: 1.631617933529288E12ms.
+[thewall.game.TheWall] [10:53:05] TEngine Main Thread/INFO ] - Frame time: 1.631617934529287E12ms.
+[thewall.game.TheWall] [10:53:06] TEngine Main Thread/INFO ] - Frame time: 1.631617935531283E12ms.
+[thewall.game.TheWall] [10:53:07] TEngine Main Thread/INFO ] - Frame time: 1.631617936531282E12ms.
+[thewall.game.TheWall] [10:53:08] TEngine Main Thread/INFO ] - Frame time: 1.63161793753228E12ms.
+[thewall.game.TheWall] [10:53:09] TEngine Main Thread/INFO ] - Frame time: 1.631617938532279E12ms.
+[thewall.game.TheWall] [10:53:10] TEngine Main Thread/INFO ] - Frame time: 1.631617939531279E12ms.
+[thewall.game.TheWall] [10:53:11] TEngine Main Thread/INFO ] - Frame time: 1.631617940532278E12ms.
+[thewall.game.TheWall] [10:53:12] TEngine Main Thread/INFO ] - Frame time: 1.631617941532276E12ms.
+[thewall.game.TheWall] [10:53:13] TEngine Main Thread/INFO ] - Frame time: 1.631617942533274E12ms.
+[thewall.game.TheWall] [10:53:14] TEngine Main Thread/INFO ] - Frame time: 1.631617943533273E12ms.
+[thewall.game.TheWall] [10:53:15] TEngine Main Thread/INFO ] - Frame time: 1.63161794453527E12ms.
+[thewall.game.TheWall] [10:53:16] TEngine Main Thread/INFO ] - Frame time: 1.631617945541264E12ms.
+[thewall.game.TheWall] [10:53:17] TEngine Main Thread/INFO ] - Frame time: 1.631617946540264E12ms.
+[thewall.game.TheWall] [10:53:18] TEngine Main Thread/INFO ] - Frame time: 1.631617947545258E12ms.
+[thewall.game.TheWall] [10:53:19] TEngine Main Thread/INFO ] - Frame time: 1.631617948550252E12ms.
+[thewall.game.TheWall] [10:53:20] TEngine Main Thread/INFO ] - Frame time: 1.631617949551249E12ms.
+[thewall.game.TheWall] [10:53:21] TEngine Main Thread/INFO ] - Frame time: 1.631617950552247E12ms.
+[thewall.game.TheWall] [10:53:22] TEngine Main Thread/INFO ] - Frame time: 1.63161795155824E12ms.
+[thewall.game.TheWall] [10:53:23] TEngine Main Thread/INFO ] - Frame time: 1.631617952565233E12ms.
+[thewall.game.TheWall] [10:53:24] TEngine Main Thread/INFO ] - Frame time: 1.631617953570226E12ms.
+[thewall.game.TheWall] [10:53:25] TEngine Main Thread/INFO ] - Frame time: 1.631617954573223E12ms.
+[thewall.game.TheWall] [10:53:26] TEngine Main Thread/INFO ] - Frame time: 1.631617955576218E12ms.
+[thewall.game.TheWall] [10:53:27] TEngine Main Thread/INFO ] - Frame time: 1.631617956575218E12ms.
+[thewall.game.TheWall] [10:53:28] TEngine Main Thread/INFO ] - Frame time: 1.631617957576217E12ms.
+[thewall.game.TheWall] [10:53:29] TEngine Main Thread/INFO ] - Frame time: 1.631617958576215E12ms.
+[thewall.game.TheWall] [10:53:30] TEngine Main Thread/INFO ] - Frame time: 1.631617959582208E12ms.
+[thewall.game.TheWall] [10:53:31] TEngine Main Thread/INFO ] - Frame time: 1.631617960582208E12ms.
+[thewall.game.TheWall] [10:53:32] TEngine Main Thread/INFO ] - Frame time: 1.631617961584204E12ms.
+[thewall.game.TheWall] [10:53:33] TEngine Main Thread/INFO ] - Frame time: 1.631617962590197E12ms.
+[thewall.game.TheWall] [10:53:34] TEngine Main Thread/INFO ] - Frame time: 1.631617963594192E12ms.
+[thewall.game.TheWall] [10:53:35] TEngine Main Thread/INFO ] - Frame time: 1.631617964604181E12ms.
+[thewall.game.TheWall] [10:53:36] TEngine Main Thread/INFO ] - Frame time: 1.631617965606179E12ms.
+[thewall.game.TheWall] [10:53:37] TEngine Main Thread/INFO ] - Frame time: 1.631617966605179E12ms.
+[thewall.game.TheWall] [10:53:38] TEngine Main Thread/INFO ] - Frame time: 1.631617967615167E12ms.
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:53:39] TEngine Main Thread/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:53:39] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:53:39] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:53:39] TEngine Main Thread/INFO ] - Closing debug window
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:53:39] TEngine Main Thread/INFO ] - Closing app...
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:53:39] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
 import thewall.engine.tengine.TEngineApp;
+import thewall.engine.tengine.debugger.TEngineDebugger;
 import thewall.engine.tengine.entity.Entity;
 import thewall.engine.tengine.entity.Light;
 import thewall.engine.tengine.entity.Player;
@@ -148,7 +149,7 @@ public class TheWall extends TEngineApp {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
             //System.out.printf("Camera: X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
-            System.out.printf("Player: X: [%s] Y: [%s] Z: [%s]\n", player.getPosition().x, player.getPosition().y, player.getPosition().z);
+            //System.out.printf("Player: X: [%s] Y: [%s] Z: [%s]\n", player.getPosition().x, player.getPosition().y, player.getPosition().z);
             //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
             frameCount = 0;
             previousTime = currentTime;
@@ -156,17 +157,21 @@ public class TheWall extends TEngineApp {
 
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        logger.info("Starting up");
-        //theWall.camera = new Camera();
-        //theWall.rndrProcessCamera(theWall.camera);
-        //theWall.rndrProcessEntity(new Entity(new TexturedModel(OBJLoader.loadObjModel("models/tree", theWall.getLoader()), new ModelTexture(the.loadTexture("stallTexture", GL_RGBA)));, new Vector3f(250, 2, 250), 0, 180, 0, 1););
+    public static void main(String[] args) {
         TEngineApp.init();
-        theWall.getDebugConsole().showConsole();
-        TEngineApp.startApp(theWall);
+        try{
+            theWall.getDebugConsole().showConsole();
+            TEngineApp.startApp(theWall);
+        }catch (Exception e){
+            logger.fatal("Cannot start game, fatal runtime error", e);
+            System.exit(1);
+            return;
+        }
+
         theWall.input().getMouse().disableCursor();
         theWall.enableVSync();
         theWall.setKeyboardCallback(new KeyboardCallback());
         theWall.setFPSLimit(200);
+
     }
 }

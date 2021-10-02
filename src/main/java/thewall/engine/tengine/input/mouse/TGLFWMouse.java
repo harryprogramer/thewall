@@ -1,6 +1,7 @@
 package thewall.engine.tengine.input.mouse;
 
 
+import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.BufferUtils;
 import thewall.engine.tengine.TEngineApp;
@@ -18,7 +19,15 @@ public class TGLFWMouse implements Mouse{
         this.app = tEngineApp;
     }
 
-    private record CursorPositionImpl(double posX, double posY) implements CursorPosition {
+    private static class CursorPositionImpl implements CursorPosition {
+       private final double posX;
+       private final double posY;
+
+       public CursorPositionImpl(double posX, double posY){
+           this.posX = posX;
+           this.posY = posY;
+       }
+
         @Override
         public double getXPos() {
             return posX;

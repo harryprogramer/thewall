@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import thewall.engine.tengine.TEngineApp;
 import thewall.engine.tengine.debugger.TEngineDebugger;
 import thewall.engine.tengine.display.DisplayManager;
@@ -30,7 +32,10 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     volatile boolean isInit = false;
     private Thread runtimeThread = null;
 
+    private long windowPointer;
+
     volatile boolean isClosing = false;
+    volatile boolean isClosed = false;
 
     private final List<Runnable> rendererTasks = new ArrayList<>();
 
@@ -52,37 +57,32 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     @Override
     protected void start(@NotNull TEngineApp program) {
         runtimeThread = Thread.currentThread();
-        TEngineDebugger.setPrintProxyDebugger(program.getDebugConsole());
         if(!program.getDebugConsole().isLogging())
             program.getDebugConsole().startLogging();
         program.setDisplayManager(new DisplayManager(program.getWindowWidth(), program.getWindowHeight(), program));
-        /*
-        scheduler.execute(() -> {
-
-        });
-
-         */
-
-
         program.getDisplayManager().createDisplay();
         glfwFocusWindow(program.getDisplayManager().getWindow());
         program.setRenderer(new MasterRenderer(program.getDisplayManager()));
         program.onEnable();
+        logger.info("GPU: " + GL11.glGetString(GL11.GL_RENDERER));
+        this.windowPointer = program.getDisplayManager().getWindow();
         this.tEngineApp = program;
-
         engineLoop();
     }
 
     @Override
-    protected void stop() {
-        isClosing = true;
-        logger.info("Shutting down [" + tEngineApp.getName() + "] ...");
-        stopEngine();
-        tEngineApp.onDisable();
-        tEngineApp.getDebugConsole().stopLogging();
-        tEngineApp.getDebugConsole().closeConsole();
-        logger.info("Closing app...");
-        System.exit(-1);
+    protected synchronized void stop() {
+        if(!isClosed) {
+            isClosing = true;
+            logger.info("Shutting down [" + tEngineApp.getName() + "] ...");
+            stopEngine();
+            tEngineApp.onDisable();
+            tEngineApp.getDebugConsole().stopLogging();
+            tEngineApp.getDebugConsole().closeConsole();
+            logger.info("Closing app...");
+            isClosed = true;
+            System.exit(-1);
+        }
     }
 
     private void stopEngine(){
@@ -101,25 +101,26 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     }
 
     private void engineLoop(){
-        while (!glfwWindowShouldClose(tEngineApp.getDisplayManager().getWindow())) {
+        GL.createCapabilities();
+        while (!glfwWindowShouldClose(windowPointer)) {
             try {
                 if(isClosing){
                     break;
                 }
-                    if (!rendererTasks.isEmpty()) {
-                        for (Iterator<Runnable> it = rendererTasks.iterator(); it.hasNext(); ) {
-                            Runnable task = it.next();
-                            try {
-                                task.run();
-                            } catch (Exception e) {
-                                logger.warn("Render task error", e);
-                            }
-                            it.remove();
+                if (!rendererTasks.isEmpty()) {
+                    for (Iterator<Runnable> it = rendererTasks.iterator(); it.hasNext(); ) {
+                        Runnable task = it.next();
+                        try {
+                            task.run();
+                        } catch (Exception e) {
+                            logger.warn("Render task error", e);
                         }
+                        it.remove();
                     }
-
-                    tEngineApp.getDisplayManager().updateDisplay();
-                    tEngineApp.enginePulse();
+                }
+                tEngineApp.getRenderer().prepare();
+                tEngineApp.getDisplayManager().updateDisplay();
+                tEngineApp.enginePulse();
             }catch (Exception e){
                 if(lastError != null){
                     if(e.getClass() == lastError.getClass()){
@@ -139,11 +140,13 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
 
             }
             try {
-                syncTimer.sync(tEngineApp.getFrameLimit());
+                //syncTimer.sync(tEngineApp.getFrameLimit());
             } catch (Exception ex) {
                 logger.warn("Error syncing fps limit", ex);
             }
         }
+
+        stop();
     }
 
 

@@ -5,10 +5,15 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.async.AsyncLoggerContext;
+import org.apache.logging.log4j.core.async.AsyncLoggerContextSelector;
+import org.apache.logging.log4j.core.selector.ContextSelector;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import thewall.engine.tengine.audio.SoundMaster;
+import thewall.engine.tengine.debugger.TEngineDebugger;
 import thewall.engine.tengine.debugger.console.DebugConsole;
 import thewall.engine.tengine.display.DisplayManager;
 import thewall.engine.tengine.display.DisplayResizeCallback;
@@ -37,6 +42,9 @@ import static org.lwjgl.glfw.GLFW.*;
 @SuppressWarnings("unused")
 public abstract class TEngineApp {
     @Getter
+    public static final String version = "1.0.4";
+
+    @Getter
     @Setter
     private DebugConsole debugConsole = DebugConsole.getConsole();
 
@@ -52,7 +60,7 @@ public abstract class TEngineApp {
     private volatile int frameLimit = 60; // DEFAULT FRAME LIMIT
 
     @Getter
-    private String name;
+    private String name = "App";
 
     @Getter
     private Light light = new Light(new Vector3f(0, 0, 0) ,new Vector3f(0, 0, 0));
@@ -170,7 +178,6 @@ public abstract class TEngineApp {
 
     @SneakyThrows
     public static void init(){
-        logger.info("Initializing engine...");
 
         class Dummy {
             public void m() {
@@ -180,6 +187,13 @@ public abstract class TEngineApp {
             Dummy dummy = new Dummy();
             dummy.m();
         }
+
+        System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+
+
+        logger.info("Initializing TEngine " + getVersion());
+
+        TEngineDebugger.setPrintProxyDebugger(DebugConsole.getConsole());
 
         if(isInit.compareAndSet(false, true)) {
             TEngineRuntime.registerRuntime(TEngineApp.class, TEngineAppRuntime.class);
@@ -201,7 +215,11 @@ public abstract class TEngineApp {
         runtime.forceStop();
     }
 
-    private static @NotNull AbstractRuntime<TEngineApp> startRuntime(TEngineApp app){
+    private volatile boolean isError = false;
+    private volatile Throwable error = null;
+
+    @SneakyThrows
+    private static AbstractRuntime<TEngineApp> startRuntime(TEngineApp app){
         checkInit();
         AbstractRuntime<TEngineApp> runtime;
         runtime = TEngineRuntime.findRuntime(TEngineApp.class);
@@ -212,19 +230,35 @@ public abstract class TEngineApp {
         thread.setName("TEngine Main Thread");
         thread.start();
 
-        while (app.displayManager == null || app.displayManager.getWindow() == 0){
+        thread.setUncaughtExceptionHandler((t, e) -> {
+           app.isError = true;
+           app.error = e;
+        });
+
+        while (!(!(app.displayManager == null) && !((app.displayManager != null ? app.displayManager.getWindow() : 0) == 0))){
+            if(app.isError){
+                logger.fatal("Fatal error when trying run [" + app.getName() + "], TEngine Runtime aborting start", app.error);
+                return null;
+            }
             Thread.onSpinWait();
         }
+
+        thread.setUncaughtExceptionHandler(null);
+
 
         app.keyboard = new TGLFWKeyboard(app);
         app.mouse = new TGLFWMouse(app);
         app.input = new InputProvider(app.keyboard, app.mouse);
+
         return runtime;
     }
 
     public static void startApp(TEngineApp app){
         AbstractRuntime<TEngineApp> runtime;
         runtime = startRuntime(app);
+        if(runtime == null){
+            throw new InitializationException("Engine was not initialized probably, look logs upper");
+        }
         app.runtime = runtime;
 
         Runtime.getRuntime().addShutdownHook(new Thread(app::stop));

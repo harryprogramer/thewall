@@ -9,11 +9,11 @@
             <PatternLayout pattern="[%d{HH:mm:ss}] [%t /%-5level] %logger{36} - %msg%n" />
             -->
         </Console>
-        <RollingFile name="RollingFile" fileName="${logs}/filename.log" append="false"
-                     filePattern="${logs}/filename-%d{yyyy-MM-dd}-%i.log" >
-            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] - %msg%n"/>
+        <RollingFile name="RollingFile"
+                     filePattern="logs/%d{yyyy-MM-dd}/%d{HH.mm.ss}-thewall-%i.log" immediateFlush="false">
+            <PatternLayout pattern="[%c] [%d{HH:mm:ss}] %t/%-5level] - %msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy />
+               <TimeBasedTriggeringPolicy interval="86400"/>
                 <SizeBasedTriggeringPolicy size="100 MB" />
             </Policies>
         </RollingFile>
@@ -31,8 +31,6 @@
             <AppenderRef ref="RollingFile"/>
             <AppenderRef ref="TEngineLoggerAppender" />
         </Root>
-
-        <Logger name="sun.reflect.Reflection" level="off"/>
     </Loggers>
 
 

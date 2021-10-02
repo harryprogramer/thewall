@@ -1,0 +1,30 @@
+[thewall.engine.tengine.TEngineApp] [10:28:05] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:28:05] main/INFO ] - Showing up debug console
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:28:05] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[System.out] [10:28:06] TEngine Main Thread/INFO ] - 
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:28:06] TEngine Main Thread/INFO ] - GPU: Intel(R) HD Graphics 630
+[thewall.game.TheWall] [10:28:06] TEngine Main Thread/WARN ] - FPS drop detected, current framerate: 1
+[System.out] [10:28:06] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:07] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:08] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:09] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:10] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:11] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:12] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:13] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:14] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:15] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:16] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:17] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:18] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:19] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:20] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[System.out] [10:28:21] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:28:22] TEngine Main Thread/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.tengine.input.keyboard.KeyboardKeys] [10:28:22] TEngine Main Thread/WARN ] - Unknown key id: 96
+[thewall.engine.tengine.input.keyboard.KeyboardKeys] [10:28:22] TEngine Main Thread/WARN ] - Unknown key id: 49
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:28:22] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:28:22] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:28:22] TEngine Main Thread/INFO ] - Closing debug window
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:28:22] TEngine Main Thread/INFO ] - Closing app...
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:28:22] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]

@@ -12,4 +12,5 @@ public final class TEngineDebugger {
         ConsoleOutProxy.setConsole(console);
         System.setOut(ConsoleOutProxy.getInstance());
     }
+
 }

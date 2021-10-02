@@ -66,7 +66,6 @@ public class MasterRenderer implements Cloneable{
     }
 
     public void render(Light sun, Camera camera){
-        prepare();
         shader.start();
         shader.loadSkyColor(RED, GREEN, BLUE);
         shader.loadLight(sun);
@@ -122,7 +121,6 @@ public class MasterRenderer implements Cloneable{
     }
 
     public void prepare(){
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         GL11.glClearColor(RED, GREEN, BLUE, 1);
     }

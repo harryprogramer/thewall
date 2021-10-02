@@ -1,0 +1,10 @@
+[thewall.engine.tengine.TEngineApp] [10:32:13] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:32:13] main/INFO ] - Showing up debug console
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:32:14] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:32:14] TEngine Main Thread/INFO ] - GPU: Intel(R) HD Graphics 630
+[thewall.game.TheWall] [10:32:14] TEngine Main Thread/WARN ] - FPS drop detected, current framerate: 6
+[thewall.engine.tengine.input.keyboard.KeyboardKeys] [10:32:19] TEngine Main Thread/WARN ] - Unknown key id: 342
+[thewall.engine.tengine.runtime.AbstractRuntime] [10:32:25] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:32:25] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:32:25] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
+[thewall.engine.tengine.debugger.console.DebugConsole] [10:32:25] TEngine Main Thread/INFO ] - Closing debug window

@@ -1,6 +1,8 @@
 package thewall.engine.tengine.display;
 
 import lombok.Getter;
+import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL;
@@ -26,7 +28,7 @@ public class DisplayManager {
 
     private static double lastFrameTime;
     private static float delta;
-    private final TEngineApp app;
+    private final @NotNull TEngineApp app;
     private final int width, height;
     Random r = new Random();
 
@@ -42,7 +44,7 @@ public class DisplayManager {
         this.app = null;
     }
 
-    public DisplayManager(int width, int height, TEngineApp app){
+    public DisplayManager(int width, int height, @NotNull TEngineApp app){
         this.width = width;
         this.height = height;
         this.app = app;
@@ -60,7 +62,7 @@ public class DisplayManager {
     }
 
     public void createDisplay(){
-        window = GLFW.glfwCreateWindow(width, height, "App",  0, 0);
+        window = GLFW.glfwCreateWindow(width, height, app.getName(),  0, 0);
         glfwMakeContextCurrent(window);
 
         glfwShowWindow(window);
@@ -100,7 +102,6 @@ public class DisplayManager {
 
          */
 
-
         GL.createCapabilities();
 
         GL11.glEnable(GL_DEPTH_TEST);
@@ -112,7 +113,7 @@ public class DisplayManager {
 
     public void updateDisplay() throws Exception {
         //glClearColor(random(), random(), random(), 0.0f);
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);z
 
         glfwSwapBuffers(window);
 
