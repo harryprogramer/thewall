@@ -140,13 +140,13 @@ public class Game {
 
         List<Entity> worldEntities = new ArrayList<>();
 
-        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass3", GL_RGBA, GL_LINEAR));
-        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud", GL_RGBA, GL_LINEAR));
-        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers", GL_RGBA, GL_LINEAR));
-        TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path", GL_RGBA, GL_LINEAR));
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass3", GL_RGBA8, GL_LINEAR));
+        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud", GL_RGBA8, GL_LINEAR));
+        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers", GL_RGBA8, GL_LINEAR));
+        TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path", GL_RGBA8, GL_LINEAR));
 
         TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
-        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap", GL_RGBA, GL_LINEAR));
+        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap", GL_RGBA8, GL_LINEAR));
 
         Terrain terrain = new Terrain(0, 0, loader, texturePack, blendMap);
         Terrain terrain2 = new Terrain(1, 0, loader, texturePack, blendMap);

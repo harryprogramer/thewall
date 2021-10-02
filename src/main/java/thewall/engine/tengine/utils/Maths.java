@@ -44,8 +44,8 @@ public class Maths {
     public static @NotNull Matrix4f createViewMatrix(@NotNull Camera camera) {
         Matrix4f viewMatrix = new Matrix4f();
         viewMatrix.identity();
-        viewMatrix.rotate((float) Math.toRadians(camera.getPitch()), new Vector3f(1, 0, 0));
-        viewMatrix.rotate((float) Math.toRadians(camera.getYaw()), new Vector3f(0, 1, 0));
+        viewMatrix.rotate((float) Math.toRadians(-camera.getRotation().x), new Vector3f(1, 0, 0));
+        viewMatrix.rotate((float) Math.toRadians(-camera.getRotation().y), new Vector3f(0, 1, 0));
         Vector3f cameraPos = camera.getPosition();
         Vector3f negativeCameraPos = new Vector3f(-cameraPos.x,-cameraPos.y,-cameraPos.z);
         viewMatrix.translate(negativeCameraPos);

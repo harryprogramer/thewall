@@ -86,8 +86,8 @@ public class TheWall extends TEngineApp {
         backgroundTexture = new TerrainTexture(getLoader().loadTexture("grass3", GL_RGBA, GL_LINEAR));
         rTexture = new TerrainTexture(getLoader().loadTexture("mud", GL_RGBA, GL_LINEAR));
         gTexture = new TerrainTexture(getLoader().loadTexture("grassFlowers", GL_RGBA, GL_LINEAR));
-        bTexture = new TerrainTexture(getLoader().loadTexture("path", GL_RGBA, GL_LINEAR));
-        blendMap = new TerrainTexture(getLoader().loadTexture("blendMap", GL_RGBA, GL_LINEAR));
+        bTexture = new TerrainTexture(getLoader().loadTexture("path", GL_RGBA, GL_NEAREST));
+        blendMap = new TerrainTexture(getLoader().loadTexture("blendMap", GL_RGBA, GL_NEAREST));
 
 
         texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
@@ -129,8 +129,6 @@ public class TheWall extends TEngineApp {
     public void enginePulse() {
         player.tick();
 
-        player.getCamera().move();
-
         getRenderer().processEntity(player);
 
         getRenderer().processTerrain(terrain);
@@ -149,7 +147,6 @@ public class TheWall extends TEngineApp {
             if (frameCount <= 30) {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
-            logger.info(input().getMouse().getCursorPosition().getXPos());
             //System.out.printf("Camera: X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
             System.out.printf("Player: X: [%s] Y: [%s] Z: [%s]\n", player.getPosition().x, player.getPosition().y, player.getPosition().z);
             //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
@@ -167,6 +164,7 @@ public class TheWall extends TEngineApp {
         TEngineApp.init();
         theWall.getDebugConsole().showConsole();
         TEngineApp.startApp(theWall);
+        theWall.input().getMouse().disableCursor();
         theWall.enableVSync();
         theWall.setKeyboardCallback(new KeyboardCallback());
         theWall.setFPSLimit(200);

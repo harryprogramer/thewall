@@ -73,4 +73,9 @@ public class TGLFWMouse implements Mouse{
     public void showCursor() {
         glfwSetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
+
+    @Override
+    public void disableCursor() {
+        glfwSetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    }
 }

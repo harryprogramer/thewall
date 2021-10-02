@@ -13,14 +13,15 @@ public class Camera {
     private final Vector3f position = new Vector3f(300, 30, 700);
     @Getter
     @Setter
-    private float yaw, roll, pitch;
+    private float pitch;
+
+    @Getter
+    private Vector3f rotation = new Vector3f();
 
     private static final float MOUSESENSTIVITY = 0.2f;
 
     private double previousTime = glfwGetTime();
 
-    private float distanceFromPlayer = 50;
-    private float angleAroundPlayer = 0;
 
 
 

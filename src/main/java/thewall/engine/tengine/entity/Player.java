@@ -1,14 +1,22 @@
 package thewall.engine.tengine.entity;
 
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
+import thewall.engine.tengine.input.InputProvider;
+import thewall.engine.tengine.input.keyboard.KeyboardKeys;
+import thewall.engine.tengine.input.mouse.CursorPosition;
 import thewall.game.Game;
 import thewall.engine.tengine.display.DisplayManager;
 import thewall.engine.tengine.models.TexturedModel;
+import thewall.game.TheWall;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Player extends Entity {
+    private final static Logger logger = LogManager.getLogger(Player.class);
+
     private static final float RUN_SPEED = 20;
     private static final float TURN_SPEED = 160;
     private static final float GRAVITY = -50;
@@ -17,9 +25,13 @@ public class Player extends Entity {
     private static final float TERRAIN_HEIGHT = 0;
     boolean isOnAir = false;
 
+    private float moveSpeed = 0.2f, mouseSensitivity = 0.15f;
+
     private float currentSpeed = 0;
     private float currentTurnSpeed = 0;
     private float upwardsSpeed = 0;
+
+    private double newMouseX, newMouseY, oldMouseX = 0, oldMouseY = 0;
 
     @Getter
     private final Camera camera;
@@ -30,7 +42,8 @@ public class Player extends Entity {
     }
 
     public void tick(){
-        //checkInputs();
+        checkInputs();
+
         super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
         float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
         float dx = (float) (distance * Math.sin(Math.toRadians(getRotY())));
@@ -48,6 +61,7 @@ public class Player extends Entity {
         //camera.getPosition().z = getPosition().z;
     }
 
+
     private void jump(){
         if(!isOnAir) {
             this.upwardsSpeed = JUMP_POWER;
@@ -56,18 +70,55 @@ public class Player extends Entity {
     }
 
     public void checkInputs(){
-        if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_W) == GLFW_PRESS){
-            this.currentSpeed = RUN_SPEED;
-        }else if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_S) == GLFW_PRESS){
-            this.currentSpeed = -RUN_SPEED;
-        }else {
-            this.currentSpeed = 0;
+        InputProvider input = TheWall.getTheWall().input();
+        CursorPosition pos = input.getMouse().getCursorPosition();
+        newMouseX = pos.getXPos();
+        newMouseY = pos.getYPos();
+
+        float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * moveSpeed;
+        float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * moveSpeed;
+
+
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.A_KEY)){
+            camera.getPosition().add(new Vector3f(-z, 0, x));
         }
 
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.D_KEY)){
+            camera.getPosition().add(new Vector3f(z, 0, -x));
+        }
 
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.W_KEY)){
+            camera.getPosition().add(new Vector3f(-x, 0, -z));
+        }
 
-        if(glfwGetKey(Game.getDisplayManager().getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS){
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.S_KEY)){
+            camera.getPosition().add(new Vector3f(x, 0, z));
+        }
+
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.SPACE_KEY)){
+            camera.getPosition().add(0, moveSpeed, 0);
+        }
+
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_SHIFT_KEY)){
+            camera.getPosition().add(new Vector3f(0, -moveSpeed, 0));
+        }
+
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_CONTROL_KEY)){
+            moveSpeed = 0.6f;
+        }else {
+            moveSpeed = 0.2f;
+        }
+
+        if(input.getKeyboard().isKeyPressed(KeyboardKeys.SPACE_KEY)){
             jump();
         }
+
+        float dx = (float) (newMouseX - oldMouseX);
+        float dy = (float) (newMouseY - oldMouseY);
+
+        camera.getRotation().add(new Vector3f(-dy * mouseSensitivity, -dx * mouseSensitivity, 0));
+
+        oldMouseX = newMouseX;
+        oldMouseY = newMouseY;
     }
 }

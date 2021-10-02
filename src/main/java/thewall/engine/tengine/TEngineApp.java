@@ -130,8 +130,12 @@ public abstract class TEngineApp {
     public void setKeyboardCallback(TKeyboardCallback TKeyboardCallback){
         checkInit();
         runtime.executeTask(() -> glfwSetKeyCallback(displayManager.getWindow(), (window, key, scancode, action, mods) -> {
-                    TKeyboardCallback.invoke(KeyboardKeys.keyToEnum(key), scancode, action, mods);
-                })
+            try {
+                TKeyboardCallback.invoke(KeyboardKeys.keyToEnum(key), scancode, action, mods);
+            }catch (Exception e){
+                //logger.warn("Keyboard callback error " + e.getMessage());
+            }
+        })
         );
     }
 
@@ -181,11 +185,12 @@ public abstract class TEngineApp {
             TEngineRuntime.registerRuntime(TEngineApp.class, TEngineAppRuntime.class);
         }
 
+
         if(!glfwInit()){
             throw new InitializationException("Engine", "OpenGL GLFW init failed");
         }
         glfwDefaultWindowHints();
-        //glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
     }
     public void setFPSLimit(int limit){
         frameLimit = limit;

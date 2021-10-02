@@ -1,48 +1,55 @@
-2021-10-01 14:45:19.776 [main] - Starting up
-2021-10-01 14:45:19.780 [main] - Initializing engine...
-2021-10-01 14:45:19.850 [TEngine Main Thread] - Starting runtime for [TEngine Game App Runtime]
-2021-10-01 14:45:20.816 [TEngine Main Thread] - 614.0
-2021-10-01 14:45:20.817 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:21.823 [TEngine Main Thread] - 438.0
-2021-10-01 14:45:21.824 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:22.831 [TEngine Main Thread] - 564.0
-2021-10-01 14:45:22.832 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:23.831 [TEngine Main Thread] - 564.0
-2021-10-01 14:45:23.832 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:24.839 [TEngine Main Thread] - 1047.0
-2021-10-01 14:45:24.840 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:25.847 [TEngine Main Thread] - 1047.0
-2021-10-01 14:45:25.850 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:26.856 [TEngine Main Thread] - 1405.0
-2021-10-01 14:45:26.857 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:27.865 [TEngine Main Thread] - 1405.0
-2021-10-01 14:45:27.866 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:28.865 [TEngine Main Thread] - 1405.0
-2021-10-01 14:45:28.866 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:29.874 [TEngine Main Thread] - -1647.0
-2021-10-01 14:45:29.874 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:30.880 [TEngine Main Thread] - -1647.0
-2021-10-01 14:45:30.881 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:31.881 [TEngine Main Thread] - -1920.0
-2021-10-01 14:45:31.881 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:32.889 [TEngine Main Thread] - -1920.0
-2021-10-01 14:45:32.890 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:33.892 [TEngine Main Thread] - -240.0
-2021-10-01 14:45:33.893 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:34.898 [TEngine Main Thread] - -22.0
-2021-10-01 14:45:34.898 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:35.906 [TEngine Main Thread] - -22.0
-2021-10-01 14:45:35.907 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:36.906 [TEngine Main Thread] - 753.0
-2021-10-01 14:45:36.907 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:37.914 [TEngine Main Thread] - 657.0
-2021-10-01 14:45:37.915 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:38.922 [TEngine Main Thread] - 11.0
-2021-10-01 14:45:38.923 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:39.922 [TEngine Main Thread] - 20.0
-2021-10-01 14:45:39.923 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-2021-10-01 14:45:40.119 [TEngine Main Thread] - Closing...
-2021-10-01 14:45:40.119 [TEngine Main Thread] - Shutting down [The Wall] ...
-2021-10-01 14:45:40.149 [TEngine Main Thread] - Disabling debug logging, stand by
-2021-10-01 14:45:40.149 [TEngine Main Thread] - Closing debug window
-2021-10-01 14:45:40.151 [TEngine Main Thread] - Closing app...
+2021-10-02 10:33:57.190 [main] - Starting up
+2021-10-02 10:33:57.195 [main] - Initializing engine...
+2021-10-02 10:33:57.287 [TEngine Main Thread] - Starting runtime for [TEngine Game App Runtime]
+2021-10-02 10:33:58.246 [TEngine Main Thread] - Player: X: [300.0] Y: [3.0735998] Z: [600.0]
+2021-10-02 10:33:59.250 [TEngine Main Thread] - Player: X: [300.0] Y: [2.0837502] Z: [600.0]
+2021-10-02 10:34:00.254 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:01.255 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:02.260 [TEngine Main Thread] - Player: X: [300.0] Y: [6.107148] Z: [600.0]
+2021-10-02 10:34:03.265 [TEngine Main Thread] - Player: X: [300.0] Y: [8.362704] Z: [600.0]
+2021-10-02 10:34:04.266 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:05.270 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:06.274 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:07.277 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:08.280 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:09.285 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:10.290 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:11.293 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:12.294 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:13.295 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:14.298 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:15.299 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:16.305 [TEngine Main Thread] - Player: X: [300.0] Y: [3.3630002] Z: [600.0]
+2021-10-02 10:34:17.308 [TEngine Main Thread] - Player: X: [300.0] Y: [1.7892975] Z: [600.0]
+2021-10-02 10:34:18.314 [TEngine Main Thread] - Player: X: [300.0] Y: [5.96245] Z: [600.0]
+2021-10-02 10:34:19.323 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:20.329 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:21.337 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:22.343 [TEngine Main Thread] - Player: X: [300.0] Y: [5.341003] Z: [600.0]
+2021-10-02 10:34:23.344 [TEngine Main Thread] - Player: X: [300.0] Y: [8.070647] Z: [600.0]
+2021-10-02 10:34:24.344 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:25.349 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:26.352 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:27.354 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:28.355 [TEngine Main Thread] - Player: X: [300.0] Y: [1.29095] Z: [600.0]
+2021-10-02 10:34:29.359 [TEngine Main Thread] - Player: X: [300.0] Y: [3.7760503] Z: [600.0]
+2021-10-02 10:34:30.365 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:31.369 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:32.374 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:33.374 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:34.374 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:35.378 [TEngine Main Thread] - Player: X: [300.0] Y: [5.332249] Z: [600.0]
+2021-10-02 10:34:36.378 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:37.381 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:38.385 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:39.388 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:40.388 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:41.388 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:42.393 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:43.395 [TEngine Main Thread] - Player: X: [300.0] Y: [0.0] Z: [600.0]
+2021-10-02 10:34:44.398 [TEngine Main Thread] - Player: X: [300.0] Y: [8.718649] Z: [600.0]
+2021-10-02 10:34:44.513 [TEngine Main Thread] - Stopping runtime for [TEngine Game App Runtime]
+2021-10-02 10:34:44.514 [TEngine Main Thread] - Shutting down [The Wall] ...
+2021-10-02 10:34:44.577 [TEngine Main Thread] - Disabling debug logging, stand by
+2021-10-02 10:34:44.578 [TEngine Main Thread] - Closing debug window
+2021-10-02 10:34:44.581 [TEngine Main Thread] - Closing app...

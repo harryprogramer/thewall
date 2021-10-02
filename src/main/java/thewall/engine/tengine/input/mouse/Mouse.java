@@ -17,6 +17,8 @@ public interface Mouse {
 
     void createMouseKeyCallback(TMouseCallback callback);
 
+    void disableCursor();
+
     void hideCursor();
 
     void showCursor();

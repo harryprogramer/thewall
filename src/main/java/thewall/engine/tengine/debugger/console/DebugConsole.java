@@ -230,13 +230,13 @@ public final class DebugConsole {
                     ((width / 2) - (frame.getSize().width / 2)) + gd[screen].getDefaultConfiguration().getBounds().x,
                     ((height / 2) - (frame.getSize().height / 2)) + gd[screen].getDefaultConfiguration().getBounds().y
             );
-            frame.setVisible(true);
-            isWindowShowed = true;
             //GLFW.glfwFocusWindow(Game.getDisplayManager().getWindow());
 
         } else {
-            throw new RuntimeException( "No Screens Found" );
+            logger.warn("Second monitor for debug console not found, displaying in current...");
         }
+        frame.setVisible(true);
+        isWindowShowed = true;
     }
 
 
