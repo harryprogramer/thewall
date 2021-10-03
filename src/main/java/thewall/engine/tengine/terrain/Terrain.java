@@ -6,10 +6,6 @@ import thewall.engine.tengine.models.RawModel;
 import thewall.engine.tengine.textures.TerrainTexture;
 import thewall.engine.tengine.textures.TerrainTexturePack;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
 public class Terrain {
     private static final float SIZE = 800;
     private static final int VERTEX_COUNT = 128;
@@ -32,7 +28,6 @@ public class Terrain {
     }
 
     private RawModel generateTerrain(Loader loader){
-
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] vertices = new float[count * 3];
         float[] normals = new float[count * 3];
