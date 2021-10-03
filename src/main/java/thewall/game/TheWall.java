@@ -167,11 +167,13 @@ public class TheWall extends TEngineApp {
             System.exit(1);
             return;
         }
-
+        /*
         theWall.input().getMouse().disableCursor();
         theWall.enableVSync();
         theWall.setKeyboardCallback(new KeyboardCallback());
         theWall.setFPSLimit(200);
+
+         */
 
     }
 }

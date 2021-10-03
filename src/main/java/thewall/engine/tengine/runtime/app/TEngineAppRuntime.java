@@ -56,18 +56,24 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
 
     @Override
     protected void start(@NotNull TEngineApp program) {
-        runtimeThread = Thread.currentThread();
-        if(!program.getDebugConsole().isLogging())
-            program.getDebugConsole().startLogging();
-        program.setDisplayManager(new DisplayManager(program.getWindowWidth(), program.getWindowHeight(), program));
-        program.getDisplayManager().createDisplay();
-        glfwFocusWindow(program.getDisplayManager().getWindow());
-        program.setRenderer(new MasterRenderer(program.getDisplayManager()));
-        program.onEnable();
-        logger.info("GPU: " + GL11.glGetString(GL11.GL_RENDERER));
-        this.windowPointer = program.getDisplayManager().getWindow();
-        this.tEngineApp = program;
-        engineLoop();
+        try {
+            runtimeThread = Thread.currentThread();
+            if (!program.getDebugConsole().isLogging())
+                program.getDebugConsole().startLogging();
+            program.setDisplayManager(new DisplayManager(program.getWindowWidth(), program.getWindowHeight(), program));
+            program.getDisplayManager().createDisplay();
+            glfwFocusWindow(program.getDisplayManager().getWindow());
+            GL.createCapabilities();
+            program.setRenderer(new MasterRenderer(program.getDisplayManager()));
+            program.onEnable();
+            logger.info("GPU: " + GL11.glGetString(GL11.GL_RENDERER));
+            this.windowPointer = program.getDisplayManager().getWindow();
+            this.tEngineApp = program;
+            engineLoop();
+        }catch (Exception e){
+            logger.fatal("An unknown error has occurred while trying to start the engine core", e);
+            forceStop();
+        }
     }
 
     @Override
@@ -101,7 +107,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     }
 
     private void engineLoop(){
-        GL.createCapabilities();
+
         while (!glfwWindowShouldClose(windowPointer)) {
             try {
                 if(isClosing){
@@ -118,7 +124,6 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
                         it.remove();
                     }
                 }
-                tEngineApp.getRenderer().prepare();
                 tEngineApp.getDisplayManager().updateDisplay();
                 tEngineApp.enginePulse();
             }catch (Exception e){
@@ -139,11 +144,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
                 lastError = e;
 
             }
-            try {
-                //syncTimer.sync(tEngineApp.getFrameLimit());
-            } catch (Exception ex) {
-                logger.warn("Error syncing fps limit", ex);
-            }
+            // TODO FIXME fps sync
         }
 
         stop();

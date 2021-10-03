@@ -20,6 +20,8 @@ public class DisplayManager {
     @Getter
     private volatile long window;
 
+    private volatile boolean isInit = false;
+
     int fps = 0;
 
     public long getFps() {
@@ -31,6 +33,11 @@ public class DisplayManager {
     private final @NotNull TEngineApp app;
     private final int width, height;
     Random r = new Random();
+
+
+    public boolean isInitialized(){
+        return isInit;
+    }
 
     public float random() {
         r = new Random();
@@ -101,12 +108,9 @@ public class DisplayManager {
         } // the stack frame is popped automatically
 
          */
-
-        GL.createCapabilities();
-
-        GL11.glEnable(GL_DEPTH_TEST);
-
         lastFrameTime = getCurrentTime();
+
+        isInit = true;
     }
 
 

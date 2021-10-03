@@ -49,7 +49,7 @@ public abstract class TEngineApp {
     private DebugConsole debugConsole = DebugConsole.getConsole();
 
     private final static Logger logger = LogManager.getLogger(TEngineApp.class);
-
+    private final static int initTimeout = 15;
     private volatile AbstractRuntime<TEngineApp> runtime;
     private volatile boolean isStackTraceEnabled = false;
     private static final AtomicBoolean isInit = new AtomicBoolean(false);
@@ -228,20 +228,31 @@ public abstract class TEngineApp {
         }
         Thread thread = new Thread(() -> runtime.execute(app));
         thread.setName("TEngine Main Thread");
-        thread.start();
 
         thread.setUncaughtExceptionHandler((t, e) -> {
-           app.isError = true;
-           app.error = e;
+            app.isError = true;
+            app.error = e;
         });
+        thread.start();
 
-        while (!(!(app.displayManager == null) && !((app.displayManager != null ? app.displayManager.getWindow() : 0) == 0))){
+        long start = System.currentTimeMillis();
+
+        while (!(!(app.displayManager == null) && !((app.displayManager != null ? app.displayManager.getWindow() : 0) == 0) && app.displayManager.isInitialized())){
             if(app.isError){
-                logger.fatal("Fatal error when trying run [" + app.getName() + "], TEngine Runtime aborting start", app.error);
+                logger.fatal("Fatal error while starting the engine, there was an unexpected error during engine initialization.\n" +
+                        "The logs above have more information", app.error);
                 return null;
             }
+
+            if((System.currentTimeMillis() - start) / 1000.0 >= 15){
+                logger.fatal("Time for initialization has been exceeded, the engine did not start in the expected time.\nThe runtime abort run.");
+                return null;
+            }
+
             Thread.onSpinWait();
         }
+
+
 
         thread.setUncaughtExceptionHandler(null);
 
