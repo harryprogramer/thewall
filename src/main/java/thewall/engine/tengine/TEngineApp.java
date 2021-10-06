@@ -5,11 +5,6 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.async.AsyncLoggerContext;
-import org.apache.logging.log4j.core.async.AsyncLoggerContextSelector;
-import org.apache.logging.log4j.core.selector.ContextSelector;
-import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import thewall.engine.tengine.audio.SoundMaster;
@@ -31,7 +26,7 @@ import thewall.engine.tengine.models.Loader;
 import thewall.engine.tengine.render.MasterRenderer;
 import thewall.engine.tengine.runtime.AbstractRuntime;
 import thewall.engine.tengine.runtime.app.TEngineAppRuntime;
-import thewall.engine.tengine.runtime.TEngineRuntime;
+import thewall.engine.tengine.runtime.TEngineRuntimeService;
 import thewall.engine.tengine.terrain.Terrain;
 
 import java.io.PrintWriter;
@@ -196,13 +191,14 @@ public abstract class TEngineApp {
         TEngineDebugger.setPrintProxyDebugger(DebugConsole.getConsole());
 
         if(isInit.compareAndSet(false, true)) {
-            TEngineRuntime.registerRuntime(TEngineApp.class, TEngineAppRuntime.class);
+            TEngineRuntimeService.registerRuntime(TEngineApp.class, TEngineAppRuntime.class);
         }
-
 
         if(!glfwInit()){
             throw new InitializationException("Engine", "OpenGL GLFW init failed");
         }
+
+        TEngineRuntimeService.init();
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
     }
@@ -222,7 +218,7 @@ public abstract class TEngineApp {
     private static AbstractRuntime<TEngineApp> startRuntime(TEngineApp app){
         checkInit();
         AbstractRuntime<TEngineApp> runtime;
-        runtime = TEngineRuntime.findRuntime(TEngineApp.class);
+        runtime = TEngineRuntimeService.findRuntime(TEngineApp.class);
         if(runtime == null){
             throw new RuntimeException("No runtime found for TEngine app");
         }
@@ -272,7 +268,6 @@ public abstract class TEngineApp {
         }
         app.runtime = runtime;
 
-        Runtime.getRuntime().addShutdownHook(new Thread(app::stop));
     }
 
     private static void checkInit(){

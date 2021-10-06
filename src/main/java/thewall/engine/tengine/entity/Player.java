@@ -79,7 +79,6 @@ public class Player extends Entity {
         float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * moveSpeed;
         float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * moveSpeed;
 
-
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.A_KEY)){
             camera.getPosition().add(new Vector3f(-z, 0, x));
         }

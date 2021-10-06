@@ -66,7 +66,9 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
             GL.createCapabilities();
             program.setRenderer(new MasterRenderer(program.getDisplayManager()));
             program.onEnable();
-            logger.info("GPU: " + GL11.glGetString(GL11.GL_RENDERER));
+            logger.info("OpenGL:                " + GL11.glGetString(GL11.GL_VERSION));
+            logger.info("GPU:                   " + GL11.glGetString(GL11.GL_RENDERER));
+            logger.info("OpenGL Vendor:         " + GL11.glGetString(GL11.GL_VENDOR));
             this.windowPointer = program.getDisplayManager().getWindow();
             this.tEngineApp = program;
             engineLoop();

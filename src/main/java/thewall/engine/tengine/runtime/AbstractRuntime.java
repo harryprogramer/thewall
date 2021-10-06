@@ -10,6 +10,8 @@ public abstract class AbstractRuntime<P> {
     @Getter
     private final String name;
 
+    private P program;
+
     private final static Logger logger = LogManager.getLogger(AbstractRuntime.class);
 
     public AbstractRuntime(String name){
@@ -19,12 +21,28 @@ public abstract class AbstractRuntime<P> {
     public void execute(P program){
         logger.info("Starting runtime for [" + name + "]");
         Objects.requireNonNull(program);
-        start(program);
+        if(this.program != null){
+            throw new RuntimeException("Runtime is already used, active program: " + program.getClass().getSimpleName());
+        }
 
+        TEngineRuntimeService.registerActiveRuntime(program, this);
+
+        this.program = program;
+
+        try {
+            start(program);
+        }catch (Exception e){
+            forceStop();
+            throw e;
+        }
     }
 
     public void forceStop(){
+        if(this.program == null){
+            throw new RuntimeException("Runtime is unused");
+        }
         logger.info("Stopping runtime for [" + name + "]");
+        TEngineRuntimeService.deleteActiveRuntime(this.program);
         executeTask(this::stop);
     }
 
