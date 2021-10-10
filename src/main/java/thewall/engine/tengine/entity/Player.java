@@ -7,12 +7,10 @@ import org.joml.Vector3f;
 import thewall.engine.tengine.input.InputProvider;
 import thewall.engine.tengine.input.keyboard.KeyboardKeys;
 import thewall.engine.tengine.input.mouse.CursorPosition;
-import thewall.game.Game;
 import thewall.engine.tengine.display.DisplayManager;
 import thewall.engine.tengine.models.TexturedModel;
+import thewall.game.Game;
 import thewall.game.TheWall;
-
-import static org.lwjgl.glfw.GLFW.*;
 
 public class Player extends Entity {
     private final static Logger logger = LogManager.getLogger(Player.class);
@@ -42,7 +40,7 @@ public class Player extends Entity {
     }
 
     public void tick(){
-        if(TheWall.getTheWall().input().getMouse().isCursorDisabled()) {
+        if(Game.getGame().input().getMouse().isCursorDisabled()) {
             checkInputs();
         }
 
@@ -72,7 +70,7 @@ public class Player extends Entity {
     }
 
     public void checkInputs(){
-        InputProvider input = TheWall.getTheWall().input();
+        InputProvider input = Game.getGame().input();
         CursorPosition pos = input.getMouse().getCursorPosition();
         newMouseX = pos.getXPos();
         newMouseY = pos.getYPos();

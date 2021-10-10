@@ -1,5 +1,6 @@
 package thewall.engine.tengine.runtime.app;
 
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +13,9 @@ import thewall.engine.tengine.display.DisplayManager;
 import thewall.engine.tengine.render.MasterRenderer;
 import thewall.engine.tengine.render.SyncTimer;
 import thewall.engine.tengine.runtime.AbstractRuntime;
+import thewall.engine.tengine.runtime.TEngineRuntimeService;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +34,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     private TEngineApp tEngineApp;
     volatile boolean isInit = false;
     private Thread runtimeThread = null;
+
 
     private long windowPointer;
 
@@ -65,7 +69,12 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
             glfwFocusWindow(program.getDisplayManager().getWindow());
             GL.createCapabilities();
             program.setRenderer(new MasterRenderer(program.getDisplayManager()));
-            program.onEnable();
+            try {
+                program.onEnable();
+            }catch (Exception e){
+                logger.fatal("Exception in app initialization function", e);
+                forceStop();
+            }
             logger.info("OpenGL:                " + GL11.glGetString(GL11.GL_VERSION));
             logger.info("GPU:                   " + GL11.glGetString(GL11.GL_RENDERER));
             logger.info("OpenGL Vendor:         " + GL11.glGetString(GL11.GL_VENDOR));
@@ -156,4 +165,5 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
     private void scheduleTask(Runnable r){
         rendererTasks.add(r);
     }
+
 }

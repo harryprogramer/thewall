@@ -47,6 +47,7 @@ public abstract class TEngineApp {
     private final static int initTimeout = 15;
     private volatile AbstractRuntime<TEngineApp> runtime;
     private volatile boolean isStackTraceEnabled = false;
+    private static long timeout = 15000;
     private static final AtomicBoolean isInit = new AtomicBoolean(false);
     private PrintWriter logCallback;
     private Thread renderThread;
@@ -226,6 +227,7 @@ public abstract class TEngineApp {
         thread.setName("TEngine Main Thread");
 
         thread.setUncaughtExceptionHandler((t, e) -> {
+            logger.info(e);
             app.isError = true;
             app.error = e;
         });
@@ -240,7 +242,7 @@ public abstract class TEngineApp {
                 return null;
             }
 
-            if((System.currentTimeMillis() - start) / 1000.0 >= 15){
+            if((System.currentTimeMillis() - start) >= timeout){
                 logger.fatal("Time for initialization has been exceeded, the engine did not start in the expected time.\nThe runtime abort run.");
                 return null;
             }
@@ -303,6 +305,14 @@ public abstract class TEngineApp {
         glfwSetWindowSizeCallback(displayManager.getWindow(), null);
     }
 
+
+    public static void setRuntimeTimeout(long time){
+        if(time <= 0 || time > 50000){
+            throw new IllegalStateException("Timeout is must not higher than 50000 and lower than 0");
+        }
+
+        timeout = time;
+    }
 
     public abstract void onEnable();
 

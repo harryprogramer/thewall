@@ -77,43 +77,43 @@ public class Camera {
 
          */
 
-        if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(),  GLFW_KEY_UP) == GLFW_PRESS){
-            if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
+        if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(),  GLFW_KEY_UP) == GLFW_PRESS){
+            if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.z -= 0.5f;
             }
             position.z -= 0.1f;
         }
 
-        if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(),  GLFW_KEY_RIGHT) == GLFW_PRESS){
-            if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
+        if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(),  GLFW_KEY_RIGHT) == GLFW_PRESS){
+            if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.x += 0.5f;
             }
             position.x += 0.1f;
         }
 
-        if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(),  GLFW_KEY_LEFT) == GLFW_PRESS){
-            if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
+        if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(),  GLFW_KEY_LEFT) == GLFW_PRESS){
+            if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.x -= 0.5f;
             }
             position.x -= 0.1f;
         }
 
-        if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_DOWN) == GLFW_PRESS){
-            if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
+        if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_DOWN) == GLFW_PRESS){
+            if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.z += 0.5f;
             }
             position.z += 0.1f;
         }
 
-        if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
-            if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
+        if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
+            if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.y -= 0.5f;
             }
             position.y -= 0.1f;
         }
 
-        if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS){
-            if(glfwGetKey(TheWall.getTheWall().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
+        if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_SPACE) == GLFW_PRESS){
+            if(glfwGetKey(Game.getGame().getDisplayManager().getWindow(), GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS){
                 position.y += 0.5f;
             }
             position.y += 0.1f;

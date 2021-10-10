@@ -30,45 +30,42 @@ import static org.lwjgl.glfw.GLFW.glfwSetWindowTitle;
 import static org.lwjgl.opengl.GL11.*;
 
 public class TheWall extends TEngineApp {
-    @Getter
-    private final static TheWall theWall = new TheWall();
-
     static int frameCount = 0;
     static double previousTime = glfwGetTime();
 
     private final static Logger logger = LogManager.getLogger(TheWall.class);
 
-    ModelData treeModelData = OBJFileLoader.loadOBJ("tree");
-    ModelData grassModelData = OBJFileLoader.loadOBJ("grassModel");
-    ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
+    private ModelData treeModelData = OBJFileLoader.loadOBJ("tree");
+    private ModelData grassModelData = OBJFileLoader.loadOBJ("grassModel");
+    private ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
 
-    RawModel treeRawModel;
+    private RawModel treeRawModel;
 
-    TexturedModel treemodel;
-    TexturedModel grassModel;
+    private TexturedModel treemodel;
+    private TexturedModel grassModel;
 
-    TexturedModel lowPolyTreeModel;
+    private TexturedModel lowPolyTreeModel;
 
-    ModelTexture texture;
+    private ModelTexture texture;
 
-    ModelData modelData = OBJFileLoader.loadOBJ("bunny");
-    RawModel bunnyModel;
-    Player player;
+    private ModelData modelData = OBJFileLoader.loadOBJ("bunny");
+    private RawModel bunnyModel;
+    private Player player;
 
-    Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
+    private Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
 
-    TerrainTexture backgroundTexture;
-    TerrainTexture rTexture ;
-    TerrainTexture gTexture ;
-    TerrainTexture bTexture ;
+    private TerrainTexture backgroundTexture;
+    private TerrainTexture rTexture ;
+    private TerrainTexture gTexture ;
+    private TerrainTexture bTexture ;
 
-    TerrainTexturePack texturePack;
-    TerrainTexture blendMap;
+    private TerrainTexturePack texturePack;
+    private TerrainTexture blendMap;
 
-    Terrain terrain;
-    Terrain terrain2;
+    private Terrain terrain;
+    private Terrain terrain2;
 
-    List<Entity> worldEntities = new ArrayList<>();
+    private List<Entity> worldEntities = new ArrayList<>();
 
     public TheWall() {
         setName("The Wall");
@@ -119,6 +116,10 @@ public class TheWall extends TEngineApp {
             float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);
             worldEntities.add(new Entity(lowPolyTreeModel, new Vector3f(x, 0, z), 0, 180, 0, 1));
         }
+        ModelData wtcModelData = OBJFileLoader.loadOBJ("");
+        TexturedModel wtcModel = new TexturedModel(getLoader().loadToVAO(wtcModelData.getVertices(), wtcModelData.getIndices(),
+                wtcModelData.getTextureCoords(), wtcModelData.getNormals()), new ModelTexture(getLoader().loadTexture("", GL_RGBA, GL_NEAREST)));
+        worldEntities.add(new Entity(wtcModel, new Vector3f(250, 0, 250), 0, 0, 0,1));
     }
 
     @Override
@@ -157,21 +158,4 @@ public class TheWall extends TEngineApp {
 
     }
 
-    public static void main(String[] args) {
-        TEngineApp.init();
-        try{
-            theWall.getDebugConsole().showConsole();
-            TEngineApp.startApp(theWall);
-        }catch (Exception e){
-            logger.fatal("Cannot start game, fatal runtime error", e);
-            System.exit(1);
-            return;
-        }
-
-        theWall.input().getMouse().disableCursor();
-        theWall.enableVSync();
-        theWall.setKeyboardCallback(new KeyboardCallback());
-        theWall.setFPSLimit(200);
-
-    }
 }
