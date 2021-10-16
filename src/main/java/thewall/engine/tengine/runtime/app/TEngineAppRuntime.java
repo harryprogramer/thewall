@@ -1,6 +1,7 @@
 package thewall.engine.tengine.runtime.app;
 
 import lombok.Setter;
+import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -117,6 +118,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
         scheduler.shutdown();
     }
 
+    @SneakyThrows
     private void engineLoop(){
 
         while (!glfwWindowShouldClose(windowPointer)) {
@@ -155,7 +157,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
                 lastError = e;
 
             }
-            // TODO FIXME fps sync
+            syncTimer.sync(tEngineApp.getFrameLimit());
         }
 
         stop();

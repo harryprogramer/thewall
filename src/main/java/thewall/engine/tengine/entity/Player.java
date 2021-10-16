@@ -23,13 +23,12 @@ public class Player extends Entity {
     private static final float TERRAIN_HEIGHT = 0;
     boolean isOnAir = false;
 
-    private float moveSpeed = 0.2f, mouseSensitivity = 0.15f;
+    private float moveSpeed = 0.2f;
 
-    private float currentSpeed = 0;
-    private float currentTurnSpeed = 0;
     private float upwardsSpeed = 0;
 
-    private double newMouseX, newMouseY, oldMouseX = 0, oldMouseY = 0;
+    private double oldMouseX = 0;
+    private double oldMouseY = 0;
 
     @Getter
     private final Camera camera;
@@ -43,8 +42,10 @@ public class Player extends Entity {
         if(Game.getGame().input().getMouse().isCursorDisabled()) {
             checkInputs();
         }
-
+    /*
+        float currentTurnSpeed = 0;
         super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
+        float currentSpeed = 0;
         float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
         float dx = (float) (distance * Math.sin(Math.toRadians(getRotY())));
         float dz = (float) (distance * Math.cos(Math.toRadians(getRotY())));
@@ -56,6 +57,8 @@ public class Player extends Entity {
             isOnAir = false;
             super.getPosition().y = TERRAIN_HEIGHT;
         }
+
+     */
         //camera.getPosition().x = getPosition().x;
         //camera.getPosition().y = getPosition().y + 5;
         //camera.getPosition().z = getPosition().z;
@@ -72,10 +75,14 @@ public class Player extends Entity {
     public void checkInputs(){
         InputProvider input = Game.getGame().input();
         CursorPosition pos = input.getMouse().getCursorPosition();
-        newMouseX = pos.getXPos();
-        newMouseY = pos.getYPos();
-        float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * moveSpeed;
-        float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * moveSpeed;
+        double newMouseX = pos.getXPos();
+        double newMouseY = pos.getYPos();
+        //float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * (moveSpeed * DisplayManager.getFrameTimeSeconds());
+        //float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * (moveSpeed * DisplayManager.getFrameTimeSeconds());
+
+        float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * DisplayManager.getFrameTimeSeconds());
+        float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * DisplayManager.getFrameTimeSeconds());
+
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.A_KEY)){
             camera.getPosition().add(new Vector3f(-z, 0, x));
@@ -94,11 +101,11 @@ public class Player extends Entity {
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.SPACE_KEY)){
-            camera.getPosition().add(0, moveSpeed, 0);
+            camera.getPosition().add(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_SHIFT_KEY)){
-            camera.getPosition().add(new Vector3f(0, -moveSpeed, 0));
+            camera.getPosition().add(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_CONTROL_KEY)){
@@ -116,6 +123,7 @@ public class Player extends Entity {
 
 
         Vector3f finalRotation = camera.getRotation();
+        float mouseSensitivity = 0.15f;
         finalRotation.add(new Vector3f(-dy * mouseSensitivity, -dx * mouseSensitivity, 0));
 
         if(finalRotation.x >= 90){

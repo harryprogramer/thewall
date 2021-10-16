@@ -22,8 +22,8 @@ public class DisplayManager {
         return fps;
     }
 
-    private static double lastFrameTime;
-    private static float delta;
+    private static long lastFrameTime;
+    private static volatile float delta;
     private final @NotNull TEngineApp app;
     private final int width, height;
     Random r = new Random();
@@ -102,7 +102,7 @@ public class DisplayManager {
         } // the stack frame is popped automatically
 
          */
-        lastFrameTime = getCurrentTime();
+        lastFrameTime = System.currentTimeMillis();
 
         isInit = true;
     }
@@ -110,21 +110,15 @@ public class DisplayManager {
 
 
     public void updateDisplay() throws Exception {
-        //glClearColor(random(), random(), random(), 0.0f);
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);z
-
         glfwSwapBuffers(window);
 
         glfwPollEvents();
 
-        double currentFrameTime = getCurrentTime();
-        delta = (float) ((currentFrameTime - lastFrameTime) / 1000f);
+        long currentFrameTime = System.currentTimeMillis();
+        delta = currentFrameTime - lastFrameTime;
         lastFrameTime = currentFrameTime;
     }
 
-    private static long getCurrentTime(){
-        return System.currentTimeMillis() * 1000 / 1000;
-    }
 
     public static float getFrameTimeSeconds(){
         return delta;

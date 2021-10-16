@@ -3,6 +3,7 @@ package thewall.game;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import oshi.SystemInfo;
 import thewall.engine.tengine.TEngineApp;
 import thewall.game.input.KeyboardCallback;
 
@@ -15,17 +16,19 @@ public class Game {
     public static void main(String[] args) {
         TEngineApp.init();
         try{
-            game.getDebugConsole().showConsole();
+            //game.getDebugConsole().showConsole();
             TEngineApp.startApp(game);
         }catch (Exception e){
             logger.fatal("Cannot start game, fatal runtime error", e);
             System.exit(1);
             return;
         }
-        game.input().getMouse().disableCursor();
+        //game.input().getMouse().disableCursor();
         game.enableVSync();
         game.setKeyboardCallback(new KeyboardCallback());
-        game.setFPSLimit(200);
+        game.setFPSLimit(144);
+
+
 
     }
 }
