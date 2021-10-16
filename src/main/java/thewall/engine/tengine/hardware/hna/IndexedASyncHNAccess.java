@@ -11,7 +11,7 @@ import java.util.List;
 @ThreadSafe
 @NonBlocking
 // TODO
-public class IndexedASyncHNAccess extends HardwareNativeAccess{
+public class IndexedASyncHNAccess extends HardwareNativeAccess {
     public IndexedASyncHNAccess(){
         throw new NotImplementedException();
     }
@@ -33,11 +33,6 @@ public class IndexedASyncHNAccess extends HardwareNativeAccess{
 
     @Override
     public List<PowerSource> getPowerSources() {
-        return null;
-    }
-
-    @Override
-    public System getSystem() {
         return null;
     }
 

@@ -29,11 +29,6 @@ public class RealtimeHNAccess extends HardwareNativeAccess {
     }
 
     @Override
-    public System getSystem() {
-        return this;
-    }
-
-    @Override
     public Graphic getUsedGraphic() {
         // TODO
         throw new UnsupportedOperationException("Not implemented yet.");

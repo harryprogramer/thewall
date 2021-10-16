@@ -2,7 +2,7 @@ package thewall.engine.tengine.hardware;
 
 import java.util.List;
 
-public interface Hardware {
+public interface Hardware extends System {
     List<Disk> getDisks();
 
     List<Graphic> getGraphicCards();
@@ -10,8 +10,6 @@ public interface Hardware {
     List<SoundCard> getSoundCards();
 
     List<PowerSource> getPowerSources();
-
-    System getSystem();
 
     Graphic getUsedGraphic();
 

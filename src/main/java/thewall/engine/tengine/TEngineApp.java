@@ -15,6 +15,10 @@ import thewall.engine.tengine.display.DisplayResizeCallback;
 import thewall.engine.tengine.entity.Entity;
 import thewall.engine.tengine.entity.Light;
 import thewall.engine.tengine.errors.InitializationException;
+import thewall.engine.tengine.hardware.Hardware;
+import thewall.engine.tengine.hardware.PlatformEnum;
+import thewall.engine.tengine.hardware.hna.IndexedASyncHNAccess;
+import thewall.engine.tengine.hardware.hna.RealtimeHNAccess;
 import thewall.engine.tengine.input.InputProvider;
 import thewall.engine.tengine.input.keyboard.Keyboard;
 import thewall.engine.tengine.input.keyboard.TGLFWKeyboard;
@@ -36,6 +40,17 @@ import static org.lwjgl.glfw.GLFW.*;
 
 @SuppressWarnings("unused")
 public abstract class TEngineApp {
+    private static final AtomicBoolean isInit = new AtomicBoolean(false);
+    private final static Logger logger = LogManager.getLogger(TEngineApp.class);
+    private final static PlatformEnum[] supportedPlatform = {PlatformEnum.WINDOWS, PlatformEnum.LINUX, PlatformEnum.MACOS};
+    private volatile boolean isStackTraceEnabled = false;
+    private volatile AbstractRuntime<TEngineApp> runtime;
+    private static double previousTime = glfwGetTime();
+    private final static int initTimeout = 15;
+    private static long timeout = 15000;
+    private PrintWriter logCallback;
+    private Thread renderThread;
+
     @Getter
     public static final String version = "1.0.4";
 
@@ -43,17 +58,11 @@ public abstract class TEngineApp {
     @Setter
     private DebugConsole debugConsole = DebugConsole.getConsole();
 
-    private final static Logger logger = LogManager.getLogger(TEngineApp.class);
-    private final static int initTimeout = 15;
-    private volatile AbstractRuntime<TEngineApp> runtime;
-    private volatile boolean isStackTraceEnabled = false;
-    private static long timeout = 15000;
-    private static final AtomicBoolean isInit = new AtomicBoolean(false);
-    private PrintWriter logCallback;
-    private Thread renderThread;
-    private static double previousTime = glfwGetTime();
     @Getter
     private volatile int frameLimit = 60; // DEFAULT FRAME LIMIT
+
+    private static final Hardware hnaAccess = new RealtimeHNAccess();
+    private static final Hardware asyncHNAccess = null;
 
     @Getter
     private String name = "App";
@@ -186,8 +195,19 @@ public abstract class TEngineApp {
 
         System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
-
         logger.info("Initializing TEngine " + getVersion());
+
+        boolean isSupported = false;
+        for(PlatformEnum platform : supportedPlatform){
+            if(platform ==  hnaAccess.getPlatform()){
+                isSupported = true;
+                break;
+            }
+        }
+
+        if(!isSupported){
+            logger.fatal("Unsupported platform [" + hnaAccess.getPlatform().getName() + "]", new InitializationException("Engine", "Unsp"));
+        }
 
         TEngineDebugger.setPrintProxyDebugger(DebugConsole.getConsole());
 

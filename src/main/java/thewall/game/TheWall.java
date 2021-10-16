@@ -35,9 +35,9 @@ public class TheWall extends TEngineApp {
 
     private final static Logger logger = LogManager.getLogger(TheWall.class);
 
-    private ModelData treeModelData = OBJFileLoader.loadOBJ("tree");
-    private ModelData grassModelData = OBJFileLoader.loadOBJ("grassModel");
-    private ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
+    private final ModelData treeModelData = OBJFileLoader.loadOBJ("tree");
+    private final ModelData grassModelData = OBJFileLoader.loadOBJ("grassModel");
+    private final ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
 
     private RawModel treeRawModel;
 
