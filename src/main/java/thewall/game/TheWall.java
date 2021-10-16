@@ -90,8 +90,7 @@ public class TheWall extends TEngineApp {
 
         texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
 
-        terrain = new Terrain(0, 0, getLoader(), texturePack, blendMap);
-        terrain2 = new Terrain(1, 0, getLoader(), texturePack, blendMap);
+        terrain = new Terrain(0, 0, getLoader(), texturePack, blendMap, "heightMap");
         treemodel = new TexturedModel(treeRawModel, new ModelTexture(getLoader().loadTexture("tree", GL_RGBA, GL_NEAREST)));
 
         player = new Player(new TexturedModel(bunnyModel,new ModelTexture(getLoader().loadTexture("white", GL_RGBA, GL_LINEAR))),
@@ -135,7 +134,6 @@ public class TheWall extends TEngineApp {
 
         getRenderer().processTerrain(terrain);
         //
-        getRenderer().processTerrain(terrain2);
 
         for (Entity ent : worldEntities) {
             getRenderer().processEntity(ent);
