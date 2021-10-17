@@ -17,10 +17,6 @@ public class Camera {
 
     @Getter
     private Vector3f rotation = new Vector3f(0, -45, 0);
-    
 
-    private void calculateZoom(){
-        //float zoomLevel =
-    }
 
 }

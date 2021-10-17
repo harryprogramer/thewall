@@ -46,6 +46,7 @@ public class Maths {
         viewMatrix.identity();
         viewMatrix.rotate((float) Math.toRadians(-camera.getRotation().x), new Vector3f(1, 0, 0));
         viewMatrix.rotate((float) Math.toRadians(-camera.getRotation().y), new Vector3f(0, 1, 0));
+        viewMatrix.rotate((float) Math.toRadians(-camera.getRotation().z), new Vector3f(0, 0, 1));
         Vector3f cameraPos = camera.getPosition();
         Vector3f negativeCameraPos = new Vector3f(-cameraPos.x,-cameraPos.y,-cameraPos.z);
         viewMatrix.translate(negativeCameraPos);

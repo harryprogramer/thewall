@@ -26,7 +26,7 @@ public class Game {
         //game.input().getMouse().disableCursor();
         game.enableVSync();
         game.setKeyboardCallback(new KeyboardCallback());
-        game.setFPSLimit(144);
+        game.setFPSLimit(300);
 
 
 

@@ -32,7 +32,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>thewall.game.TheWall</mainClass>
+                  <mainClass>thewall.game.Game</mainClass>
                   <manifestEntries>
                     <Multi-Release>true</Multi-Release>
                   </manifestEntries>
@@ -58,13 +58,25 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>thewall.game.TheWall</mainClass>
+              <mainClass>thewall.game.Game</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
           <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>thewall.game.TheWall</mainClass>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
@@ -118,8 +130,8 @@
     </dependency>
   </dependencies>
   <properties>
-    <maven.compiler.target>16</maven.compiler.target>
-    <maven.compiler.source>16</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
     <joml.version>1.10.2</joml.version>
     <lwjgl.version>3.2.3</lwjgl.version>
   </properties>

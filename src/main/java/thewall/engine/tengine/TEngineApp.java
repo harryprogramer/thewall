@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import thewall.engine.tengine.audio.SoundMaster;
@@ -15,9 +16,10 @@ import thewall.engine.tengine.display.DisplayResizeCallback;
 import thewall.engine.tengine.entity.Entity;
 import thewall.engine.tengine.entity.Light;
 import thewall.engine.tengine.errors.InitializationException;
+import thewall.engine.tengine.events.EventManager;
+import thewall.engine.tengine.events.TEventManager;
 import thewall.engine.tengine.hardware.Hardware;
 import thewall.engine.tengine.hardware.PlatformEnum;
-import thewall.engine.tengine.hardware.hna.IndexedASyncHNAccess;
 import thewall.engine.tengine.hardware.hna.RealtimeHNAccess;
 import thewall.engine.tengine.input.InputProvider;
 import thewall.engine.tengine.input.keyboard.Keyboard;
@@ -62,7 +64,7 @@ public abstract class TEngineApp {
     private volatile int frameLimit = 60; // DEFAULT FRAME LIMIT
 
     private static final Hardware hnaAccess = new RealtimeHNAccess();
-    private static final Hardware asyncHNAccess = null;
+    private static final Hardware asyncHNAccess = null; // TODO
 
     @Getter
     private String name = "App";
@@ -89,6 +91,9 @@ public abstract class TEngineApp {
     @Getter
     @Setter
     private volatile MasterRenderer renderer;
+
+    @Getter
+    private final EventManager eventManager = new TEventManager();
 
     private volatile Keyboard keyboard;
     private volatile Mouse mouse;
@@ -122,8 +127,12 @@ public abstract class TEngineApp {
         glfwSetWindowTitle(displayManager.getWindow(), windowTitle);
     }
 
-    public void enableDebugConsole(){
+    public Hardware getRealtimeHardware(){
+        return hnaAccess;
+    }
 
+    public Hardware getIndexedAsyncHardware(){
+        return asyncHNAccess;
     }
 
     public void enableVSync(){
@@ -236,7 +245,7 @@ public abstract class TEngineApp {
     private volatile Throwable error = null;
 
     @SneakyThrows
-    private static AbstractRuntime<TEngineApp> startRuntime(TEngineApp app){
+    private static @Nullable AbstractRuntime<TEngineApp> startRuntime(TEngineApp app){
         checkInit();
         AbstractRuntime<TEngineApp> runtime;
         runtime = TEngineRuntimeService.findRuntime(TEngineApp.class);
@@ -269,8 +278,6 @@ public abstract class TEngineApp {
 
             Thread.onSpinWait();
         }
-
-
 
         thread.setUncaughtExceptionHandler(null);
 
@@ -309,6 +316,7 @@ public abstract class TEngineApp {
             @Override
             public void invoke(long window, int argWidth, int argHeight) {
                renderer.resizeWindow(argWidth, argHeight);
+
             }
         });
     }

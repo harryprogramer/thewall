@@ -1,26 +1,22 @@
 package thewall.engine.tengine.runtime.app;
 
-import lombok.Setter;
+import io.swagger.models.auth.In;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.tengine.TEngineApp;
-import thewall.engine.tengine.debugger.TEngineDebugger;
 import thewall.engine.tengine.display.DisplayManager;
+import thewall.engine.tengine.events.input.gamepad.GamepadConnectedEvent;
+import thewall.engine.tengine.input.gamepad.GLFWGamepad;
+import thewall.engine.tengine.input.gamepad.GLFWJoystickCallback;
 import thewall.engine.tengine.render.MasterRenderer;
 import thewall.engine.tengine.render.SyncTimer;
 import thewall.engine.tengine.runtime.AbstractRuntime;
-import thewall.engine.tengine.runtime.TEngineRuntimeService;
 
-import java.io.Serial;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.*;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
@@ -81,11 +77,30 @@ public class TEngineAppRuntime extends AbstractRuntime<TEngineApp> {
             logger.info("OpenGL Vendor:         " + GL11.glGetString(GL11.GL_VENDOR));
             this.windowPointer = program.getDisplayManager().getWindow();
             this.tEngineApp = program;
+            glfwSetJoystickCallback(new GLFWJoystickCallback(this.tEngineApp));
             engineLoop();
         }catch (Exception e){
             logger.fatal("An unknown error has occurred while trying to start the engine core", e);
             forceStop();
         }
+    }
+
+    private List<Integer> getActiveControllers(){
+        int[] controllerDictionary = {GLFW_JOYSTICK_1, GLFW_JOYSTICK_2, GLFW_JOYSTICK_3,
+                GLFW_JOYSTICK_4, GLFW_JOYSTICK_5, GLFW_JOYSTICK_6, GLFW_JOYSTICK_7,
+                GLFW_JOYSTICK_8, GLFW_JOYSTICK_9, GLFW_JOYSTICK_10, GLFW_JOYSTICK_11,
+                GLFW_JOYSTICK_12, GLFW_JOYSTICK_13, GLFW_JOYSTICK_14, GLFW_JOYSTICK_15,
+                GLFW_JOYSTICK_16};
+
+        List<Integer> controllers = new ArrayList<>();
+
+        for(int i = 0; i < 15; i++){
+            if(glfwJoystickPresent(controllerDictionary[i])){
+                controllers.add(i + 1);
+            }
+        }
+
+        return controllers;
     }
 
     @Override

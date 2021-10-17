@@ -18,6 +18,7 @@ import thewall.engine.tengine.terrain.Terrain;
 import thewall.engine.tengine.textures.ModelTexture;
 import thewall.engine.tengine.textures.TerrainTexture;
 import thewall.engine.tengine.textures.TerrainTexturePack;
+import thewall.game.events.GamepadEvent;
 import thewall.game.input.KeyboardCallback;
 
 import java.util.ArrayList;
@@ -25,8 +26,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static org.lwjgl.glfw.GLFW.glfwGetTime;
-import static org.lwjgl.glfw.GLFW.glfwSetWindowTitle;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class TheWall extends TEngineApp {
@@ -97,6 +97,8 @@ public class TheWall extends TEngineApp {
                 new Vector3f(300, 0, 600), 0, 0, 0, 1);
         texture = treemodel.getModelTexture();
 
+        player.setPlayerVisible(false);
+
         enableAutoWindowResizable();
 
         texture.setShineDamper(10);
@@ -105,7 +107,7 @@ public class TheWall extends TEngineApp {
         for(int i = 0; i < 600; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            worldEntities.add(new Entity(grassModel, new Vector3f(x, 0, z), 0, 180, 0, 3));
+            worldEntities.add(new Entity(grassModel, new Vector3f(x, 0, z), 1));
         }
 
         // drzewa low poly
@@ -113,12 +115,14 @@ public class TheWall extends TEngineApp {
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);
-            worldEntities.add(new Entity(lowPolyTreeModel, new Vector3f(x, 0, z), 0, 180, 0, 1));
+            worldEntities.add(new Entity(lowPolyTreeModel, new Vector3f(x, 0, z), 1));
         }
         //ModelData wtcModelData = OBJFileLoader.loadOBJ("");
         //TexturedModel wtcModel = new TexturedModel(getLoader().loadToVAO(wtcModelData.getVertices(), wtcModelData.getIndices(),
         //        wtcModelData.getTextureCoords(), wtcModelData.getNormals()), new ModelTexture(getLoader().loadTexture("", GL_RGBA, GL_NEAREST)));
        // worldEntities.add(new Entity(wtcModel, new Vector3f(250, 0, 250), 0, 0, 0,1));
+
+        getEventManager().registerEvents(new GamepadEvent());
     }
 
     @Override
@@ -133,12 +137,13 @@ public class TheWall extends TEngineApp {
         getRenderer().processEntity(player);
 
         getRenderer().processTerrain(terrain);
-        //
 
         for (Entity ent : worldEntities) {
             getRenderer().processEntity(ent);
         }
+
         getRenderer().render(light, player.getCamera());
+
 
         double currentTime = glfwGetTime();
         frameCount++;
@@ -147,9 +152,6 @@ public class TheWall extends TEngineApp {
             if (frameCount <= 30) {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
-            //System.out.printf("Camera: X: [%s] Y: [%s] Z: [%s]\n", camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
-            //System.out.printf("Player: X: [%s] Y: [%s] Z: [%s]\n", player.getPosition().x, player.getPosition().y, player.getPosition().z);
-            //System.out.println("Root: " + String.valueOf(System.nanoTime() - tickStartTime / 1000000.0).substring(0, 4) + "ms");
             frameCount = 0;
             previousTime = currentTime;
         }

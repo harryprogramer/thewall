@@ -1,6 +1,7 @@
 package thewall.engine.tengine.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
@@ -20,6 +21,9 @@ public class Player extends Entity {
     private static final float GRAVITY = -50;
     private static final float JUMP_POWER = 30;
 
+    @Setter
+    private boolean isPlayerVisible = false;
+
     private static final float TERRAIN_HEIGHT = 0;
     boolean isOnAir = false;
 
@@ -34,34 +38,17 @@ public class Player extends Entity {
     private final Camera camera;
 
     public Player(TexturedModel texturedModel, Vector3f vector3f, float rotX, float rotY, float rotZ, float scale) {
-        super(texturedModel, vector3f, rotX, rotY, rotZ, scale);
+        super(texturedModel, vector3f, scale);
         this.camera = new Camera();
+        camera.getPosition().set(vector3f.x - 25, vector3f.y + 25, vector3f.z);
+        getRotation().set(0, 180, 0);
+        camera.getRotation().set(0, 180, 0);
     }
 
     public void tick(){
         if(Game.getGame().input().getMouse().isCursorDisabled()) {
             checkInputs();
         }
-    /*
-        float currentTurnSpeed = 0;
-        super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
-        float currentSpeed = 0;
-        float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
-        float dx = (float) (distance * Math.sin(Math.toRadians(getRotY())));
-        float dz = (float) (distance * Math.cos(Math.toRadians(getRotY())));
-        super.increasePosition(dx, 0, dz);
-        upwardsSpeed += GRAVITY * DisplayManager.getFrameTimeSeconds();
-        super.increasePosition(0, upwardsSpeed * DisplayManager.getFrameTimeSeconds(), 0);
-        if(super.getPosition().y < TERRAIN_HEIGHT){
-            upwardsSpeed = 0;
-            isOnAir = false;
-            super.getPosition().y = TERRAIN_HEIGHT;
-        }
-
-     */
-        //camera.getPosition().x = getPosition().x;
-        //camera.getPosition().y = getPosition().y + 5;
-        //camera.getPosition().z = getPosition().z;
     }
 
 
@@ -85,27 +72,46 @@ public class Player extends Entity {
 
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.A_KEY)){
+            if(isPlayerVisible) {
+                getPosition().add(new Vector3f(-z, 0, x));
+            }
             camera.getPosition().add(new Vector3f(-z, 0, x));
+
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.D_KEY)){
+            if(isPlayerVisible) {
+                getPosition().add(new Vector3f(z, 0, -x));
+            }
             camera.getPosition().add(new Vector3f(z, 0, -x));
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.W_KEY)){
+            if(isPlayerVisible) {
+                getPosition().add(new Vector3f(-x, 0, -z));
+            }
             camera.getPosition().add(new Vector3f(-x, 0, -z));
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.S_KEY)){
+            if(isPlayerVisible) {
+                getPosition().add(new Vector3f(x, 0, z));
+            }
             camera.getPosition().add(new Vector3f(x, 0, z));
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.SPACE_KEY)){
             camera.getPosition().add(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
+            if(isPlayerVisible) {
+                getPosition().add(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
+            }
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_SHIFT_KEY)){
             camera.getPosition().add(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
+            if(isPlayerVisible) {
+                getPosition().add(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
+            }
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_CONTROL_KEY)){
@@ -132,8 +138,8 @@ public class Player extends Entity {
             finalRotation.x = -90f;
         }
 
-        camera.getRotation().set(finalRotation);
-
+        camera.getRotation().set(finalRotation.x, finalRotation.y, finalRotation.z);
+        getRotation().set(0, finalRotation.y - 90, 0);
         oldMouseX = newMouseX;
         oldMouseY = newMouseY;
     }

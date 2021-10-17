@@ -21,6 +21,7 @@ public final class ConsoleOutProxy extends PrintStream {
 
     private final static Logger logger = LogManager.getLogger("System.out");
 
+
     private ConsoleOutProxy(PrintStream systemOut){
         super(new OutStream());
 
@@ -29,6 +30,8 @@ public final class ConsoleOutProxy extends PrintStream {
 
     private static class OutStream extends OutputStream {
         private PrintStream systemOut;
+
+        private static final Logger logger = LogManager.getLogger(OutStream.class);
 
         @Getter
         private static OutStream instance;
@@ -59,7 +62,7 @@ public final class ConsoleOutProxy extends PrintStream {
         public void write(int b) throws IOException {
             if(systemOut != null && console != null){
                 if(characters.size() > 4096){
-                    console.warn("Buffer print limit, over 2048 characters, flushing out...");
+                    logger.warn("Buffer print limit, over 2048 characters, flushing out...");
                     flushConsole();
                     return;
                 }
