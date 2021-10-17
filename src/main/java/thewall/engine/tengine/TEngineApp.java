@@ -54,7 +54,7 @@ public abstract class TEngineApp {
     private Thread renderThread;
 
     @Getter
-    public static final String version = "1.0.4";
+    public static final String version = "1.0.6";
 
     @Getter
     @Setter
