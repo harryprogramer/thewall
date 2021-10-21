@@ -9,11 +9,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class TEngineRuntimeService {
     private static final Logger logger = LogManager.getLogger(TEngineRuntimeService.class);
     private static final HashMap<Class<?>, Class<? extends AbstractRuntime<?>>> runtimes = new HashMap<>();
-    private static final HashMap<Object, AbstractRuntime<?>> activeRuntime = new HashMap<>();
+    private static final ConcurrentMap<Object, AbstractRuntime<?>> activeRuntime = new ConcurrentHashMap<>();
 
     private static boolean isInit = false;
 

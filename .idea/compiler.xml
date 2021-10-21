@@ -10,13 +10,5 @@
         <module name="lwjgl-edu" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="thewall-prototype" target="16" />
-    </bytecodeTargetLevel>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="thewall-prototype" options="" />
-    </option>
   </component>
 </project>

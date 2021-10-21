@@ -14,6 +14,7 @@ uniform float shineDamper;
 uniform float reflectivity;
 uniform vec3 skyColor;
 
+
 void main(void){
 
     vec3 unitNormal = normalize(surfaceNormal);
@@ -39,5 +40,4 @@ void main(void){
 
     out_Color =  vec4(diffuse,1.0) * texture(modelTexture,pass_textureCoordinates) + vec4(finalSpecular,1.0);
     out_Color = mix(vec4(skyColor, 1.0), out_Color, visiblity);
-
 }

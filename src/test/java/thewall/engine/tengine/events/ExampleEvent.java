@@ -8,7 +8,7 @@ public class ExampleEvent extends Event{
     }
 
     public static class ListenerEvent implements Listener {
-        @EngineEvent
+        @EngineEvent(type = EventType.CUSTOM)
         void onEvent(@NotNull ExampleEvent test){
             System.out.println(test.getEventName());
         }

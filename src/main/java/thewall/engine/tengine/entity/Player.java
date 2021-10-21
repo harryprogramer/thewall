@@ -10,6 +10,7 @@ import thewall.engine.tengine.input.keyboard.KeyboardKeys;
 import thewall.engine.tengine.input.mouse.CursorPosition;
 import thewall.engine.tengine.display.DisplayManager;
 import thewall.engine.tengine.models.TexturedModel;
+import thewall.engine.tengine.terrain.Terrain;
 import thewall.game.Game;
 import thewall.game.TheWall;
 
@@ -21,8 +22,6 @@ public class Player extends Entity {
     private static final float GRAVITY = -50;
     private static final float JUMP_POWER = 30;
 
-    @Setter
-    private boolean isPlayerVisible = false;
 
     private static final float TERRAIN_HEIGHT = 0;
     boolean isOnAir = false;
@@ -37,10 +36,10 @@ public class Player extends Entity {
     @Getter
     private final Camera camera;
 
-    public Player(TexturedModel texturedModel, Vector3f vector3f, float rotX, float rotY, float rotZ, float scale) {
-        super(texturedModel, vector3f, scale);
-        this.camera = new Camera();
-        camera.getPosition().set(vector3f.x - 25, vector3f.y + 25, vector3f.z);
+    public Player(TexturedModel texturedModel, Vector3f vector3f, float rotX, float rotY, float rotZ, float scale, Terrain terrain) {
+        super(texturedModel, vector3f, scale, terrain);
+        this.camera = new Camera(vector3f, terrain);
+        camera.setPosition(vector3f.x - 25, vector3f.y + 25, vector3f.z);
         getRotation().set(0, 180, 0);
         camera.getRotation().set(0, 180, 0);
     }
@@ -64,54 +63,42 @@ public class Player extends Entity {
         CursorPosition pos = input.getMouse().getCursorPosition();
         double newMouseX = pos.getXPos();
         double newMouseY = pos.getYPos();
-        //float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * (moveSpeed * DisplayManager.getFrameTimeSeconds());
-        //float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * (moveSpeed * DisplayManager.getFrameTimeSeconds());
 
         float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * DisplayManager.getFrameTimeSeconds());
         float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * DisplayManager.getFrameTimeSeconds());
 
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.A_KEY)){
-            if(isPlayerVisible) {
-                getPosition().add(new Vector3f(-z, 0, x));
-            }
-            camera.getPosition().add(new Vector3f(-z, 0, x));
+            move(new Vector3f(-z, 0, x));
+            camera.move(new Vector3f(-z, 0, x));
 
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.D_KEY)){
-            if(isPlayerVisible) {
-                getPosition().add(new Vector3f(z, 0, -x));
-            }
-            camera.getPosition().add(new Vector3f(z, 0, -x));
+            move(new Vector3f(z, 0, -x));
+            camera.move(new Vector3f(z, 0, -x));
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.W_KEY)){
-            if(isPlayerVisible) {
-                getPosition().add(new Vector3f(-x, 0, -z));
-            }
-            camera.getPosition().add(new Vector3f(-x, 0, -z));
+            move(new Vector3f(-x, 0, -z));
+            camera.move(new Vector3f(-x, 0, -z));
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.S_KEY)){
-            if(isPlayerVisible) {
-                getPosition().add(new Vector3f(x, 0, z));
-            }
-            camera.getPosition().add(new Vector3f(x, 0, z));
+            move(new Vector3f(x, 0, z));
+            camera.move(new Vector3f(x, 0, z));
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.SPACE_KEY)){
-            camera.getPosition().add(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
-            if(isPlayerVisible) {
-                getPosition().add(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
-            }
+            camera.move(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
+            move(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
+
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_SHIFT_KEY)){
-            camera.getPosition().add(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
-            if(isPlayerVisible) {
-                getPosition().add(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
-            }
+            camera.move(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
+            move(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
+
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_CONTROL_KEY)){

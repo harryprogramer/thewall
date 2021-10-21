@@ -1,6 +1,8 @@
 package thewall.engine.tengine.render;
 
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
@@ -19,10 +21,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class MasterRenderer implements Cloneable{
+public class MasterRenderer {
+    private final static Logger logger = LogManager.getLogger(MasterRenderer.class);
+
     private final static float FOV = 80;
     private final static float NEAR_PLANE = 0.1f;
     private final static float FAR_PLANE = 1200;
@@ -37,6 +42,8 @@ public class MasterRenderer implements Cloneable{
     private final TerrainShader terrainShader = new TerrainShader();
 
     private final List<Terrain> terrains = new ArrayList<>();
+
+    private final List<Class<?>> deprecatedList = new ArrayList<>();
 
     public MasterRenderer(DisplayManager displayManager){
         this.displayManager = displayManager;
@@ -54,6 +61,7 @@ public class MasterRenderer implements Cloneable{
     private final Map<TexturedModel, List<Entity>> entities = new HashMap<>();
 
     public void processEntity(@NotNull Entity entity){
+        checkForDeprecation(entity.getClass());
         TexturedModel entityModel = entity.getModel();
         List<Entity> batch = entities.get(entityModel);
         if(batch != null){
@@ -63,6 +71,26 @@ public class MasterRenderer implements Cloneable{
             newBatch.add(entity);
             entities.put(entityModel, newBatch);
         }
+    }
+
+    private void checkForDeprecation(@NotNull Class<?> entity){
+        AtomicBoolean isClassWarned = new AtomicBoolean(false);
+
+        deprecatedList.forEach((aClass -> {
+            if(aClass.equals(entity)){
+                isClassWarned.set(true);
+            }
+        }));
+
+        if(isClassWarned.get()){
+            return;
+        }
+
+        if(entity.isAnnotationPresent(Deprecated.class)){
+            logger.warn("Entity [" + entity.getPackageName() + "." + entity.getSimpleName() + "] is deprecated, try to use another entity or implement your own.");
+        }
+
+        deprecatedList.add(entity);
     }
 
     public void render(Light sun, Camera camera){
@@ -110,15 +138,6 @@ public class MasterRenderer implements Cloneable{
         projectionMatrix.m23(-1);
         projectionMatrix.m32(-((2 * NEAR_PLANE * FAR_PLANE) / frustum_length));
         projectionMatrix.m33(0);
-       /*
-        projectionMatrix.m00 = x_scale;
-        projectionMatrix.m11 = y_scale;
-        projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustum_length);
-        projectionMatrix.m23 = -1;
-        projectionMatrix.m32 = -((2 * NEAR_PLANE * FAR_PLANE) / frustum_length);
-        projectionMatrix.m33 = 0;
-
-        */
     }
 
     public void prepare(){

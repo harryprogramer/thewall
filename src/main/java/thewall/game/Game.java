@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import oshi.SystemInfo;
 import thewall.engine.tengine.TEngineApp;
+import thewall.engine.tengine.events.input.gamepad.GamepadConnectedEvent;
 import thewall.game.input.KeyboardCallback;
 
 public class Game {

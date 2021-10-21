@@ -57,7 +57,8 @@ public class EntityRenderer {
             List<Entity> batch = entities.get(model);
             for(Entity entity : batch){
                 prepareInstance(entity);
-                GL11.glDrawElements(GL_TRIANGLES, model.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
+                if(!entity.isHidden())
+                    GL11.glDrawElements(GL_TRIANGLES, model.getRawModel().getVertexCount(), GL_UNSIGNED_INT, 0);
             }
 
             unbindTexturedModel();

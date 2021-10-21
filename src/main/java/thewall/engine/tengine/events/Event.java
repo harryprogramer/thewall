@@ -1,6 +1,8 @@
 package thewall.engine.tengine.events;
 
-public abstract class Event {
+import org.jetbrains.annotations.NotNull;
+
+public abstract class Event implements Comparable<Event> {
     private final boolean async;
     private final EventType eventType;
     private String name;
@@ -29,5 +31,14 @@ public abstract class Event {
     public String getEventName(){
         return name == null ? this.getClass().getName() : name;
 
+    }
+
+    @Override
+    public int compareTo(@NotNull Event o) {
+        if(isAsynchronous()) {
+            return -1;
+        }else {
+            return 1;
+        }
     }
 }

@@ -2,11 +2,10 @@ package thewall.engine.tengine.events;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,6 +13,7 @@ public class TEventManager implements EventManager {
     private final ExecutorService asyncExecutor = Executors.newFixedThreadPool(50);
     private final static Logger logger = LogManager.getLogger(TEventManager.class);
     private final ArrayList<Listener> listenerList = new ArrayList<>();
+
 
     @Override
     public void registerEvents(Listener listener) {
@@ -29,9 +29,10 @@ public class TEventManager implements EventManager {
 
     @Override
     public void callEvent(Event event) {
+        long startTime = System.currentTimeMillis();
         try {
             for (Listener listener : listenerList) {
-                List<Method> events = getMethodsAnnotatedWith(listener);
+                List<Method> events = getMethodsAnnotatedWith(listener, event.getEventType());
                 for (Method method : events) {
                     if (method.getParameterTypes()[0] == event.getClass()) {
                         if(event.isAsynchronous()){
@@ -39,6 +40,8 @@ public class TEventManager implements EventManager {
                             return;
                         }
                         method.invoke(listener, event);
+                        double endTime = (System.currentTimeMillis() - startTime) / 1000.0;
+                        System.out.println("Event call time: " + endTime);
                     }
                 }
             }
@@ -48,12 +51,15 @@ public class TEventManager implements EventManager {
         }
     }
 
-    private static List<Method> getMethodsAnnotatedWith(final Listener type) {
+    private static @NotNull List<Method> getMethodsAnnotatedWith(final @NotNull Listener type, EventType eventType) {
         final List<Method> methods = new ArrayList<>();
         Class<?> klass = type.getClass();
         while (klass != Object.class) {
             for (final Method method : klass.getDeclaredMethods()) {
                 if (method.isAnnotationPresent(EngineEvent.class)) {
+                    if(method.getAnnotation(EngineEvent.class).type() != eventType){
+                        continue;
+                    }
                     methods.add(method);
                 }
             }

@@ -9,6 +9,7 @@ import thewall.engine.tengine.debugger.TEngineDebugger;
 import thewall.engine.tengine.entity.Entity;
 import thewall.engine.tengine.entity.Light;
 import thewall.engine.tengine.entity.Player;
+import thewall.engine.tengine.entity.RawEntity;
 import thewall.engine.tengine.input.keyboard.KeyboardKeys;
 import thewall.engine.tengine.models.RawModel;
 import thewall.engine.tengine.models.TexturedModel;
@@ -94,10 +95,10 @@ public class TheWall extends TEngineApp {
         treemodel = new TexturedModel(treeRawModel, new ModelTexture(getLoader().loadTexture("tree", GL_RGBA, GL_NEAREST)));
 
         player = new Player(new TexturedModel(bunnyModel,new ModelTexture(getLoader().loadTexture("white", GL_RGBA, GL_LINEAR))),
-                new Vector3f(300, 0, 600), 0, 0, 0, 1);
+                new Vector3f(300, 0, 600), 0, 0, 0, 1, terrain);
         texture = treemodel.getModelTexture();
 
-        player.setPlayerVisible(false);
+        player.hide();
 
         enableAutoWindowResizable();
 
@@ -107,7 +108,7 @@ public class TheWall extends TEngineApp {
         for(int i = 0; i < 600; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            worldEntities.add(new Entity(grassModel, new Vector3f(x, 0, z), 1));
+            worldEntities.add(new RawEntity(grassModel, new Vector3f(x, 0, z), 1, terrain));
         }
 
         // drzewa low poly
@@ -115,7 +116,7 @@ public class TheWall extends TEngineApp {
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);
-            worldEntities.add(new Entity(lowPolyTreeModel, new Vector3f(x, 0, z), 1));
+            worldEntities.add(new RawEntity(lowPolyTreeModel, new Vector3f(x, 0, z), 1, terrain));
         }
         //ModelData wtcModelData = OBJFileLoader.loadOBJ("");
         //TexturedModel wtcModel = new TexturedModel(getLoader().loadToVAO(wtcModelData.getVertices(), wtcModelData.getIndices(),
@@ -123,6 +124,9 @@ public class TheWall extends TEngineApp {
        // worldEntities.add(new Entity(wtcModel, new Vector3f(250, 0, 250), 0, 0, 0,1));
 
         getEventManager().registerEvents(new GamepadEvent());
+
+        player.enableCollisionSystem();
+
     }
 
     @Override

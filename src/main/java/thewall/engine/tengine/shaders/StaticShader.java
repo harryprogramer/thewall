@@ -1,6 +1,7 @@
 package thewall.engine.tengine.shaders;
 
 import org.joml.Matrix4f;
+import org.joml.Random;
 import org.joml.Vector3f;
 import thewall.engine.tengine.entity.Camera;
 import thewall.engine.tengine.entity.Light;
@@ -17,6 +18,7 @@ public class StaticShader extends ShaderProgram {
     private int locationShaneDamper;
     private int location_useFakeLighting;
     private int locationSkyColor;
+    private int locationRandom;
 
     public StaticShader(){
         super("vertexShader.frag", "fragmentShader.vert");
@@ -33,6 +35,9 @@ public class StaticShader extends ShaderProgram {
         locationShaneDamper = super.getUniformLocation("shineDamper");
         location_useFakeLighting = super.getUniformLocation("useFakeLighting");
         locationSkyColor = super.getUniformLocation("skyColor");
+        locationRandom = super.getUniformLocation("random");
+
+        loadFloat(locationRandom, new Random().nextFloat());
     }
 
     public void loadSkyColor(float r, float g, float b){

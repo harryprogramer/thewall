@@ -1,5 +1,7 @@
 package thewall.engine.tengine.shaders;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import thewall.engine.tengine.utils.ResourceUtils;
@@ -12,6 +14,8 @@ import org.lwjgl.opengl.GL20;
 import java.nio.FloatBuffer;
 
 public abstract class ShaderProgram {
+    private static final Logger logger = LogManager.getLogger(ShaderProgram.class);
+
     private final int programID;
     private final int vertexShaderID;
     private final int fragmentShaderID;
@@ -51,7 +55,7 @@ public abstract class ShaderProgram {
     protected int getUniformLocation(String uniformName){
         int location = GL20.glGetUniformLocation(programID, uniformName);
         if(location == -1){
-            System.err.println("Uniform [" + uniformName + "] not found");
+            logger.error("Uniform [" + uniformName + "] not found");
         }
 
         return location;
@@ -88,8 +92,8 @@ public abstract class ShaderProgram {
         GL20.glShaderSource(shaderID, ResourceUtils.readFromInputStream(ShaderProgram.class.getResourceAsStream("/shaders/" + file)));
         GL20.glCompileShader(shaderID);
         if(GL20.glGetShaderi(shaderID, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE){
-            System.out.println("Error from: " + file);
-            System.out.println(GL20.glGetShaderInfoLog(shaderID));
+            logger.error("GLSL Shader compile error from: [" + file + "]");
+            logger.error("Shader error details:\n" + GL20.glGetShaderInfoLog(shaderID));
         }
         return shaderID;
     }
