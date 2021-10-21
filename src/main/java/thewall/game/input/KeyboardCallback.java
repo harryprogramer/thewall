@@ -2,11 +2,10 @@ package thewall.game.input;
 
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
-import thewall.engine.tengine.input.keyboard.KeyboardKeys;
-import thewall.engine.tengine.input.keyboard.TKeyboardCallback;
-import thewall.engine.tengine.input.mouse.Mouse;
+import thewall.engine.twilight.input.keyboard.KeyboardKeys;
+import thewall.engine.twilight.input.keyboard.TKeyboardCallback;
+import thewall.engine.twilight.input.mouse.Mouse;
 import thewall.game.Game;
-import thewall.game.TheWall;
 
 public class KeyboardCallback implements TKeyboardCallback {
     @Override

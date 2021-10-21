@@ -1,26 +1,22 @@
 package thewall.game;
 
-import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
-import thewall.engine.tengine.TEngineApp;
-import thewall.engine.tengine.debugger.TEngineDebugger;
-import thewall.engine.tengine.entity.Entity;
-import thewall.engine.tengine.entity.Light;
-import thewall.engine.tengine.entity.Player;
-import thewall.engine.tengine.entity.RawEntity;
-import thewall.engine.tengine.input.keyboard.KeyboardKeys;
-import thewall.engine.tengine.models.RawModel;
-import thewall.engine.tengine.models.TexturedModel;
-import thewall.engine.tengine.models.obj.thinmatrix.ModelData;
-import thewall.engine.tengine.models.obj.thinmatrix.OBJFileLoader;
-import thewall.engine.tengine.terrain.Terrain;
-import thewall.engine.tengine.textures.ModelTexture;
-import thewall.engine.tengine.textures.TerrainTexture;
-import thewall.engine.tengine.textures.TerrainTexturePack;
+import thewall.engine.twilight.TwilightApp;
+import thewall.engine.twilight.entity.Entity;
+import thewall.engine.twilight.entity.Light;
+import thewall.engine.twilight.entity.Player;
+import thewall.engine.twilight.entity.RawEntity;
+import thewall.engine.twilight.models.RawModel;
+import thewall.engine.twilight.models.TexturedModel;
+import thewall.engine.twilight.models.obj.thinmatrix.ModelData;
+import thewall.engine.twilight.models.obj.thinmatrix.OBJFileLoader;
+import thewall.engine.twilight.terrain.Terrain;
+import thewall.engine.twilight.textures.ModelTexture;
+import thewall.engine.twilight.textures.TerrainTexture;
+import thewall.engine.twilight.textures.TerrainTexturePack;
 import thewall.game.events.GamepadEvent;
-import thewall.game.input.KeyboardCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
-public class TheWall extends TEngineApp {
+public class TheWall extends TwilightApp {
     static int frameCount = 0;
     static double previousTime = glfwGetTime();
 
@@ -108,7 +104,7 @@ public class TheWall extends TEngineApp {
         for(int i = 0; i < 600; i++){
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            worldEntities.add(new RawEntity(grassModel, new Vector3f(x, 0, z), 1, terrain));
+            worldEntities.add(new RawEntity(grassModel, new Vector3f(x, terrain.getHeightOfTerrain(x, z), z), 3, terrain));
         }
 
         // drzewa low poly
@@ -116,7 +112,7 @@ public class TheWall extends TEngineApp {
             int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
             float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);
-            worldEntities.add(new RawEntity(lowPolyTreeModel, new Vector3f(x, 0, z), 1, terrain));
+            worldEntities.add(new RawEntity(lowPolyTreeModel, new Vector3f(x, terrain.getHeightOfTerrain(x, z), z), 1, terrain));
         }
         //ModelData wtcModelData = OBJFileLoader.loadOBJ("");
         //TexturedModel wtcModel = new TexturedModel(getLoader().loadToVAO(wtcModelData.getVertices(), wtcModelData.getIndices(),

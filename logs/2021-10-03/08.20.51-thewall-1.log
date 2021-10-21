@@ -1,15 +1,15 @@
-[thewall.engine.tengine.TEngineApp] [08:20:51] main/INFO ] - Initializing TEngine 1.0.4
-[thewall.engine.tengine.debugger.console.DebugConsole] [08:20:51] main/INFO ] - Showing up debug console
-[thewall.engine.tengine.runtime.AbstractRuntime] [08:20:51] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[thewall.engine.twilight.TwilightApp] [08:20:51] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.twilight.debugger.console.DebugConsole] [08:20:51] main/INFO ] - Showing up debug console
+[thewall.engine.twilight.runtime.AbstractRuntime] [08:20:51] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
 [System.out] [08:20:51] TEngine Main Thread/INFO ] - 
-[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:20:52] TEngine Main Thread/WARN ] - Error while pulsing engine
-java.lang.NullPointerException: Cannot invoke "thewall.engine.tengine.input.InputProvider.getMouse()" because the return value of "thewall.game.TheWall.input()" is null
-	at thewall.engine.tengine.entity.Player.tick(Player.java:45) ~[classes/:?]
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [08:20:52] TEngine Main Thread/WARN ] - Error while pulsing engine
+java.lang.NullPointerException: Cannot invoke "thewall.engine.twilight.input.InputProvider.getMouse()" because the return value of "thewall.game.TheWall.input()" is null
+	at thewall.engine.twilight.entity.Player.tick(Player.java:45) ~[classes/:?]
 	at thewall.game.TheWall.enginePulse(TheWall.java:131) ~[classes/:?]
-	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.engineLoop(TEngineAppRuntime.java:117) ~[classes/:?]
-	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:65) ~[classes/:?]
-	at thewall.engine.tengine.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:23) ~[classes/:?]
-	at thewall.engine.tengine.runtime.AbstractRuntime.execute(AbstractRuntime.java:23) ~[classes/:?]
-	at thewall.engine.tengine.TEngineApp.lambda$startRuntime$2(TEngineApp.java:229) ~[classes/:?]
+	at thewall.engine.twilight.runtime.app.TEngineAppRuntime.engineLoop(TEngineAppRuntime.java:117) ~[classes/:?]
+	at thewall.engine.twilight.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:65) ~[classes/:?]
+	at thewall.engine.twilight.runtime.app.TEngineAppRuntime.start(TEngineAppRuntime.java:23) ~[classes/:?]
+	at thewall.engine.twilight.runtime.AbstractRuntime.execute(AbstractRuntime.java:23) ~[classes/:?]
+	at thewall.engine.twilight.TwilightApp.lambda$startRuntime$2(TEngineApp.java:229) ~[classes/:?]
 	at java.lang.Thread.run(Thread.java:833) [?:?]
-[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [08:20:53] TEngine Main Thread/WARN ] - NullPointerException is still throwing in the engine loop, more then 100 times
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [08:20:53] TEngine Main Thread/WARN ] - NullPointerException is still throwing in the engine loop, more then 100 times

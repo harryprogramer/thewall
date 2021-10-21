@@ -1,6 +1,6 @@
-[thewall.engine.tengine.TEngineApp] [10:21:21] main/INFO ] - Initializing TEngine 1.0.4
-[thewall.engine.tengine.debugger.console.DebugConsole] [10:21:22] main/INFO ] - Showing up debug console
-[thewall.engine.tengine.runtime.AbstractRuntime] [10:21:22] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[thewall.engine.twilight.TwilightApp] [10:21:21] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.twilight.debugger.console.DebugConsole] [10:21:22] main/INFO ] - Showing up debug console
+[thewall.engine.twilight.runtime.AbstractRuntime] [10:21:22] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
 [System.out] [10:21:22] TEngine Main Thread/INFO ] - 
 [thewall.game.TheWall] [10:21:23] TEngine Main Thread/WARN ] - FPS drop detected, current framerate: 3
 [System.out] [10:21:23] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
@@ -109,9 +109,9 @@
 [System.out] [10:23:06] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
 [System.out] [10:23:07] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [7.768546] Z: [600.0]
 [System.out] [10:23:08] TEngine Main Thread/INFO ] - Player: X: [300.0] Y: [0.0] Z: [600.0]
-[thewall.engine.tengine.runtime.AbstractRuntime] [10:23:09] TEngine Main Thread/INFO ] - Stopping runtime for [TEngine Game App Runtime]
-[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:23:09] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
-[thewall.engine.tengine.debugger.console.DebugConsole] [10:23:09] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
-[thewall.engine.tengine.debugger.console.DebugConsole] [10:23:09] TEngine Main Thread/INFO ] - Closing debug window
-[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:23:09] TEngine Main Thread/INFO ] - Closing app...
-[thewall.engine.tengine.runtime.AbstractRuntime] [10:23:09] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.twilight.runtime.AbstractRuntime] [10:23:09] TEngine Main Thread/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [10:23:09] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
+[thewall.engine.twilight.debugger.console.DebugConsole] [10:23:09] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
+[thewall.engine.twilight.debugger.console.DebugConsole] [10:23:09] TEngine Main Thread/INFO ] - Closing debug window
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [10:23:09] TEngine Main Thread/INFO ] - Closing app...
+[thewall.engine.twilight.runtime.AbstractRuntime] [10:23:09] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]

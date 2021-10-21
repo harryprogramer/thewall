@@ -1,9 +1,9 @@
-[thewall.engine.tengine.TEngineApp] [10:32:31] main/INFO ] - Initializing TEngine 1.0.4
-[thewall.engine.tengine.debugger.console.DebugConsole] [10:32:31] main/INFO ] - Showing up debug console
-[thewall.engine.tengine.runtime.AbstractRuntime] [10:32:31] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
-[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:32:32] TEngine Main Thread/INFO ] - GPU: Intel(R) HD Graphics 630
+[thewall.engine.twilight.TwilightApp] [10:32:31] main/INFO ] - Initializing TEngine 1.0.4
+[thewall.engine.twilight.debugger.console.DebugConsole] [10:32:31] main/INFO ] - Showing up debug console
+[thewall.engine.twilight.runtime.AbstractRuntime] [10:32:31] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [10:32:32] TEngine Main Thread/INFO ] - GPU: Intel(R) HD Graphics 630
 [thewall.game.TheWall] [10:32:32] TEngine Main Thread/WARN ] - FPS drop detected, current framerate: 15
-[thewall.engine.tengine.runtime.AbstractRuntime] [10:33:53] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]
-[thewall.engine.tengine.runtime.app.TEngineAppRuntime] [10:33:53] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
-[thewall.engine.tengine.debugger.console.DebugConsole] [10:33:53] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
-[thewall.engine.tengine.debugger.console.DebugConsole] [10:33:53] TEngine Main Thread/INFO ] - Closing debug window
+[thewall.engine.twilight.runtime.AbstractRuntime] [10:33:53] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [10:33:53] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
+[thewall.engine.twilight.debugger.console.DebugConsole] [10:33:53] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
+[thewall.engine.twilight.debugger.console.DebugConsole] [10:33:53] TEngine Main Thread/INFO ] - Closing debug window

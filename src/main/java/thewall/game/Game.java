@@ -3,9 +3,7 @@ package thewall.game;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import oshi.SystemInfo;
-import thewall.engine.tengine.TEngineApp;
-import thewall.engine.tengine.events.input.gamepad.GamepadConnectedEvent;
+import thewall.engine.twilight.TwilightApp;
 import thewall.game.input.KeyboardCallback;
 
 public class Game {
@@ -15,10 +13,10 @@ public class Game {
     private final static Logger logger = LogManager.getLogger(Game.class);
 
     public static void main(String[] args) {
-        TEngineApp.init();
+        TwilightApp.init();
         try{
             //game.getDebugConsole().showConsole();
-            TEngineApp.startApp(game);
+            TwilightApp.startApp(game);
         }catch (Exception e){
             logger.fatal("Cannot start game, fatal runtime error", e);
             System.exit(1);
