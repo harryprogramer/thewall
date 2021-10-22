@@ -5,7 +5,6 @@ public interface DisplayManager {
 
     void updateDisplay() throws Exception;
 
-
     void enableVSync();
 
     void disableVSync();

@@ -1,6 +1,7 @@
 package thewall.engine.twilight.runtime.app;
 
 import lombok.SneakyThrows;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -8,6 +9,8 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.display.GLFWDisplayManager;
+import thewall.engine.twilight.hardware.Memory;
+import thewall.engine.twilight.hardware.SoundCard;
 import thewall.engine.twilight.input.gamepad.GLFWJoystickCallback;
 import thewall.engine.twilight.render.MasterRenderer;
 import thewall.engine.twilight.render.SyncTimer;
@@ -49,7 +52,11 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
 
     @Override
     public void executeTask(Runnable runnable) {
-        rendererTasks.add(runnable);
+        if(twilightApp == null){
+            runnable.run();
+        }else {
+            rendererTasks.add(runnable);
+        }
     }
 
     @Override
@@ -68,11 +75,19 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
                 logger.fatal("Exception in app initialization function", e);
                 forceStop();
             }
-            logger.info("OpenGL:                " + GL11.glGetString(GL11.GL_VERSION));
-            logger.info("GPU:                   " + GL11.glGetString(GL11.GL_RENDERER));
-            logger.info("OpenGL Vendor:         " + GL11.glGetString(GL11.GL_VENDOR));
             this.windowPointer = program.getWindowPointer();
             this.twilightApp = program;
+            logger.info("CPU:       " + twilightApp.getRealtimeHardware().getProcessor().getName());
+            logger.info("OpenGL:    " + TwilightApp.getRenderAPIVersion());
+            logger.info("GPU:       " + twilightApp.getRealtimeHardware().getUsedGraphic().getName());
+            logger.info("Vendor:    " + twilightApp.getRealtimeHardware().getUsedGraphic().getVendor());
+            logger.info("Memory :   " + (twilightApp.getRealtimeHardware().getMemory().getTotal()) / (1024L * 1024L) + "MB");
+            logger.info("Baseboard: "  + twilightApp.getRealtimeHardware().getBaseboardManufacturer() + " " + twilightApp.getRealtimeHardware().getBaseboardModel());
+            List<SoundCard> soundCards = twilightApp.getRealtimeHardware().getSoundCards();
+            int i = 0;
+            for(SoundCard soundCard : soundCards) {
+                logger.info(String.format("Sound %d:   %s %s %s", ++i ,soundCard.getName(), soundCard.getCodec(), soundCard.getDriverVersion()));
+            }
             glfwSetJoystickCallback(new GLFWJoystickCallback(this.twilightApp));
             engineLoop();
         }catch (Exception e){
@@ -81,7 +96,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
         }
     }
 
-    private List<Integer> getActiveControllers(){
+    private @NotNull List<Integer> getActiveControllers(){
         int[] controllerDictionary = {GLFW_JOYSTICK_1, GLFW_JOYSTICK_2, GLFW_JOYSTICK_3,
                 GLFW_JOYSTICK_4, GLFW_JOYSTICK_5, GLFW_JOYSTICK_6, GLFW_JOYSTICK_7,
                 GLFW_JOYSTICK_8, GLFW_JOYSTICK_9, GLFW_JOYSTICK_10, GLFW_JOYSTICK_11,
@@ -103,11 +118,13 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     protected synchronized void stop() {
         if(!isClosed) {
             isClosing = true;
-            logger.info("Shutting down [" + twilightApp.getName() + "] ...");
+            logger.info("Shutting down [" + (twilightApp != null ? twilightApp.getName() : "N/A") + "] ...");
             stopEngine();
-            twilightApp.onDisable();
-            twilightApp.getDebugConsole().stopLogging();
-            twilightApp.getDebugConsole().closeConsole();
+            if(twilightApp != null) {
+                twilightApp.onDisable();
+                twilightApp.getDebugConsole().stopLogging();
+                twilightApp.getDebugConsole().closeConsole();
+            }
             logger.info("Closing app...");
             isClosed = true;
             System.exit(-1);
@@ -115,11 +132,13 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     }
 
     private void stopEngine(){
-        twilightApp.getRenderer().cleanUp();
-        twilightApp.getLoader().cleanUp();
+        if(twilightApp != null) {
+            twilightApp.getRenderer().cleanUp();
+            twilightApp.getLoader().cleanUp();
+            glfwFreeCallbacks(twilightApp.getWindowPointer());
+            glfwDestroyWindow(twilightApp.getWindowPointer());
+        }
 
-        glfwFreeCallbacks(twilightApp.getWindowPointer());
-        glfwDestroyWindow(twilightApp.getWindowPointer());
         glfwTerminate();
         try {
             Objects.requireNonNull(glfwSetErrorCallback(null)).free();

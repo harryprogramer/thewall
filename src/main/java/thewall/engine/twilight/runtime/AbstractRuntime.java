@@ -1,6 +1,7 @@
 package thewall.engine.twilight.runtime;
 
 import lombok.Getter;
+import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,6 +38,7 @@ public abstract class AbstractRuntime<P> {
         }
     }
 
+    @SneakyThrows
     public void forceStop(){
         if(this.program == null){
             throw new RuntimeException("Runtime is unused");

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
+import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.audio.SoundMaster;
 import thewall.engine.twilight.debugger.TEngineDebugger;
 import thewall.engine.twilight.debugger.console.DebugConsole;
@@ -54,7 +55,7 @@ public abstract class TwilightApp extends GLFWWindowManager {
     private Thread renderThread;
 
     @Getter
-    public static final String version = "1.0.6";
+    public static final String version = "1.0.9";
 
     @Getter
     @Setter
@@ -201,7 +202,7 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
         System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
-        logger.info("Initializing TEngine " + getVersion());
+        logger.info("Initializing Twilight " + getVersion());
 
         boolean isSupported = false;
         for(PlatformEnum platform : supportedPlatform){
@@ -340,6 +341,10 @@ public abstract class TwilightApp extends GLFWWindowManager {
         }
 
         timeout = time;
+    }
+
+    public static String getRenderAPIVersion(){
+        return GL11.glGetString(GL11.GL_VERSION);
     }
 
     public abstract void onEnable();

@@ -32,7 +32,7 @@ public class RealtimeHNAccess extends HardwareNativeAccess {
     @Override
     public Graphic getUsedGraphic() {
         // TODO parse the rest of the data (vendor, deviceID, version, vram)
-        return new HNAGraphic(GL11.glGetString(GL11.GL_RENDERER), null, null, null, 0);
+    return new HNAGraphic(GL11.glGetString(GL11.GL_RENDERER), GL11.glGetString(GL11.GL_VENDOR), null, null, 0);
     }
 
     @Override
