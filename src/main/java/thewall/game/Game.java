@@ -23,6 +23,7 @@ public class Game {
             return;
         }
         //game.input().getMouse().disableCursor();
+        game.enableAutoWindowResizable();
         game.enableVSync();
         game.setKeyboardCallback(new KeyboardCallback());
         game.setFPSLimit(300);

@@ -1,5 +1,6 @@
 package thewall.game;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
@@ -30,10 +31,12 @@ public class TheWall extends TwilightApp {
     static int frameCount = 0;
     static double previousTime = glfwGetTime();
 
+    private static final long  MEGABYTE = 1024L * 1024L;
+
     private final static Logger logger = LogManager.getLogger(TheWall.class);
 
     private final ModelData treeModelData = OBJFileLoader.loadOBJ("tree");
-    private final ModelData grassModelData = OBJFileLoader.loadOBJ("grassModel");
+    private final ModelData grassModelData = OBJFileLoader.loadOBJ("fern");
     private final ModelData lowPolyTree = OBJFileLoader.loadOBJ("lowPolyTree");
 
     private RawModel treeRawModel;
@@ -72,7 +75,8 @@ public class TheWall extends TwilightApp {
     public void onEnable() {
         bunnyModel = getLoader().loadToVAO(modelData.getVertices(), modelData.getIndices(), modelData.getTextureCoords(), modelData.getNormals());
         grassModel = new TexturedModel(getLoader().loadToVAO(grassModelData.getVertices(), grassModelData.getIndices(),
-                grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(getLoader().loadTexture("grassTexture", GL_RGBA, GL_NEAREST)));
+                grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(getLoader().loadTexture("fern", GL_RGBA, GL_NEAREST)));
+        grassModel.getModelTexture().setNumberOfRows(2);
         treeRawModel = getLoader().loadToVAO(treeModelData.getVertices(), treeModelData.getIndices(),
                 treeModelData.getTextureCoords(), treeModelData.getNormals());
         lowPolyTreeModel = new TexturedModel(getLoader().loadToVAO(lowPolyTree.getVertices(), lowPolyTree.getIndices(),
@@ -101,16 +105,16 @@ public class TheWall extends TwilightApp {
         texture.setShineDamper(10);
         texture.setReflectivity(1);
 
-        for(int i = 0; i < 600; i++){
-            int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            worldEntities.add(new RawEntity(grassModel, new Vector3f(x, terrain.getHeightOfTerrain(x, z), z), 3, terrain));
+        for(int i = 0; i < 400; i++){
+            int x = ThreadLocalRandom.current().nextInt(0, 800 + 1);
+            int z = ThreadLocalRandom.current().nextInt(0, 800 + 1);
+            worldEntities.add(new RawEntity(grassModel, new Random().nextInt(4) ,new Vector3f(x, terrain.getHeightOfTerrain(x, z), z), 2, terrain));
         }
 
         // drzewa low poly
         for(int i = 0; i < 400; i++){
-            int x = ThreadLocalRandom.current().nextInt(100, 300 + 1);
-            int z = ThreadLocalRandom.current().nextInt(100, 300 + 1);
+            int x = ThreadLocalRandom.current().nextInt(0, 800 + 1);
+            int z = ThreadLocalRandom.current().nextInt(0, 800 + 1);
             float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);
             worldEntities.add(new RawEntity(lowPolyTreeModel, new Vector3f(x, terrain.getHeightOfTerrain(x, z), z), 1, terrain));
         }
@@ -149,7 +153,11 @@ public class TheWall extends TwilightApp {
         double currentTime = glfwGetTime();
         frameCount++;
         if (currentTime - previousTime >= 1.0) {
-            setWindowTitle("FPS: " + frameCount);
+            long total = getRealtimeHardware().getMemory().getTotalAllocated() / MEGABYTE;
+            long available = getRealtimeHardware().getMemory().getAvailableAllocated() / MEGABYTE;
+            setWindowTitle("MEMORY: " + available + "MB "
+                    + "/ " + total + "MB"
+                    + " | FPS: " + frameCount + " | " + getRealtimeHardware().getProcessor().getName() + " | " + getRealtimeHardware().getUsedGraphic().getName());
             if (frameCount <= 30) {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
@@ -157,6 +165,22 @@ public class TheWall extends TwilightApp {
             previousTime = currentTime;
         }
 
+    }
+
+    private static long getMaxMemory() {
+        return Runtime.getRuntime().maxMemory();
+    }
+
+    private static long getUsedMemory() {
+        return getMaxMemory() - getFreeMemory();
+    }
+
+    private static long getTotalMemory() {
+        return Runtime.getRuntime().totalMemory();
+    }
+
+    private static long getFreeMemory() {
+        return Runtime.getRuntime().freeMemory();
     }
 
 }

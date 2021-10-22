@@ -3,6 +3,8 @@ package thewall.engine.twilight.shaders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector2i;
 import org.joml.Vector3f;
 import thewall.engine.twilight.utils.ResourceUtils;
 import lombok.SneakyThrows;
@@ -79,8 +81,11 @@ public abstract class ShaderProgram {
 
     protected void loadMatrix(int location, @NotNull Matrix4f matrix4f){
         matrix4f.get(matrixBuffer);
-        //matrixBuffer.flip();
         GL20.glUniformMatrix4fv(location, false, matrixBuffer);
+    }
+
+    protected void loadVector2f(int location, @NotNull Vector2f vector){
+        GL20.glUniform2f(location, vector.x, vector.y);
     }
 
 

@@ -5,13 +5,14 @@ import thewall.engine.twilight.hardware.Memory;
 import java.util.List;
 
 final class HNAMemory implements Memory {
-    private long total, available;
+    private long total, available, totalAlloc, availableAlloc;
     List<PhysicalMemory> psymem;
 
-    public HNAMemory(long total, long available, List<PhysicalMemory> psymem){
+    public HNAMemory(long total, long available, long totalAlloc, long availableAlloc ,List<PhysicalMemory> psymem){
         this.total = total;
         this.available = available;
-
+        this.totalAlloc = totalAlloc;
+        this.availableAlloc = availableAlloc;
         this.psymem = psymem;
     }
 
@@ -23,6 +24,16 @@ final class HNAMemory implements Memory {
     @Override
     public long getAvailable() {
         return available;
+    }
+
+    @Override
+    public long getTotalAllocated() {
+        return totalAlloc;
+    }
+
+    @Override
+    public long getAvailableAllocated() {
+        return availableAlloc;
     }
 
     @Override

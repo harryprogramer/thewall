@@ -1,6 +1,8 @@
 package thewall.engine.twilight.hardware.hna;
 
 import org.jetbrains.annotations.Blocking;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.hardware.*;
 
 import java.util.List;
@@ -29,8 +31,8 @@ public class RealtimeHNAccess extends HardwareNativeAccess {
 
     @Override
     public Graphic getUsedGraphic() {
-        // TODO
-        throw new UnsupportedOperationException("Not implemented yet.");
+        // TODO parse the rest of the data (vendor, deviceID, version, vram)
+        return new HNAGraphic(GL11.glGetString(GL11.GL_RENDERER), null, null, null, 0);
     }
 
     @Override

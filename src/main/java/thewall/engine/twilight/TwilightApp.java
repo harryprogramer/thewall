@@ -317,7 +317,6 @@ public abstract class TwilightApp extends GLFWWindowManager {
             @Override
             public void invoke(long window, int argWidth, int argHeight) {
                renderer.resizeWindow(argWidth, argHeight);
-
             }
         });
     }

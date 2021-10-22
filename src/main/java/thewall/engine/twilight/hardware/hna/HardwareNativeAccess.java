@@ -49,7 +49,7 @@ public abstract class HardwareNativeAccess implements Hardware {
                     memory.getMemoryType(), memory.getClockSpeed(), memory.getBankLabel()));
         }
 
-        return new HNAMemory(glMemory.getTotal(), glMemory.getAvailable(), physicalMemHNA);
+        return new HNAMemory(glMemory.getTotal(), glMemory.getAvailable(), getMaxMemory(), getFreeMemory(), physicalMemHNA);
     }
 
     protected List<PowerSource> getHNAPowerSource(){
@@ -82,6 +82,22 @@ public abstract class HardwareNativeAccess implements Hardware {
         }
 
         return soundCardsHNA;
+    }
+
+    private static long getMaxMemory() {
+        return Runtime.getRuntime().maxMemory();
+    }
+
+    private static long getUsedMemory() {
+        return getMaxMemory() - getFreeMemory();
+    }
+
+    private static long getTotalMemory() {
+        return Runtime.getRuntime().totalMemory();
+    }
+
+    private static long getFreeMemory() {
+        return Runtime.getRuntime().freeMemory();
     }
 
     protected int getHNACurrentProcessID(){

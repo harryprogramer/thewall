@@ -36,7 +36,7 @@ public class MasterRenderer {
     private static final float GREEN = 0.78f;
     private static final float BLUE = 0.76f;
 
-    private Matrix4f projectionMatrix;
+    private volatile Matrix4f projectionMatrix;
     private final GLFWDisplayManager glfwDisplayManager;
     private final TerrainRenderer terrainRenderer;
     private final TerrainShader terrainShader = new TerrainShader();
@@ -50,8 +50,12 @@ public class MasterRenderer {
         GL11.glEnable(GL_CULL_FACE);
         GL11.glCullFace(GL_BACK);
         createProjectionMatrix(-1, -1);
-        entityRenderer = new EntityRenderer(glfwDisplayManager, shader, projectionMatrix);
-        terrainRenderer = new TerrainRenderer(terrainShader, projectionMatrix);
+        entityRenderer = new EntityRenderer(glfwDisplayManager, shader, this);
+        terrainRenderer = new TerrainRenderer(terrainShader, this);
+    }
+
+    public Matrix4f getProjectionMatrix(){
+        return projectionMatrix;
     }
 
     private final StaticShader shader = new StaticShader();
@@ -151,8 +155,11 @@ public class MasterRenderer {
     }
 
     public void resizeWindow(int argWidth, int argHeight) {
-        glViewport(0, 0, argWidth,argHeight);
         createProjectionMatrix(argWidth, argHeight);
+        entityRenderer.rebuildProjectionMatrix();
+        terrainRenderer.rebuildMatrix();
+        glViewport(0, 0, argWidth,argHeight);
+
         //adjustProjectionMatrix(width, height); // recalculating projection matrix (only if you are using one)
     }
 

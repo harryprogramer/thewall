@@ -9,4 +9,8 @@ public class RawEntity extends Entity {
     public RawEntity(TexturedModel texturedModel, Vector3f vector3f, float scale, Terrain currentWorld) {
         super(texturedModel, vector3f, scale, currentWorld);
     }
+
+    public RawEntity(TexturedModel texturedModel, int index ,Vector3f vector3f, float scale, Terrain currentWorld) {
+        super(texturedModel, index ,vector3f, scale, currentWorld);
+    }
 }

@@ -16,6 +16,10 @@ public final class ModelTexture {
     @Setter
     private boolean useFakeLighting = false;
 
+    @Setter
+    @Getter
+    private int numberOfRows = 1;
+
     public ModelTexture(int texture){
         this.textureID = texture;
     }

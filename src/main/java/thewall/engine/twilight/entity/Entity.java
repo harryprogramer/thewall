@@ -10,6 +10,8 @@ public abstract class Entity {
     @Getter
     private final TexturedModel model;
 
+    private int textureIndex = 0;
+
     private final Vector3f position;
     @Getter
     private final Vector3f rotation = new Vector3f(0, 0, 0);
@@ -22,11 +24,29 @@ public abstract class Entity {
 
     private boolean isShowed = true;
 
+    public Entity(TexturedModel texturedModel, int index, Vector3f vector3f, float scale, Terrain currentWorld) {
+        this.textureIndex = index;
+        this.model = texturedModel;
+        this.position = vector3f;
+        this.scale = scale;
+        this.world = currentWorld;
+    }
+
     public Entity(TexturedModel texturedModel, Vector3f vector3f, float scale, Terrain currentWorld) {
         this.model = texturedModel;
         this.position = vector3f;
         this.scale = scale;
         this.world = currentWorld;
+    }
+
+    public float getTextureXOffset(){
+        int column = textureIndex % model.getModelTexture().getNumberOfRows();
+        return (float) column / (float) model.getModelTexture().getNumberOfRows();
+    }
+
+    public float getTextureYOffset(){
+        int row = textureIndex / model.getModelTexture().getNumberOfRows();
+        return (float) row / (float) model.getModelTexture().getNumberOfRows();
     }
 
     public void move(@NotNull Vector3f vector3f){

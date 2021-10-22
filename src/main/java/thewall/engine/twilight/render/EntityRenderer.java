@@ -1,6 +1,7 @@
 package thewall.engine.twilight.render;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.entity.Entity;
 import thewall.engine.twilight.models.RawModel;
@@ -25,16 +26,17 @@ public class EntityRenderer {
     private double lastUpdate = GLFW.glfwGetTime();
 
 
-    private Matrix4f projectionMatrix;
+    private MasterRenderer projectionMatrix;
 
     private volatile GLFWDisplayManager GLFWDisplayManager;
     private volatile StaticShader staticShader;
 
-    public EntityRenderer(@NotNull GLFWDisplayManager GLFWDisplayManager, @NotNull StaticShader staticShader, Matrix4f projectionMatrix){
+    public EntityRenderer(@NotNull GLFWDisplayManager GLFWDisplayManager, @NotNull StaticShader staticShader, MasterRenderer projectionMatrix){
         this.GLFWDisplayManager = GLFWDisplayManager;
         this.staticShader = staticShader;
+        this.projectionMatrix = projectionMatrix;
         staticShader.start();
-        staticShader.loadProjectionMatrix(projectionMatrix);
+        staticShader.loadProjectionMatrix(projectionMatrix.getProjectionMatrix());
         staticShader.stop();
     }
 
@@ -72,6 +74,7 @@ public class EntityRenderer {
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
         ModelTexture texture = model.getModelTexture();
+        staticShader.loadNumberOfRows(texture.getNumberOfRows());
         if(texture.isHasTransparency()){
             MasterRenderer.disableCulling();
         }
@@ -89,10 +92,17 @@ public class EntityRenderer {
         GL30.glBindVertexArray(0);
     }
 
-    private void prepareInstance(Entity entity){
+    private void prepareInstance(@NotNull Entity entity){
         Matrix4f transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(),
                 entity.getRotation().x, entity.getRotation().y, entity.getRotation().z, entity.getScale());
         staticShader.loadTransformationMatrix(transformationMatrix);
+        staticShader.loadOffset(new Vector2f(entity.getTextureXOffset(), entity.getTextureYOffset()));
+    }
+
+    public void rebuildProjectionMatrix(){
+        staticShader.start();
+        staticShader.loadProjectionMatrix(projectionMatrix.getProjectionMatrix());
+        staticShader.stop();
     }
 
 

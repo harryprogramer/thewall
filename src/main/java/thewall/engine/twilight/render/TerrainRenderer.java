@@ -19,11 +19,13 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class TerrainRenderer {
     private TerrainShader shader;
+    private MasterRenderer renderer;
 
-    public TerrainRenderer(TerrainShader terrainShader, Matrix4f projectionMatrix){
+    public TerrainRenderer(TerrainShader terrainShader, @NotNull MasterRenderer projectionMatrix){
         this.shader = terrainShader;
+        this.renderer = projectionMatrix;
         shader.start();
-        shader.loadProjectionMatrix(projectionMatrix);
+        shader.loadProjectionMatrix(projectionMatrix.getProjectionMatrix());
         shader.connectTextureUnits();
         shader.stop();
     }
@@ -73,5 +75,12 @@ public class TerrainRenderer {
         Matrix4f transformationMatrix = Maths.createTransformationMatrix(
                 new Vector3f(terrain.getX(), 0, terrain.getZ()), 0,0,0,1);
         shader.loadTransformationMatrix(transformationMatrix);
+    }
+
+    public void rebuildMatrix(){
+        shader.start();
+        shader.loadProjectionMatrix(renderer.getProjectionMatrix());
+        shader.connectTextureUnits();
+        shader.stop();
     }
 }

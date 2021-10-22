@@ -2,6 +2,7 @@ package thewall.engine.twilight.shaders;
 
 import org.joml.Matrix4f;
 import org.joml.Random;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import thewall.engine.twilight.entity.Camera;
 import thewall.engine.twilight.entity.Light;
@@ -18,6 +19,8 @@ public class StaticShader extends ShaderProgram {
     private int locationShaneDamper;
     private int location_useFakeLighting;
     private int locationSkyColor;
+    private int locationNumberOfRows;
+    private int locationOffset;
     private int locationRandom;
 
     public StaticShader(){
@@ -36,8 +39,18 @@ public class StaticShader extends ShaderProgram {
         location_useFakeLighting = super.getUniformLocation("useFakeLighting");
         locationSkyColor = super.getUniformLocation("skyColor");
         locationRandom = super.getUniformLocation("random");
+        locationNumberOfRows = super.getUniformLocation("numberOfRows");
+        locationOffset = super.getUniformLocation("offset");
 
         loadFloat(locationRandom, new Random().nextFloat());
+    }
+
+    public void loadNumberOfRows(int numberOfRows){
+        super.loadFloat(locationNumberOfRows, numberOfRows);
+    }
+
+    public void loadOffset(Vector2f vector2f){
+        super.loadVector2f(locationOffset, vector2f);
     }
 
     public void loadSkyColor(float r, float g, float b){

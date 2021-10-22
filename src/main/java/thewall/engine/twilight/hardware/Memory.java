@@ -7,6 +7,10 @@ public interface Memory {
 
     long getAvailable();
 
+    long getTotalAllocated();
+
+    long getAvailableAllocated();
+
     List<PhysicalMemory> getPhysicalMemory();
 
     interface PhysicalMemory {
