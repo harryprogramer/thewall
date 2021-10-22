@@ -13,11 +13,11 @@ public class TGLFWKeyboard implements Keyboard{
 
     @Override
     public boolean isKeyPressed(KeyboardKeys key) {
-        return glfwGetKey(twilightApp.getDisplayManager().getWindow(), KeyboardKeys.enumToKey(key)) == GLFW_PRESS;
+        return glfwGetKey(twilightApp.getWindowPointer(), KeyboardKeys.enumToKey(key)) == GLFW_PRESS;
     }
 
     @Override
     public boolean isKeyReleased(KeyboardKeys key) {
-        return glfwGetKey(twilightApp.getDisplayManager().getWindow(), KeyboardKeys.enumToKey(key)) == GLFW_RELEASE;
+        return glfwGetKey(twilightApp.getWindowPointer(), KeyboardKeys.enumToKey(key)) == GLFW_RELEASE;
     }
 }

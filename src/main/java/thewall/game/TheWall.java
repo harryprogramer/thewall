@@ -132,6 +132,7 @@ public class TheWall extends TwilightApp {
 
     @Override
     public void enginePulse() {
+
         player.tick();
 
         getRenderer().processEntity(player);

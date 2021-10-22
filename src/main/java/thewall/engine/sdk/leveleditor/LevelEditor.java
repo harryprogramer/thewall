@@ -1,7 +1,7 @@
 package thewall.engine.sdk.leveleditor;
 
 import lombok.Getter;
-import thewall.engine.sdk.leveleditor.window.LevelEditorJFrame;
+import thewall.engine.sdk.leveleditor.window.awt.LevelEditorJFrame;
 import thewall.engine.sdk.leveleditor.window.WindowManager;
 
 public class LevelEditor {

@@ -11,8 +11,8 @@ import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import thewall.engine.twilight.audio.SoundMaster;
 import thewall.engine.twilight.debugger.TEngineDebugger;
 import thewall.engine.twilight.debugger.console.DebugConsole;
-import thewall.engine.twilight.display.DisplayManager;
 import thewall.engine.twilight.display.DisplayResizeCallback;
+import thewall.engine.twilight.display.GLFWWindowManager;
 import thewall.engine.twilight.entity.Entity;
 import thewall.engine.twilight.entity.Light;
 import thewall.engine.twilight.errors.InitializationException;
@@ -41,7 +41,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static org.lwjgl.glfw.GLFW.*;
 
 @SuppressWarnings("unused")
-public abstract class TwilightApp {
+public abstract class TwilightApp extends GLFWWindowManager {
     private static final AtomicBoolean isInit = new AtomicBoolean(false);
     private final static Logger logger = LogManager.getLogger(TwilightApp.class);
     private final static PlatformEnum[] supportedPlatform = {PlatformEnum.WINDOWS, PlatformEnum.LINUX, PlatformEnum.MACOS};
@@ -77,9 +77,6 @@ public abstract class TwilightApp {
     @Getter
     private final Loader loader = new Loader();
 
-    @Getter
-    @Setter
-    private volatile DisplayManager displayManager;
 
     @Getter
     @Setter
@@ -124,7 +121,7 @@ public abstract class TwilightApp {
      * */
     public void setWindowTitle(String windowTitle){
         checkInit();
-        glfwSetWindowTitle(displayManager.getWindow(), windowTitle);
+        glfwSetWindowTitle(getWindowPointer(), windowTitle);
     }
 
     public Hardware getRealtimeHardware(){
@@ -137,12 +134,12 @@ public abstract class TwilightApp {
 
     public void enableVSync(){
         checkInit();
-        displayManager.enableVSync();
+        super.enableVSync();
     }
 
     public void disableVSync(){
         checkInit();
-        displayManager.disableVSync();
+        super.disableVSync();
     }
 
     public void setLogCallback(PrintWriter callback){
@@ -151,7 +148,7 @@ public abstract class TwilightApp {
 
     public void setKeyboardCallback(TKeyboardCallback TKeyboardCallback){
         checkInit();
-        runtime.executeTask(() -> glfwSetKeyCallback(displayManager.getWindow(), (window, key, scancode, action, mods) -> {
+        runtime.executeTask(() -> glfwSetKeyCallback(getWindowPointer(), (window, key, scancode, action, mods) -> {
             try {
                 TKeyboardCallback.invoke(KeyboardKeys.keyToEnum(key), scancode, action, mods);
             }catch (Exception e){
@@ -264,7 +261,7 @@ public abstract class TwilightApp {
 
         long start = System.currentTimeMillis();
 
-        while (!(!(app.displayManager == null) && !((app.displayManager != null ? app.displayManager.getWindow() : 0) == 0) && app.displayManager.isInitialized())){
+        while (app.getWindowPointer() == 0){
             if(app.isError){
                 logger.fatal("Fatal error while starting the engine, there was an unexpected error during engine initialization.\n" +
                         "The logs above have more information", app.error);
@@ -289,6 +286,10 @@ public abstract class TwilightApp {
         return runtime;
     }
 
+    public static boolean isInit(){
+        return isInit.get();
+    }
+
     public static void startApp(TwilightApp app){
         AbstractRuntime<TwilightApp> runtime;
         runtime = startRuntime(app);
@@ -306,13 +307,13 @@ public abstract class TwilightApp {
     }
 
     private void checkStart(){
-        if(displayManager == null){
+        if(!isInit()){
             throw new InitializationException("Before changing some settings you must first run app.");
         }
     }
 
     public void enableAutoWindowResizable(){
-        glfwSetWindowSizeCallback(displayManager.getWindow(), new GLFWWindowSizeCallback() {
+        glfwSetWindowSizeCallback(getWindowPointer(), new GLFWWindowSizeCallback() {
             @Override
             public void invoke(long window, int argWidth, int argHeight) {
                renderer.resizeWindow(argWidth, argHeight);
@@ -322,15 +323,15 @@ public abstract class TwilightApp {
     }
 
     public void disableAutoWindowResizable(){
-        glfwSetWindowSizeCallback(displayManager.getWindow(), null);
+        glfwSetWindowSizeCallback(getWindowPointer(), null);
     }
 
     public void setWindowResizeCallback(DisplayResizeCallback callback){
-        glfwSetWindowSizeCallback(displayManager.getWindow(), (window, width, height) -> callback.invoke(width, height));
+        glfwSetWindowSizeCallback(getWindowPointer(), (window, width, height) -> callback.invoke(width, height));
     }
 
     public void disableWindowResizeCallback(){
-        glfwSetWindowSizeCallback(displayManager.getWindow(), null);
+        glfwSetWindowSizeCallback(getWindowPointer(), null);
     }
 
 

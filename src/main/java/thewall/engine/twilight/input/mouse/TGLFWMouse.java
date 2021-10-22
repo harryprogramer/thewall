@@ -12,7 +12,7 @@ public class TGLFWMouse implements Mouse{
     private final TwilightApp app;
 
     public TGLFWMouse(@NotNull TwilightApp twilightApp){
-        if(twilightApp.getDisplayManager().getWindow() == 0){
+        if(twilightApp.getWindowPointer() == 0){
             throw new NullPointerException("Null pointer");
         }
 
@@ -43,58 +43,58 @@ public class TGLFWMouse implements Mouse{
     public CursorPosition getCursorPosition() {
         DoubleBuffer xPos = BufferUtils.createDoubleBuffer(1);
         DoubleBuffer yPos = BufferUtils.createDoubleBuffer(1);
-        glfwGetCursorPos(app.getDisplayManager().getWindow(), xPos, yPos);
+        glfwGetCursorPos(app.getWindowPointer(), xPos, yPos);
         return new CursorPositionImpl(xPos.get(0), yPos.get(0));
     }
 
     @Override
     public void setCursorPositionCallback(CursorPositionCallback callback) throws UnsupportedOperationException {
-        glfwSetCursorPosCallback(app.getDisplayManager().getWindow(), (window, xpos, ypos) -> callback.invoke(xpos, ypos));
+        glfwSetCursorPosCallback(app.getWindowPointer(), (window, xpos, ypos) -> callback.invoke(xpos, ypos));
     }
 
     @Override
     public void setCursorPosition(double posX, double posY) {
-        glfwSetCursorPos(app.getDisplayManager().getWindow(), posX, posY);
+        glfwSetCursorPos(app.getWindowPointer(), posX, posY);
     }
 
     @Override
     public boolean getMouseKeyPress(MouseButtons button) {
-        return glfwGetMouseButton(app.getDisplayManager().getWindow(), MouseButtons.buttonToEnum(button)) == GLFW_PRESS;
+        return glfwGetMouseButton(app.getWindowPointer(), MouseButtons.buttonToEnum(button)) == GLFW_PRESS;
     }
 
     @Override
     public boolean getMouseKeyReleased(MouseButtons button) {
-        return glfwGetMouseButton(app.getDisplayManager().getWindow(), MouseButtons.buttonToEnum(button)) == GLFW_RELEASE;
+        return glfwGetMouseButton(app.getWindowPointer(), MouseButtons.buttonToEnum(button)) == GLFW_RELEASE;
     }
 
 
     @Override
     public void createMouseKeyCallback(TMouseCallback callback) {
-        glfwSetMouseButtonCallback(app.getDisplayManager().getWindow(), (window, button, action, mods) -> callback.invoke(button, action, mods));
+        glfwSetMouseButtonCallback(app.getWindowPointer(), (window, button, action, mods) -> callback.invoke(button, action, mods));
     }
 
     @Override
     public void hideCursor() {
-        glfwSetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+        glfwSetInputMode(app.getWindowPointer(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
     }
 
     @Override
     public void showCursor() {
-        glfwSetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        glfwSetInputMode(app.getWindowPointer(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
     }
 
     @Override
     public boolean isCursorDisabled() {
-        return glfwGetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED;
+        return glfwGetInputMode(app.getWindowPointer(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED;
     }
 
     @Override
     public void disableCursor() {
-        glfwSetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        glfwSetInputMode(app.getWindowPointer(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     }
 
     @Override
     public boolean isCursorHidden() {
-        return glfwGetInputMode(app.getDisplayManager().getWindow(), GLFW_CURSOR) == GLFW_CURSOR_HIDDEN;
+        return glfwGetInputMode(app.getWindowPointer(), GLFW_CURSOR) == GLFW_CURSOR_HIDDEN;
     }
 }

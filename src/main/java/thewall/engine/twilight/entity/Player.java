@@ -4,10 +4,10 @@ import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
+import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.input.InputProvider;
 import thewall.engine.twilight.input.keyboard.KeyboardKeys;
 import thewall.engine.twilight.input.mouse.CursorPosition;
-import thewall.engine.twilight.display.DisplayManager;
 import thewall.engine.twilight.models.TexturedModel;
 import thewall.engine.twilight.terrain.Terrain;
 import thewall.game.Game;
@@ -62,8 +62,8 @@ public class Player extends Entity {
         double newMouseX = pos.getXPos();
         double newMouseY = pos.getYPos();
 
-        float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * DisplayManager.getFrameTimeSeconds());
-        float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * DisplayManager.getFrameTimeSeconds());
+        float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds());
+        float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds());
 
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.A_KEY)){
@@ -88,14 +88,14 @@ public class Player extends Entity {
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.SPACE_KEY)){
-            camera.move(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
-            move(0, moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0);
+            camera.move(0, moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds(), 0);
+            move(0, moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds(), 0);
 
         }
 
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.LEFT_SHIFT_KEY)){
-            camera.move(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
-            move(new Vector3f(0, -moveSpeed / 2 * DisplayManager.getFrameTimeSeconds(), 0));
+            camera.move(new Vector3f(0, -moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds(), 0));
+            move(new Vector3f(0, -moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds(), 0));
 
         }
 

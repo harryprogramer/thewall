@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
-import thewall.engine.twilight.display.DisplayManager;
+import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.input.gamepad.GLFWJoystickCallback;
 import thewall.engine.twilight.render.MasterRenderer;
 import thewall.engine.twilight.render.SyncTimer;
@@ -58,11 +58,10 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             runtimeThread = Thread.currentThread();
             if (!program.getDebugConsole().isLogging())
                 program.getDebugConsole().startLogging();
-            program.setDisplayManager(new DisplayManager(program.getWindowWidth(), program.getWindowHeight(), program));
-            program.getDisplayManager().createDisplay();
-            glfwFocusWindow(program.getDisplayManager().getWindow());
+            program.createDisplay();
+            glfwFocusWindow(program.getWindowPointer());
             GL.createCapabilities();
-            program.setRenderer(new MasterRenderer(program.getDisplayManager()));
+            program.setRenderer(new MasterRenderer(program));
             try {
                 program.onEnable();
             }catch (Exception e){
@@ -72,7 +71,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             logger.info("OpenGL:                " + GL11.glGetString(GL11.GL_VERSION));
             logger.info("GPU:                   " + GL11.glGetString(GL11.GL_RENDERER));
             logger.info("OpenGL Vendor:         " + GL11.glGetString(GL11.GL_VENDOR));
-            this.windowPointer = program.getDisplayManager().getWindow();
+            this.windowPointer = program.getWindowPointer();
             this.twilightApp = program;
             glfwSetJoystickCallback(new GLFWJoystickCallback(this.twilightApp));
             engineLoop();
@@ -119,8 +118,8 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
         twilightApp.getRenderer().cleanUp();
         twilightApp.getLoader().cleanUp();
 
-        glfwFreeCallbacks(twilightApp.getDisplayManager().getWindow());
-        glfwDestroyWindow(twilightApp.getDisplayManager().getWindow());
+        glfwFreeCallbacks(twilightApp.getWindowPointer());
+        glfwDestroyWindow(twilightApp.getWindowPointer());
         glfwTerminate();
         try {
             Objects.requireNonNull(glfwSetErrorCallback(null)).free();
@@ -149,7 +148,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
                         it.remove();
                     }
                 }
-                twilightApp.getDisplayManager().updateDisplay();
+                twilightApp.updateDisplay();
                 twilightApp.enginePulse();
             }catch (Exception e){
                 if(lastError != null){

@@ -1,7 +1,7 @@
 package thewall.engine.twilight.render;
 
 import org.joml.Matrix4f;
-import thewall.engine.twilight.display.DisplayManager;
+import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.entity.Entity;
 import thewall.engine.twilight.models.RawModel;
 import thewall.engine.twilight.models.TexturedModel;
@@ -27,11 +27,11 @@ public class EntityRenderer {
 
     private Matrix4f projectionMatrix;
 
-    private volatile DisplayManager displayManager;
+    private volatile GLFWDisplayManager GLFWDisplayManager;
     private volatile StaticShader staticShader;
 
-    public EntityRenderer(@NotNull DisplayManager displayManager, @NotNull StaticShader staticShader, Matrix4f projectionMatrix){
-        this.displayManager = displayManager;
+    public EntityRenderer(@NotNull GLFWDisplayManager GLFWDisplayManager, @NotNull StaticShader staticShader, Matrix4f projectionMatrix){
+        this.GLFWDisplayManager = GLFWDisplayManager;
         this.staticShader = staticShader;
         staticShader.start();
         staticShader.loadProjectionMatrix(projectionMatrix);

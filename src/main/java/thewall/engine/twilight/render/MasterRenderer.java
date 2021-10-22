@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
-import thewall.engine.twilight.display.DisplayManager;
+import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.display.DisplayUtils;
 import thewall.engine.twilight.display.Resolution;
 import thewall.engine.twilight.entity.Camera;
@@ -37,7 +37,7 @@ public class MasterRenderer {
     private static final float BLUE = 0.76f;
 
     private Matrix4f projectionMatrix;
-    private final DisplayManager displayManager;
+    private final GLFWDisplayManager glfwDisplayManager;
     private final TerrainRenderer terrainRenderer;
     private final TerrainShader terrainShader = new TerrainShader();
 
@@ -45,12 +45,12 @@ public class MasterRenderer {
 
     private final List<Class<?>> deprecatedList = new ArrayList<>();
 
-    public MasterRenderer(DisplayManager displayManager){
-        this.displayManager = displayManager;
+    public MasterRenderer(GLFWDisplayManager glfwDisplayManager){
+        this.glfwDisplayManager = glfwDisplayManager;
         GL11.glEnable(GL_CULL_FACE);
         GL11.glCullFace(GL_BACK);
         createProjectionMatrix(-1, -1);
-        entityRenderer = new EntityRenderer(displayManager, shader, projectionMatrix);
+        entityRenderer = new EntityRenderer(glfwDisplayManager, shader, projectionMatrix);
         terrainRenderer = new TerrainRenderer(terrainShader, projectionMatrix);
     }
 
@@ -122,7 +122,7 @@ public class MasterRenderer {
         if(width != -1 && height != -1){
             resolution = new Resolution(width, height);
         }else {
-            resolution = DisplayUtils.getWindowSize(displayManager.getWindow());
+            resolution = DisplayUtils.getWindowSize(glfwDisplayManager.getWindowPointer());
 
         }
         float aspectRatio = (float) resolution.getWidth() / (float) resolution.getHeight();
