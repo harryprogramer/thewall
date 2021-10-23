@@ -3,17 +3,25 @@ package thewall.engine.twilight.display;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import thewall.engine.twilight.errors.NotImplementedException;
 
 import java.awt.image.BufferedImage;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 public class GLFWWindowManager extends GLFWDisplayManager implements WindowManager {
+    private final static short MAX_CALLBACKS = 10;
+
     private final AtomicReference<String> windowName = new AtomicReference<>(null);
     private final AtomicReference<Vector2i> windowSizeLimit = new AtomicReference<>(null);
+
+    private final List<DisplayResizeCallback> resizeCallbacks = new ArrayList<>(10);
 
     public GLFWWindowManager() {
         super();
@@ -43,6 +51,26 @@ public class GLFWWindowManager extends GLFWDisplayManager implements WindowManag
     @Override
     public void setWindowSize(int x, int y) {
         glfwSetWindowSize(getWindowPointer(), x, y);
+    }
+
+    public void addDisplayResizeCallback(DisplayResizeCallback callback){
+        if(resizeCallbacks.size() >= 10){
+            throw new IndexOutOfBoundsException("Maximum registered callbacks is [" + MAX_CALLBACKS + "]");
+        }
+        Objects.requireNonNull(callback, "Window resize callback cannot be null.");
+        resizeCallbacks.add(callback);
+    }
+
+    public void unregisterDisplayCallback(DisplayResizeCallback callback){
+        resizeCallbacks.remove(callback);
+    }
+
+    public void registerCallbacks(){
+        glfwSetWindowSizeCallback(getWindowPointer(), (window, width, height) -> {
+            for(DisplayResizeCallback callback : resizeCallbacks){
+                callback.invoke(width, height);
+            }
+        });
     }
 
     @Override

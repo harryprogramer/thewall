@@ -14,6 +14,8 @@ import thewall.engine.twilight.debugger.TEngineDebugger;
 import thewall.engine.twilight.debugger.console.DebugConsole;
 import thewall.engine.twilight.display.DisplayResizeCallback;
 import thewall.engine.twilight.display.GLFWWindowManager;
+import thewall.engine.twilight.display.GLFWWindowResizeSystem;
+import thewall.engine.twilight.display.WindowResizeSystem;
 import thewall.engine.twilight.entity.Entity;
 import thewall.engine.twilight.entity.Light;
 import thewall.engine.twilight.errors.InitializationException;
@@ -37,6 +39,7 @@ import thewall.engine.twilight.runtime.TwilightRuntimeService;
 import thewall.engine.twilight.terrain.Terrain;
 
 import java.io.PrintWriter;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -92,6 +95,8 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
     @Getter
     private final EventManager eventManager = new TEventManager();
+
+    private WindowResizeSystem windowResizeSystem;
 
     private volatile Keyboard keyboard;
     private volatile Mouse mouse;
@@ -157,6 +162,11 @@ public abstract class TwilightApp extends GLFWWindowManager {
             }
         })
         );
+    }
+
+    public void setWindowResizeSystem(WindowResizeSystem windowResizeSystem){
+        Objects.requireNonNull(windowResizeSystem);
+        this.windowResizeSystem = windowResizeSystem;
     }
 
     public void processTerrain(Terrain terrain){
@@ -314,24 +324,19 @@ public abstract class TwilightApp extends GLFWWindowManager {
     }
 
     public void enableAutoWindowResizable(){
-        glfwSetWindowSizeCallback(getWindowPointer(), new GLFWWindowSizeCallback() {
-            @Override
-            public void invoke(long window, int argWidth, int argHeight) {
-               renderer.resizeWindow(argWidth, argHeight);
-            }
-        });
+        addDisplayResizeCallback(windowResizeSystem);
     }
 
     public void disableAutoWindowResizable(){
-        glfwSetWindowSizeCallback(getWindowPointer(), null);
+        unregisterResizeCallback(windowResizeSystem);
     }
 
     public void setWindowResizeCallback(DisplayResizeCallback callback){
-        glfwSetWindowSizeCallback(getWindowPointer(), (window, width, height) -> callback.invoke(width, height));
+        addDisplayResizeCallback(callback);
     }
 
-    public void disableWindowResizeCallback(){
-        glfwSetWindowSizeCallback(getWindowPointer(), null);
+    public void unregisterResizeCallback(DisplayResizeCallback callback){
+        unregisterDisplayCallback(callback);
     }
 
 

@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.display.GLFWDisplayManager;
+import thewall.engine.twilight.display.GLFWWindowResizeSystem;
 import thewall.engine.twilight.hardware.Memory;
 import thewall.engine.twilight.hardware.SoundCard;
 import thewall.engine.twilight.input.gamepad.GLFWJoystickCallback;
@@ -69,6 +70,8 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             glfwFocusWindow(program.getWindowPointer());
             GL.createCapabilities();
             program.setRenderer(new MasterRenderer(program));
+            program.setWindowResizeSystem(new GLFWWindowResizeSystem(program.getRenderer()));
+            program.registerCallbacks();
             try {
                 program.onEnable();
             }catch (Exception e){
