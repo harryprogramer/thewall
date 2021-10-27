@@ -21,10 +21,14 @@ import thewall.engine.twilight.entity.Light;
 import thewall.engine.twilight.errors.InitializationException;
 import thewall.engine.twilight.events.EventManager;
 import thewall.engine.twilight.events.TEventManager;
+import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.hardware.Hardware;
 import thewall.engine.twilight.hardware.PlatformEnum;
 import thewall.engine.twilight.hardware.hna.RealtimeHNAccess;
+import thewall.engine.twilight.input.Input;
 import thewall.engine.twilight.input.InputProvider;
+import thewall.engine.twilight.input.gamepad.GLFWGamepadManager;
+import thewall.engine.twilight.input.gamepad.GamepadManager;
 import thewall.engine.twilight.input.keyboard.Keyboard;
 import thewall.engine.twilight.input.keyboard.TGLFWKeyboard;
 import thewall.engine.twilight.input.keyboard.TKeyboardCallback;
@@ -58,7 +62,7 @@ public abstract class TwilightApp extends GLFWWindowManager {
     private Thread renderThread;
 
     @Getter
-    public static final String version = "1.0.9";
+    public static final String version = "1.1.0.3";
 
     @Getter
     @Setter
@@ -74,13 +78,16 @@ public abstract class TwilightApp extends GLFWWindowManager {
     private String name = "App";
 
     @Getter
-    private Light light = new Light(new Vector3f(0, 0, 0) ,new Vector3f(0, 0, 0));
+    private Light light = new Light(new Vector3f(0, 0, 0) ,new Vector3f(0, 0, 0), new Vector3f(0.4f, 0.4f, 0.4f));
     //@Getter
     //private Camera rndrCamera = new Camera();
 
     @Getter
     private final Loader loader = new Loader();
 
+    @Getter
+    @Setter
+    private GuiRenderer guiRenderer;
 
     @Getter
     @Setter
@@ -98,11 +105,11 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
     private WindowResizeSystem windowResizeSystem;
 
-    private volatile Keyboard keyboard;
-    private volatile Mouse mouse;
+
+    @Setter
     private InputProvider input;
 
-    public InputProvider input(){
+    public Input input(){
         checkInit();
         checkStart();
         return input;
@@ -214,6 +221,10 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
         logger.info("Initializing Twilight " + getVersion());
 
+        glfwSetErrorCallback((error1, description) -> {
+            logger.error("GLFW Error [" + error1 + "]: " + description);
+        });
+
         boolean isSupported = false;
         for(PlatformEnum platform : supportedPlatform){
             if(platform ==  hnaAccess.getPlatform()){
@@ -272,7 +283,7 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
         long start = System.currentTimeMillis();
 
-        while (app.getWindowPointer() == 0){
+        while (!runtime.isReady()){
             if(app.isError){
                 logger.fatal("Fatal error while starting the engine, there was an unexpected error during engine initialization.\n" +
                         "The logs above have more information", app.error);
@@ -289,10 +300,6 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
         thread.setUncaughtExceptionHandler(null);
 
-
-        app.keyboard = new TGLFWKeyboard(app);
-        app.mouse = new TGLFWMouse(app);
-        app.input = new InputProvider(app.keyboard, app.mouse);
 
         return runtime;
     }

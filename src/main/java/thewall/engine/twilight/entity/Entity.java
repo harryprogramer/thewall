@@ -18,7 +18,7 @@ public abstract class Entity {
     @Getter
     private float scale;
 
-    private boolean isCollisionDetectionSystemEnabled = false;
+    private volatile boolean isCollisionDetectionSystemEnabled = false;
 
     private Terrain world;
 

@@ -1,0 +1,77 @@
+[thewall.engine.twilight.TwilightApp] [15:12:42] main/INFO ] - Initializing Twilight 1.1.0.3
+[thewall.engine.twilight.runtime.AbstractRuntime] [15:12:42] TwLight Main Thread/INFO ] - Starting runtime for [Twilight Game App Runtime]
+[thewall.engine.twilight.shaders.ShaderProgram] [15:12:42] TwLight Main Thread/ERROR] - Uniform [random] not found
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:42] TwLight Main Thread/INFO ] - CPU:       Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:42] TwLight Main Thread/INFO ] - OpenGL:    4.6 (Compatibility Profile) Mesa 20.3.5
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:42] TwLight Main Thread/INFO ] - GPU:       Mesa Intel(R) HD Graphics 630 (KBL GT2)
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:42] TwLight Main Thread/INFO ] - Vendor:    Intel
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:42] TwLight Main Thread/INFO ] - Memory :   15891MB
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:42] TwLight Main Thread/INFO ] - Baseboard: ASUSTeK COMPUTER INC. UX550VE
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - Sound 1:   HDA-Intel - HDA Intel PCH Intel Kabylake HDMI Advanced Linux Sound Architecture Driver Version k5.14.0-2parrot1-amd64.
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - Sound 2:   USB-Audio - PRO X  Advanced Linux Sound Architecture Driver Version k5.14.0-2parrot1-amd64.
+[thewall.engine.twilight.render.MasterRenderer] [15:12:43] TwLight Main Thread/WARN ] - Entity [thewall.engine.twilight.entity.RawEntity] is deprecated, try to use another or implement your own.
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.game.TheWall] [15:12:43] TwLight Main Thread/WARN ] - FPS drop detected, current framerate: 3
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:43] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Main Thread/INFO ] - 60
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [15:12:44] TwLight Ma

@@ -3,7 +3,9 @@ package thewall.game;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
+import thewall.engine.twilight.textures.TextureData;
 import thewall.game.input.KeyboardCallback;
 
 public class Game {
@@ -13,6 +15,7 @@ public class Game {
     private final static Logger logger = LogManager.getLogger(Game.class);
 
     public static void main(String[] args) {
+        long startTime = System.currentTimeMillis();
         TwilightApp.init();
         try{
             //game.getDebugConsole().showConsole();
@@ -22,13 +25,12 @@ public class Game {
             System.exit(1);
             return;
         }
+        long endTime = System.currentTimeMillis();
+        logger.info("Game started in " + (endTime - startTime) / 1000.0 + "s.");
         //game.input().getMouse().disableCursor();
         game.enableAutoWindowResizable();
-        game.enableVSync();
         game.setKeyboardCallback(new KeyboardCallback());
         game.setFPSLimit(300);
-
-
 
     }
 }

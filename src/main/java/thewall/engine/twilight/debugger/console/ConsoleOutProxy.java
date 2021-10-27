@@ -15,15 +15,22 @@ public final class ConsoleOutProxy extends PrintStream {
     @Setter
     private static DebugConsole console;
     @Getter
-    private static final ConsoleOutProxy instance = new ConsoleOutProxy(System.out);
+    private static final ConsoleOutProxy instance = new ConsoleOutProxy(System.out, System.err, false);
+
+    @Getter
+    private static final ConsoleOutProxy instanceErr = new ConsoleOutProxy(System.out, System.err, true);
 
     private final static Logger logger = LogManager.getLogger("System.out");
 
 
-    private ConsoleOutProxy(PrintStream systemOut){
-        super(new OutStream());
+    private ConsoleOutProxy(PrintStream systemOut, PrintStream systemOutError, boolean err){
+        super(err ? new OutStreamError() : new OutStream());
 
-        OutStream.getInstance().systemOut = systemOut;
+        if(!err) {
+            OutStream.getInstance().systemOut = systemOut;
+        }else {
+            OutStreamError.getInstance().systemOut = systemOutError;
+        }
     }
 
     private static class OutStream extends OutputStream {
@@ -36,17 +43,17 @@ public final class ConsoleOutProxy extends PrintStream {
 
         private final List<Character> characters = new ArrayList<>();
 
-        public OutStream(){
-            if(getInstance() != null){
+        public OutStream() {
+            if (getInstance() != null) {
                 throw new IllegalStateException("Console proxy can has only one instance");
             }
             instance = this;
         }
 
-        private void flushConsole(){
+        private void flushConsole() {
             StringBuilder stringBuilder = new StringBuilder();
-            for(char character : characters){
-                if(character == 0x0A || character == 0x0D){
+            for (char character : characters) {
+                if (character == 0x0A || character == 0x0D) {
                     continue;
                 }
                 stringBuilder.append((character));
@@ -58,20 +65,68 @@ public final class ConsoleOutProxy extends PrintStream {
 
         @Override
         public void write(int b) throws IOException {
-            if(systemOut != null && console != null){
-                if(characters.size() > 4096){
+            if (systemOut != null && console != null) {
+                if (characters.size() > 4096) {
                     logger.warn("Buffer print limit, over 2048 characters, flushing out...");
                     flushConsole();
                     return;
                 }
 
-                if(b == 0x0A){
-                    if(!(characters.size() < 2)) {
+                if (b == 0x0A) {
+                    if (!(characters.size() < 2)) {
                         flushConsole();
                     }
                 }
                 characters.add((char) b);
             }
         }
+    }
+        private static class OutStreamError extends OutputStream {
+            private PrintStream systemOut;
+
+            private static final Logger logger = LogManager.getLogger(ConsoleOutProxy.OutStreamError.class);
+
+            @Getter
+            private static OutStreamError instance;
+
+            private final List<Character> characters = new ArrayList<>();
+
+            public OutStreamError(){
+                if(getInstance() != null){
+                    throw new IllegalStateException("Console proxy can has only one instance");
+                }
+                instance = this;
+            }
+
+            private void flushConsole(){
+                StringBuilder stringBuilder = new StringBuilder();
+                for(char character : characters){
+                    if(character == 0x0A || character == 0x0D){
+                        continue;
+                    }
+                    stringBuilder.append((character));
+                }
+                console.warn(stringBuilder.toString().trim());
+                logger.error(stringBuilder.toString().trim());
+                characters.clear();
+            }
+
+            @Override
+            public void write(int b) throws IOException {
+                if(systemOut != null && console != null){
+                    if(characters.size() > 4096){
+                        logger.warn("Buffer print limit, over 2048 characters, flushing out...");
+                        flushConsole();
+                        return;
+                    }
+
+                    if(b == 0x0A){
+                        if(!(characters.size() < 2)) {
+                            flushConsole();
+                        }
+                    }
+                    characters.add((char) b);
+                }
+            }
     }
 }

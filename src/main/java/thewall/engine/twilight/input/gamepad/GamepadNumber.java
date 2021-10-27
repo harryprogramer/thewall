@@ -102,7 +102,7 @@ public enum GamepadNumber {
             }
 
             default -> {
-                logger.warn("Unknown or invaild gamepad number [" + number + "]");
+                logger.warn("Unknown or invalid gamepad number [" + number + "]");
                 return null;
             }
         }

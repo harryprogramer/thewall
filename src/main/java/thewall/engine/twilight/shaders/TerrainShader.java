@@ -7,12 +7,17 @@ import thewall.engine.twilight.entity.Camera;
 import thewall.engine.twilight.entity.Light;
 import thewall.engine.twilight.utils.Maths;
 
-public class TerrainShader extends ShaderProgram{
+import java.util.List;
+
+public final class TerrainShader extends ShaderProgram{
+    private static final int MAX_LIGHTS = 4;
+
     private int locationTransformationMatrix;
     private int locationProjectionMatrix;
     private int locationViewMatrix;
-    private int locationLightColor;
-    private int locationLightPosition;
+    private int[] locationLightColor;
+    private int[] locationLightPosition;
+    private int[] locationAttenuation;
     private int locationReflectivity;
     private int locationShaneDamper;
     private int locationSkyColor;
@@ -23,7 +28,7 @@ public class TerrainShader extends ShaderProgram{
     private int locationBlendMap;
 
     public TerrainShader(){
-        super("terrainVertexShader.vert", "terrainfragmentShader.frag");
+        super("terrain/terrainVertexShader.vert", "terrain/terrainfragmentShader.frag");
     }
 
     @Override
@@ -31,8 +36,14 @@ public class TerrainShader extends ShaderProgram{
         locationTransformationMatrix = super.getUniformLocation("transformationMatrix");
         locationProjectionMatrix = super.getUniformLocation("projectionMatrix");
         locationViewMatrix = super.getUniformLocation("viewMatrix");
-        locationLightColor = super.getUniformLocation("lightColour");
-        locationLightPosition = super.getUniformLocation("lightPosition");
+        locationLightColor = new int[MAX_LIGHTS];
+        locationLightPosition = new int[MAX_LIGHTS];
+        locationAttenuation = new int[MAX_LIGHTS];
+        for(int i = 0; i < MAX_LIGHTS; i++){
+            locationLightColor[i] = super.getUniformLocation("lightColour[" + i + "]");
+            locationLightPosition[i] = super.getUniformLocation("lightPosition[" + i + "]");
+            locationAttenuation[i] = super.getUniformLocation("attenuation[" + i + "]");
+        }
         locationReflectivity = super.getUniformLocation("reflectivity");
         locationShaneDamper = super.getUniformLocation("shineDamper");
         locationSkyColor = super.getUniformLocation("skyColor");
@@ -72,9 +83,18 @@ public class TerrainShader extends ShaderProgram{
         super.loadMatrix(locationViewMatrix, Maths.createViewMatrix(camera));
     }
 
-    public void loadLight(@NotNull Light light){
-        super.loadVector(locationLightColor, light.getColour());
-        super.loadVector(locationLightPosition, light.getPosition());
+    public void loadLights(@NotNull List<Light> lights){
+        for(int i = 0; i < MAX_LIGHTS; i++) {
+            if(i < lights.size()) {
+                super.loadVector(locationLightPosition[i], lights.get(i).getPosition());
+                super.loadVector(locationLightColor[i], lights.get(i).getColour());
+                super.loadVector(locationAttenuation[i], lights.get(i).getAttenuation());
+            }else {
+                super.loadVector(locationLightColor[i], new Vector3f(0, 0, 0));
+                super.loadVector(locationLightPosition[i], new Vector3f(0, 0, 0));
+                super.loadVector(locationAttenuation[i], new Vector3f(1, 0, 0));
+            }
+        }
     }
 
     @Override

@@ -1,0 +1,78 @@
+[thewall.engine.twilight.TwilightApp] [22:49:52] main/INFO ] - Initializing Twilight 1.1.0.3
+[thewall.engine.twilight.runtime.AbstractRuntime] [22:49:52] TwLight Main Thread/INFO ] - Starting runtime for [Twilight Game App Runtime]
+[thewall.engine.twilight.shaders.ShaderProgram] [22:49:53] TwLight Main Thread/ERROR] - Uniform from [thewall.engine.twilight.shaders.StaticShader] [random] not found
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:53] TwLight Main Thread/INFO ] - CPU:       Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:53] TwLight Main Thread/INFO ] - OpenGL:    4.6 (Compatibility Profile) Mesa 20.3.5
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:53] TwLight Main Thread/INFO ] - GPU:       Mesa Intel(R) HD Graphics 630 (KBL GT2)
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:53] TwLight Main Thread/INFO ] - Vendor:    Intel
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:53] TwLight Main Thread/INFO ] - Memory :   15891MB
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:53] TwLight Main Thread/INFO ] - Baseboard: ASUSTeK COMPUTER INC. UX550VE
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:54] TwLight Main Thread/INFO ] - Sound 1:   HDA-Intel - HDA Intel PCH Intel Kabylake HDMI Advanced Linux Sound Architecture Driver Version k5.14.0-2parrot1-amd64.
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:54] TwLight Main Thread/INFO ] - Sound 2:   USB-Audio - PRO X  Advanced Linux Sound Architecture Driver Version k5.14.0-2parrot1-amd64.
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStream] [22:49:54] TwLight Main Thread/INFO ] - 
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [22:49:54] TwLight Main Thread/INFO ] - Initialization complete, runtime is ready
+[thewall.game.Game] [22:49:54] main/INFO ] - Game started in 1.175s.
+[thewall.engine.twilight.render.MasterRenderer] [22:49:54] TwLight Main Thread/WARN ] - Entity [thewall.engine.twilight.entity.RawEntity] is deprecated, try to use another or implement your own.
+[thewall.game.TheWall] [22:49:54] TwLight Main Thread/WARN ] - FPS drop detected, current framerate: 1
+[thewall.game.TheWall] [22:49:54] TwLight Main Thread/INFO ] - X:275.0 Y:25.0 Z:600.0
+[thewall.game.TheWall] [22:49:55] TwLight Main Thread/INFO ] - X:275.0 Y:25.0 Z:600.0
+[thewall.game.TheWall] [22:49:56] TwLight Main Thread/INFO ] - X:275.0 Y:25.0 Z:600.0
+[thewall.game.TheWall] [22:49:57] TwLight Main Thread/INFO ] - X:299.64008 Y:63.39999 Z:572.8114
+[thewall.game.TheWall] [22:49:58] TwLight Main Thread/INFO ] - X:255.53534 Y:63.39999 Z:456.4661
+[thewall.game.TheWall] [22:49:59] TwLight Main Thread/INFO ] - X:212.6366 Y:63.39999 Z:341.218
+[thewall.game.TheWall] [22:50:00] TwLight Main Thread/INFO ] - X:212.6366 Y:63.39999 Z:341.218
+[thewall.game.TheWall] [22:50:01] TwLight Main Thread/INFO ] - X:212.6366 Y:63.39999 Z:341.218
+[thewall.game.TheWall] [22:50:02] TwLight Main Thread/INFO ] - X:238.89801 Y:63.39999 Z:216.16512
+[thewall.game.TheWall] [22:50:03] TwLight Main Thread/INFO ] - X:397.1392 Y:63.39999 Z:332.48315
+[thewall.game.TheWall] [22:50:04] TwLight Main Thread/INFO ] - X:578.00995 Y:63.39999 Z:384.11963
+[thewall.game.TheWall] [22:50:05] TwLight Main Thread/INFO ] - X:687.8858 Y:63.39999 Z:301.0312
+[thewall.game.TheWall] [22:50:06] TwLight Main Thread/INFO ] - X:559.2054 Y:63.39999 Z:233.33115
+[thewall.game.TheWall] [22:50:07] TwLight Main Thread/INFO ] - X:392.25848 Y:63.39999 Z:271.27542
+[thewall.game.TheWall] [22:50:08] TwLight Main Thread/INFO ] - X:364.00616 Y:63.39999 Z:467.96548
+[thewall.game.TheWall] [22:50:09] TwLight Main Thread/INFO ] - X:228.37624 Y:63.39999 Z:578.06177
+[thewall.game.TheWall] [22:50:10] TwLight Main Thread/INFO ] - X:128.80003 Y:63.39999 Z:421.88214
+[thewall.game.TheWall] [22:50:11] TwLight Main Thread/INFO ] - X:141.13231 Y:63.39999 Z:262.58356
+[thewall.game.TheWall] [22:50:12] TwLight Main Thread/INFO ] - X:175.02937 Y:63.39999 Z:197.74188
+[thewall.game.TheWall] [22:50:13] TwLight Main Thread/INFO ] - X:199.05296 Y:33.8 Z:194.88336
+[thewall.game.TheWall] [22:50:14] TwLight Main Thread/INFO ] - X:226.23201 Y:110.99998 Z:254.61853
+[thewall.game.TheWall] [22:50:15] TwLight Main Thread/INFO ] - X:412.26178 Y:146.99995 Z:188.93344
+[thewall.game.TheWall] [22:50:16] TwLight Main Thread/INFO ] - X:599.5869 Y:193.59993 Z:151.88971
+[thewall.game.TheWall] [22:50:17] TwLight Main Thread/INFO ] - X:643.18164 Y:193.59993 Z:168.70032
+[thewall.game.TheWall] [22:50:18] TwLight Main Thread/INFO ] - X:226.95781 Y:193.59993 Z:203.56714
+[thewall.game.TheWall] [22:50:19] TwLight Main Thread/INFO ] - X:183.05614 Y:70.3998 Z:336.88657
+[thewall.game.TheWall] [22:50:20] TwLight Main Thread/INFO ] - X:160.31798 Y:37.399788 Z:321.926
+[thewall.game.TheWall] [22:50:21] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.engine.twilight.input.keyboard.KeyboardKeys] [22:50:22] TwLight Main Thread/WARN ] - Unknown key id: 342
+[thewall.game.TheWall] [22:50:22] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:23] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:24] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:25] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:26] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:27] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:28] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:29] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:30] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:31] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:32] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:33] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:34] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:35] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:36] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:37] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:38] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:39] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:40] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:41] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:42] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:43] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:44] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:45] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:46] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:47] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:48] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:49] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:50] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:51] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:52] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:53] TwLight Main Thread/INFO ] - X:173.86278 Y:37.399788 Z:366.608
+[thewall.game.TheWall] [22:50:54] TwL

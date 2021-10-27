@@ -7,4 +7,5 @@ import org.joml.Vector3f;
 public class Light {
     private final Vector3f position;
     private final Vector3f colour;
+    private final Vector3f attenuation;
 }

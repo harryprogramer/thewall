@@ -3,23 +3,35 @@ package thewall.engine.twilight.models;
 
 import de.matthiasmann.twl.utils.PNGDecoder;
 import lombok.SneakyThrows;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryStack;
+import org.w3c.dom.Text;
+import thewall.engine.twilight.errors.TextureDecoderException;
+import thewall.engine.twilight.textures.TextureData;
+import thewall.engine.twilight.utils.Validation;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.stb.STBImage.*;
 
+@Deprecated
 public class Loader {
+    private final static Logger logger = LogManager.getLogger(Loader.class);
 
     private final List<Integer> vaos = new ArrayList<>();
     private final List<Integer> vbos = new ArrayList<>();
@@ -35,6 +47,17 @@ public class Loader {
         return new RawModel(vaoID, indices.length);
     }
 
+    public RawModel loadToVAO(float[] positions){
+        return loadToVAO(positions, 2);
+    }
+
+    public RawModel loadToVAO(float[] positions, int dimensions){
+        int vaoID = createVAO();
+        this.storeDataInAttributeList(0, dimensions, positions);
+        unbindVAO();
+        return new RawModel(vaoID, positions.length / dimensions);
+    }
+
     private int createVAO(){
         int vaoID = GL30.glGenVertexArrays();
         vaos.add(vaoID);
@@ -46,6 +69,48 @@ public class Loader {
     private int loadTexture5(String filename, int pixelFormat){
         //reserved
         return 0;
+    }
+
+    public int loadCubeMap(String @NotNull [] textureFiles){
+        int texID = GL11.glGenTextures();
+        GL13.glActiveTexture(GL_TEXTURE0);
+        GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, texID);
+
+        Validation.checkNull(getClass(), textureFiles);
+        int coordinates = GL_TEXTURE_CUBE_MAP_POSITIVE_X - 1;
+        for(String string : textureFiles){
+            TextureData textureData = decodeTextureFile("res/texture/skybox/" + string + ".png");
+            GL11.glTexImage2D(++coordinates, 0, GL_RGBA, textureData.getWidth(), textureData.getHeight(),
+                    0, GL_RGBA, GL_UNSIGNED_BYTE, textureData.getBuffer());
+        }
+
+        GL11.glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        GL11.glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        textures.add(texID);
+        return texID;
+    }
+
+
+
+    private @NotNull TextureData decodeTextureFile(String fileName) throws TextureDecoderException {
+        int width;
+        int height;
+        ByteBuffer buffer;
+        try{
+            FileInputStream in = new FileInputStream(fileName);
+            PNGDecoder pngDecoder = new PNGDecoder(in);
+            width = pngDecoder.getWidth();
+            height = pngDecoder.getHeight();
+            buffer = ByteBuffer.allocateDirect(4 * width * height);
+            pngDecoder.decode(buffer, width * 4, PNGDecoder.Format.RGBA);
+            buffer.flip();
+            in.close();
+        }catch (Exception e){
+            logger.error("Texture file decoder error, cannot decode [" + fileName + "]", e);
+            throw new TextureDecoderException(e);
+        }
+
+        return new TextureData(width, height, buffer);
     }
 
 
@@ -75,15 +140,20 @@ public class Loader {
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         //set the texture parameters, can be GL_LINEAR or GL_NEAREST
+        /*
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, textureMagFilter); // Linear Filtering
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, textureMagFilter); // Linear Filter
+
+         */
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // brak możliwości trójliniowości przy powiększeniu
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR); // trójliniowy, gdy rozdzielczość ekranu jest niższa niż rozdzielczość tex
         //upload texture
         glTexImage2D(GL_TEXTURE_2D, 0, pixelFormat, decoder.getWidth(), decoder.getHeight(), 0, pixelFormat, GL_UNSIGNED_BYTE, buffer);
 
         // Generate Mip Map
         GL30.glGenerateMipmap(GL_TEXTURE_2D);
         GL11.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        GL11.glTexParameterf(GL_TEXTURE_2D, GL14.GL_TEXTURE_LOD_BIAS, -0.4f);
+        GL11.glTexParameterf(GL_TEXTURE_2D, GL14.GL_TEXTURE_LOD_BIAS, -0.04f);
         return id;
 
     }

@@ -48,6 +48,7 @@ public abstract class AbstractRuntime<P> {
         executeTask(this::stop);
     }
 
+
     public boolean checkThread(){
         return Thread.currentThread() == getThread();
     }
@@ -59,4 +60,6 @@ public abstract class AbstractRuntime<P> {
     protected abstract void start(P program);
 
     protected abstract void stop();
+
+    public abstract boolean isReady();
 }

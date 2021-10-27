@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
 import thewall.engine.twilight.display.GLFWDisplayManager;
+import thewall.engine.twilight.input.Input;
 import thewall.engine.twilight.input.InputProvider;
 import thewall.engine.twilight.input.keyboard.KeyboardKeys;
 import thewall.engine.twilight.input.mouse.CursorPosition;
@@ -57,7 +58,7 @@ public class Player extends Entity {
     }
 
     public void checkInputs(){
-        InputProvider input = Game.getGame().input();
+        Input input = Game.getGame().input();
         CursorPosition pos = input.getMouse().getCursorPosition();
         double newMouseX = pos.getXPos();
         double newMouseY = pos.getYPos();
@@ -127,5 +128,9 @@ public class Player extends Entity {
         getRotation().set(0, finalRotation.y - 90, 0);
         oldMouseX = newMouseX;
         oldMouseY = newMouseY;
+    }
+
+    private void handleControllerInput(){
+
     }
 }

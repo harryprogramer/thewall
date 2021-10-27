@@ -3,12 +3,14 @@ package thewall.game;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
+import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
-import thewall.engine.twilight.entity.Entity;
-import thewall.engine.twilight.entity.Light;
-import thewall.engine.twilight.entity.Player;
-import thewall.engine.twilight.entity.RawEntity;
+import thewall.engine.twilight.entity.*;
+import thewall.engine.twilight.gui.GuiRenderer;
+import thewall.engine.twilight.gui.GuiTexture;
+import thewall.engine.twilight.input.gamepad.GamepadNumber;
 import thewall.engine.twilight.models.RawModel;
 import thewall.engine.twilight.models.TexturedModel;
 import thewall.engine.twilight.models.obj.thinmatrix.ModelData;
@@ -52,7 +54,7 @@ public class TheWall extends TwilightApp {
     private RawModel bunnyModel;
     private Player player;
 
-    private Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
+    private final List<Light> lights = new ArrayList<>();
 
     private TerrainTexture backgroundTexture;
     private TerrainTexture rTexture ;
@@ -67,6 +69,8 @@ public class TheWall extends TwilightApp {
 
     private List<Entity> worldEntities = new ArrayList<>();
 
+    private final List<GuiTexture> guis = new ArrayList<>();
+
     public TheWall() {
         setName("The Wall");
     }
@@ -75,7 +79,7 @@ public class TheWall extends TwilightApp {
     public void onEnable() {
         bunnyModel = getLoader().loadToVAO(modelData.getVertices(), modelData.getIndices(), modelData.getTextureCoords(), modelData.getNormals());
         grassModel = new TexturedModel(getLoader().loadToVAO(grassModelData.getVertices(), grassModelData.getIndices(),
-                grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(getLoader().loadTexture("fern", GL_RGBA, GL_NEAREST)));
+                grassModelData.getTextureCoords(), grassModelData.getNormals()), new ModelTexture(getLoader().loadTexture("fern", GL_RGBA, GL_LINEAR)));
         grassModel.getModelTexture().setNumberOfRows(2);
         treeRawModel = getLoader().loadToVAO(treeModelData.getVertices(), treeModelData.getIndices(),
                 treeModelData.getTextureCoords(), treeModelData.getNormals());
@@ -98,6 +102,18 @@ public class TheWall extends TwilightApp {
                 new Vector3f(300, 0, 600), 0, 0, 0, 1, terrain);
         texture = treemodel.getModelTexture();
 
+        lights.add(new Light(new Vector3f(418, 100, 227), new Vector3f(255, 255, 255), new Vector3f(1, 0.01f, 0.02f)));
+        //lights.add(new Light(new Vector3f(418,10, 227),new Vector3f(0,0,10), new Vector3f(1, 0.01f, 0.002f)));
+        lights.add(new Light(new Vector3f(370,17,-300),new Vector3f(10,0,0), new Vector3f(1, 0.01f, 0.002f)));
+        lights.add(new Light(new Vector3f(293, 7, -305), new Vector3f(2, 2, 0), new Vector3f(1, 0.01f, 0.002f)));
+        ModelData lampModel = OBJFileLoader.loadOBJ("fern");
+        TexturedModel lamp = new TexturedModel(getLoader().loadToVAO(lampModel.getVertices(), lampModel.getIndices(),
+                lampModel.getTextureCoords(), lampModel.getNormals()), new ModelTexture(getLoader().loadTexture("lamp", GL_RGBA, 0)));
+
+        worldEntities.add(new Model(lamp, new Vector3f(293, 7, -305), 1f, terrain));
+        worldEntities.add(new Model(lamp, new Vector3f(370,17,-300), 1f, terrain));
+        worldEntities.add(new Model(lamp, new Vector3f(185,10, -293), 1f, terrain));
+
         player.hide();
 
         enableAutoWindowResizable();
@@ -105,16 +121,19 @@ public class TheWall extends TwilightApp {
         texture.setShineDamper(10);
         texture.setReflectivity(1);
 
+        int seed = 0xFFFF;
+        Random worldRandom = new Random(seed);
+
         for(int i = 0; i < 400; i++){
-            int x = ThreadLocalRandom.current().nextInt(0, 800 + 1);
-            int z = ThreadLocalRandom.current().nextInt(0, 800 + 1);
+            int x = worldRandom.nextInt(50, 760 + 1);
+            int z = worldRandom.nextInt(50, 760 + 1);
             worldEntities.add(new RawEntity(grassModel, new Random().nextInt(4) ,new Vector3f(x, terrain.getHeightOfTerrain(x, z), z), 2, terrain));
         }
 
         // drzewa low poly
         for(int i = 0; i < 400; i++){
-            int x = ThreadLocalRandom.current().nextInt(0, 800 + 1);
-            int z = ThreadLocalRandom.current().nextInt(0, 800 + 1);
+            int x = worldRandom.nextInt(50, 760 + 1);
+            int z = worldRandom.nextInt(50, 760 + 1);
             float size = 0.2f + new Random().nextFloat() * (0.3f - 0.2f);
             worldEntities.add(new RawEntity(lowPolyTreeModel, new Vector3f(x, terrain.getHeightOfTerrain(x, z), z), 1, terrain));
         }
@@ -125,8 +144,7 @@ public class TheWall extends TwilightApp {
 
         getEventManager().registerEvents(new GamepadEvent());
 
-        player.enableCollisionSystem();
-
+        //guis.add(new GuiTexture(getLoader().loadTexture("pistole", GL_RGBA, GL_NEAREST), new Vector2f(0.5f, 0.5f), new Vector2f(0.25f, 0.25f)));
     }
 
     @Override
@@ -134,6 +152,7 @@ public class TheWall extends TwilightApp {
 
     }
 
+    static boolean test = false;
     @Override
     public void enginePulse() {
 
@@ -147,8 +166,9 @@ public class TheWall extends TwilightApp {
             getRenderer().processEntity(ent);
         }
 
-        getRenderer().render(light, player.getCamera());
+        getRenderer().render(lights, player.getCamera());
 
+        getGuiRenderer().render(guis);
 
         double currentTime = glfwGetTime();
         frameCount++;
@@ -161,6 +181,22 @@ public class TheWall extends TwilightApp {
             if (frameCount <= 30) {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
+
+            /*
+            if(test) {
+                test = false;
+                GL11.glPointSize(2f);
+                GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK,GL11.GL_POINT);
+
+            }else {
+                GL11.glPointSize(1f);
+                test = true;
+            }
+
+             */
+            Vector3f vector3f = player.getCamera().getPosition();
+            logger.info("X:" + vector3f.x + " Y:" + vector3f.y + " Z:" + vector3f.z);
+
             frameCount = 0;
             previousTime = currentTime;
         }

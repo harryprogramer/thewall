@@ -57,7 +57,7 @@ public abstract class ShaderProgram {
     protected int getUniformLocation(String uniformName){
         int location = GL20.glGetUniformLocation(programID, uniformName);
         if(location == -1){
-            logger.error("Uniform [" + uniformName + "] not found");
+            logger.error("Uniform from [" + this.getClass().getPackageName() + "." + this.getClass().getSimpleName() + "] [" + uniformName + "] not found");
         }
 
         return location;

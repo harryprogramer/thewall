@@ -1,14 +1,11 @@
 package thewall.engine.twilight.input.gamepad;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class GamepadLookupService {
     private final ConcurrentMap<GamepadNumber, Gamepad> gamepadMap = new ConcurrentHashMap<>();
-
-    protected GamepadLookupService(){
-
-    }
 
     public Gamepad createGamepad(int controller){
         Gamepad gamepad = new GLFWGamepad(controller);
@@ -22,5 +19,9 @@ public class GamepadLookupService {
 
     public void deleteGamepad(int controller){
         gamepadMap.remove(GamepadNumber.numberToGamepadNumber(controller));
+    }
+
+    public List<GamepadNumber> availableControllers(){
+        return gamepadMap.keySet().stream().toList();
     }
 }

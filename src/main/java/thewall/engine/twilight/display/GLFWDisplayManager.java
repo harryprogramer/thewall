@@ -79,8 +79,6 @@ public class GLFWDisplayManager implements GLDisplayManager {
         });
 
         lastFrameTime = System.currentTimeMillis();
-
-        isInit = true;
     }
 
 

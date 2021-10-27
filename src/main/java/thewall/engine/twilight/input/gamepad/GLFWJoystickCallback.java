@@ -1,6 +1,7 @@
 package thewall.engine.twilight.input.gamepad;
 
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFWJoystickCallbackI;
 import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.events.input.gamepad.GamepadConnectedEvent;
@@ -12,13 +13,15 @@ import java.util.List;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class GLFWJoystickCallback implements GLFWJoystickCallbackI {
-    @Getter
-    private final GamepadLookupService gamepadLookupService = new GamepadLookupService();
+
+    private final GamepadLookupService gamepadLookupService;
 
     private final TwilightApp twilightApp;
 
-    public GLFWJoystickCallback(TwilightApp twilightApp){
+
+    public GLFWJoystickCallback(TwilightApp twilightApp, GamepadLookupService gamepadLookupService){
         this.twilightApp = twilightApp;
+        this.gamepadLookupService = gamepadLookupService;
 
         List<Integer> controllers = getActiveControllers();
         for(int controller : controllers){
@@ -33,11 +36,13 @@ public class GLFWJoystickCallback implements GLFWJoystickCallbackI {
         if(event == GLFW_CONNECTED){
             twilightApp.getEventManager().callEvent(new GamepadConnectedEvent(gamepadLookupService.createGamepad(jid)));
         }else if(event == GLFW_DISCONNECTED){
+            Gamepad gamepad = gamepadLookupService.getGamepad(jid);
             twilightApp.getEventManager().callEvent(new GamepadDisconnectedEvent(gamepadLookupService.getGamepad(jid)));
+            gamepadLookupService.deleteGamepad(gamepad.getNumber().getRawNumber());
         }
     }
 
-    private static List<Integer> getActiveControllers(){
+    private static @NotNull List<Integer> getActiveControllers(){
         int[] controllerDictionary = {GLFW_JOYSTICK_1, GLFW_JOYSTICK_2, GLFW_JOYSTICK_3,
                 GLFW_JOYSTICK_4, GLFW_JOYSTICK_5, GLFW_JOYSTICK_6, GLFW_JOYSTICK_7,
                 GLFW_JOYSTICK_8, GLFW_JOYSTICK_9, GLFW_JOYSTICK_10, GLFW_JOYSTICK_11,

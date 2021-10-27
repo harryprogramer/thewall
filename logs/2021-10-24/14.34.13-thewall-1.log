@@ -1,0 +1,212 @@
+[thewall.engine.twilight.TwilightApp] [14:34:12] main/INFO ] - Initializing Twilight 1.1.0.3
+[thewall.engine.twilight.runtime.AbstractRuntime] [14:34:12] TwLight Main Thread/INFO ] - Starting runtime for [Twilight Game App Runtime]
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - GLSL Shader compile error from: [terrainVertexShader.vert]
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Shader error details:
+0:11(24): error: array size must be a constant valued expression
+0:18(28): error: array size must be a constant valued expression
+0:32(2): error: unsized array index must be constant
+0:32(21): error: unsized array index must be constant
+
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - GLSL Shader compile error from: [terrainfragmentShader.frag]
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Shader error details:
+0:7(23): error: array size must be a constant valued expression
+0:19(26): error: array size must be a constant valued expression
+0:34(35): error: unsized array index must be constant
+0:44(30): error: unsized array index must be constant
+0:45(48): error: unsized array index must be constant
+0:50(30): error: `modelTexture' undeclared
+0:50(22): error: no matching function for call to `texture(error, vec2)'; candidates are:
+0:50(22): error:    vec4 texture(sampler1D, float)
+0:50(22): error:    ivec4 texture(isampler1D, float)
+0:50(22): error:    uvec4 texture(usampler1D, float)
+0:50(22): error:    vec4 texture(sampler2D, vec2)
+0:50(22): error:    ivec4 texture(isampler2D, vec2)
+0:50(22): error:    uvec4 texture(usampler2D, vec2)
+0:50(22): error:    vec4 texture(sampler3D, vec3)
+0:50(22): error:    ivec4 texture(isampler3D, vec3)
+0:50(22): error:    uvec4 texture(usampler3D, vec3)
+0:50(22): error:    vec4 texture(samplerCube, vec3)
+0:50(22): error:    ivec4 texture(isamplerCube, vec3)
+0:50(22): error:    uvec4 texture(usamplerCube, vec3)
+0:50(22): error:    float texture(sampler1DShadow, vec3)
+0:50(22): error:    float texture(sampler2DShadow, vec3)
+0:50(22): error:    float texture(samplerCubeShadow, vec4)
+0:50(22): error:    vec4 texture(sampler1DArray, vec2)
+0:50(22): error:    ivec4 texture(isampler1DArray, vec2)
+0:50(22): error:    uvec4 texture(usampler1DArray, vec2)
+0:50(22): error:    vec4 texture(sampler2DArray, vec3)
+0:50(22): error:    ivec4 texture(isampler2DArray, vec3)
+0:50(22): error:    uvec4 texture(usampler2DArray, vec3)
+0:50(22): error:    vec4 texture(samplerCubeArray, vec4)
+0:50(22): error:    ivec4 texture(isamplerCubeArray, vec4)
+0:50(22): error:    uvec4 texture(usamplerCubeArray, vec4)
+0:50(22): error:    float texture(sampler1DArrayShadow, vec3)
+0:50(22): error:    float texture(sampler2DArrayShadow, vec4)
+0:50(22): error:    float texture(samplerCubeArrayShadow, vec4, float)
+0:50(22): error:    vec4 texture(sampler2DRect, vec2)
+0:50(22): error:    ivec4 texture(isampler2DRect, vec2)
+0:50(22): error:    uvec4 texture(usampler2DRect, vec2)
+0:50(22): error:    float texture(sampler2DRectShadow, vec3)
+0:50(22): error:    vec4 texture(sampler1D, float, float)
+0:50(22): error:    ivec4 texture(isampler1D, float, float)
+0:50(22): error:    uvec4 texture(usampler1D, float, float)
+0:50(22): error:    vec4 texture(sampler2D, vec2, float)
+0:50(22): error:    ivec4 texture(isampler2D, vec2, float)
+0:50(22): error:    uvec4 texture(usampler2D, vec2, float)
+0:50(22): error:    vec4 texture(sampler3D, vec3, float)
+0:50(22): error:    ivec4 texture(isampler3D, vec3, float)
+0:50(22): error:    uvec4 texture(usampler3D, vec3, float)
+0:50(22): error:    vec4 texture(samplerCube, vec3, float)
+0:50(22): error:    ivec4 texture(isamplerCube, vec3, float)
+0:50(22): error:    uvec4 texture(usamplerCube, vec3, float)
+0:50(22): error:    float texture(sampler1DShadow, vec3, float)
+0:50(22): error:    float texture(sampler2DShadow, vec3, float)
+0:50(22): error:    float texture(samplerCubeShadow, vec4, float)
+0:50(22): error:    vec4 texture(sampler1DArray, vec2, float)
+0:50(22): error:    ivec4 texture(isampler1DArray, vec2, float)
+0:50(22): error:    uvec4 texture(usampler1DArray, vec2, float)
+0:50(22): error:    vec4 texture(sampler2DArray, vec3, float)
+0:50(22): error:    ivec4 texture(isampler2DArray, vec3, float)
+0:50(22): error:    uvec4 texture(usampler2DArray, vec3, float)
+0:50(22): error:    vec4 texture(samplerCubeArray, vec4, float)
+0:50(22): error:    ivec4 texture(isamplerCubeArray, vec4, float)
+0:50(22): error:    uvec4 texture(usamplerCubeArray, vec4, float)
+0:50(22): error:    float texture(sampler1DArrayShadow, vec3, float)
+0:51(5): warning: `textureColor' used uninitialized
+0:55(19): error: `diffuse' undeclared
+0:55(14): error: cannot construct `vec4' from a non-numeric data type
+0:55(42): error: `modelTexture' undeclared
+0:55(34): error: no matching function for call to `texture(error, vec2)'; candidates are:
+0:55(34): error:    vec4 texture(sampler1D, float)
+0:55(34): error:    ivec4 texture(isampler1D, float)
+0:55(34): error:    uvec4 texture(usampler1D, float)
+0:55(34): error:    vec4 texture(sampler2D, vec2)
+0:55(34): error:    ivec4 texture(isampler2D, vec2)
+0:55(34): error:    uvec4 texture(usampler2D, vec2)
+0:55(34): error:    vec4 texture(sampler3D, vec3)
+0:55(34): error:    ivec4 texture(isampler3D, vec3)
+0:55(34): error:    uvec4 texture(usampler3D, vec3)
+0:55(34): error:    vec4 texture(samplerCube, vec3)
+0:55(34): error:    ivec4 texture(isamplerCube, vec3)
+0:55(34): error:    uvec4 texture(usamplerCube, vec3)
+0:55(34): error:    float texture(sampler1DShadow, vec3)
+0:55(34): error:    float texture(sampler2DShadow, vec3)
+0:55(34): error:    float texture(samplerCubeShadow, vec4)
+0:55(34): error:    vec4 texture(sampler1DArray, vec2)
+0:55(34): error:    ivec4 texture(isampler1DArray, vec2)
+0:55(34): error:    uvec4 texture(usampler1DArray, vec2)
+0:55(34): error:    vec4 texture(sampler2DArray, vec3)
+0:55(34): error:    ivec4 texture(isampler2DArray, vec3)
+0:55(34): error:    uvec4 texture(usampler2DArray, vec3)
+0:55(34): error:    vec4 texture(samplerCubeArray, vec4)
+0:55(34): error:    ivec4 texture(isamplerCubeArray, vec4)
+0:55(34): error:    uvec4 texture(usamplerCubeArray, vec4)
+0:55(34): error:    float texture(sampler1DArrayShadow, vec3)
+0:55(34): error:    float texture(sampler2DArrayShadow, vec4)
+0:55(34): error:    float texture(samplerCubeArrayShadow, vec4, float)
+0:55(34): error:    vec4 texture(sampler2DRect, vec2)
+0:55(34): error:    ivec4 texture(isampler2DRect, vec2)
+0:55(34): error:    uvec4 texture(usampler2DRect, vec2)
+0:55(34): error:    float texture(sampler2DRectShadow, vec3)
+0:55(34): error:    vec4 texture(sampler1D, float, float)
+0:55(34): error:    ivec4 texture(isampler1D, float, float)
+0:55(34): error:    uvec4 texture(usampler1D, float, float)
+0:55(34): error:    vec4 texture(sampler2D, vec2, float)
+0:55(34): error:    ivec4 texture(isampler2D, vec2, float)
+0:55(34): error:    uvec4 texture(usampler2D, vec2, float)
+0:55(34): error:    vec4 texture(sampler3D, vec3, float)
+0:55(34): error:    ivec4 texture(isampler3D, vec3, float)
+0:55(34): error:    uvec4 texture(usampler3D, vec3, float)
+0:55(34): error:    vec4 texture(samplerCube, vec3, float)
+0:55(34): error:    ivec4 texture(isamplerCube, vec3, float)
+0:55(34): error:    uvec4 texture(usamplerCube, vec3, float)
+0:55(34): error:    float texture(sampler1DShadow, vec3, float)
+0:55(34): error:    float texture(sampler2DShadow, vec3, float)
+0:55(34): error:    float texture(samplerCubeShadow, vec4, float)
+0:55(34): error:    vec4 texture(sampler1DArray, vec2, float)
+0:55(34): error:    ivec4 texture(isampler1DArray, vec2, float)
+0:55(34): error:    uvec4 texture(usampler1DArray, vec2, float)
+0:55(34): error:    vec4 texture(sampler2DArray, vec3, float)
+0:55(34): error:    ivec4 texture(isampler2DArray, vec3, float)
+0:55(34): error:    uvec4 texture(usampler2DArray, vec3, float)
+0:55(34): error:    vec4 texture(samplerCubeArray, vec4, float)
+0:55(34): error:    ivec4 texture(isamplerCubeArray, vec4, float)
+0:55(34): error:    uvec4 texture(usamplerCubeArray, vec4, float)
+0:55(34): error:    float texture(sampler1DArrayShadow, vec3, float)
+0:55(14): error: operands to arithmetic operators must be numeric
+0:55(14): error: operands to arithmetic operators must be numeric
+
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [transformationMatrix] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [projectionMatrix] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [viewMatrix] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[0]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[0]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[1]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[1]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[2]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[2]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[3]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[3]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [reflectivity] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [shineDamper] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [skyColor] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [backgroundTexture] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [rTexture] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [gTexture] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [bTexture] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [blendMap] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - GLSL Shader compile error from: [vertexShader.frag]
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Shader error details:
+0:11(24): error: array size must be a constant valued expression
+0:18(28): error: array size must be a constant valued expression
+0:43(2): error: unsized array index must be constant
+0:43(21): error: unsized array index must be constant
+
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - GLSL Shader compile error from: [fragmentShader.vert]
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Shader error details:
+0:7(23): error: array size must be a constant valued expression
+0:14(26): error: array size must be a constant valued expression
+0:30(35): error: unsized array index must be constant
+0:40(30): error: unsized array index must be constant
+0:41(48): error: unsized array index must be constant
+0:51(19): error: `diffuse' undeclared
+0:51(14): error: cannot construct `vec4' from a non-numeric data type
+0:51(14): error: operands to arithmetic operators must be numeric
+0:51(14): error: operands to arithmetic operators must be numeric
+
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [transformationMatrix] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [projectionMatrix] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [viewMatrix] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[0]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[0]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[1]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[1]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[2]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[2]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightPosition[3]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [lightColor[3]] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [reflectivity] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [shineDamper] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [useFakeLighting] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [skyColor] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [random] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [numberOfRows] not found
+[thewall.engine.twilight.shaders.ShaderProgram] [14:34:13] TwLight Main Thread/ERROR] - Uniform [offset] not found
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - CPU:       Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - OpenGL:    4.6 (Compatibility Profile) Mesa 20.3.5
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - GPU:       Mesa Intel(R) HD Graphics 630 (KBL GT2)
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - Vendor:    Intel
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - Memory :   15891MB
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - Baseboard: ASUSTeK COMPUTER INC. UX550VE
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - Sound 1:   HDA-Intel - HDA Intel PCH Intel Kabylake HDMI Advanced Linux Sound Architecture Driver Version k5.14.0-2parrot1-amd64.
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - Sound 2:   USB-Audio - PRO X  Advanced Linux Sound Architecture Driver Version k5.14.0-2parrot1-amd64.
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStream] [14:34:13] TwLight Main Thread/INFO ] - 
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/INFO ] - Initialization complete, runtime is ready
+[thewall.game.Game] [14:34:13] main/INFO ] - Game started in 0.978s.
+[thewall.engine.twilight.render.MasterRenderer] [14:34:13] TwLight Main Thread/WARN ] - Entity [thewall.engine.twilight.entity.RawEntity] is deprecated, try to use another or implement your own.
+[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [14:34:13] TwLight Main Thread/WARN ] - Error while pulsing engine
+java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
+	at jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64) ~[?:?]
+	at jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70) ~[?:?]
+	at jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266) ~[?:?]
+	at java.util.Objects.c

@@ -5,6 +5,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3fc;
 import thewall.engine.twilight.entity.Camera;
 
 public class Maths {
@@ -50,6 +51,14 @@ public class Maths {
         matrix.rotate((float) Math.toRadians(ry), new Vector3f(0,1,0));
         matrix.rotate((float) Math.toRadians(rz), new Vector3f(0,0,1));
         matrix.scale(new Vector3f(scale,scale,scale));
+        return matrix;
+    }
+
+    public static @NotNull Matrix4f createTransformationMatrix(Vector2f translation, Vector2f scale) {
+        Matrix4f matrix = new Matrix4f();
+        matrix.identity();
+        matrix.translate(new Vector3f(translation.x, translation.y, 0));
+        matrix.scale(new Vector3f(scale.x, scale.y, 1f));
         return matrix;
     }
 

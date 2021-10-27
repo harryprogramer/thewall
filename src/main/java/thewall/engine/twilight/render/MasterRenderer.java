@@ -12,9 +12,12 @@ import thewall.engine.twilight.display.Resolution;
 import thewall.engine.twilight.entity.Camera;
 import thewall.engine.twilight.entity.Entity;
 import thewall.engine.twilight.entity.Light;
+import thewall.engine.twilight.models.Loader;
 import thewall.engine.twilight.models.TexturedModel;
+import thewall.engine.twilight.shaders.SkyboxShader;
 import thewall.engine.twilight.shaders.StaticShader;
 import thewall.engine.twilight.shaders.TerrainShader;
+import thewall.engine.twilight.skybox.SkyboxRender;
 import thewall.engine.twilight.terrain.Terrain;
 
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.lwjgl.opengl.GL11.*;
 
+@Deprecated
 public class MasterRenderer {
     private final static Logger logger = LogManager.getLogger(MasterRenderer.class);
 
@@ -40,18 +44,20 @@ public class MasterRenderer {
     private final GLFWDisplayManager glfwDisplayManager;
     private final TerrainRenderer terrainRenderer;
     private final TerrainShader terrainShader = new TerrainShader();
+    private final SkyboxRender skyboxShader;
 
     private final List<Terrain> terrains = new ArrayList<>();
 
     private final List<Class<?>> deprecatedList = new ArrayList<>();
 
-    public MasterRenderer(GLFWDisplayManager glfwDisplayManager){
+    public MasterRenderer(GLFWDisplayManager glfwDisplayManager, Loader loader){
         this.glfwDisplayManager = glfwDisplayManager;
         GL11.glEnable(GL_CULL_FACE);
         GL11.glCullFace(GL_BACK);
         createProjectionMatrix(-1, -1);
         entityRenderer = new EntityRenderer(glfwDisplayManager, shader, this);
         terrainRenderer = new TerrainRenderer(terrainShader, this);
+        skyboxShader = new SkyboxRender(loader, projectionMatrix);
     }
 
     public Matrix4f getProjectionMatrix(){
@@ -91,26 +97,27 @@ public class MasterRenderer {
         }
 
         if(entity.isAnnotationPresent(Deprecated.class)){
-            logger.warn("Entity [" + entity.getPackageName() + "." + entity.getSimpleName() + "] is deprecated, try to use another entity or implement your own.");
+            logger.warn("Entity [" + entity.getPackageName() + "." + entity.getSimpleName() + "] is deprecated, try to use another or implement your own.");
         }
 
         deprecatedList.add(entity);
     }
 
-    public void render(Light sun, Camera camera){
+    public void render(List<Light> lights, Camera camera){
         prepare();
         shader.start();
         shader.loadSkyColor(RED, GREEN, BLUE);
-        shader.loadLight(sun);
+        shader.loadLights(lights);
         shader.loadViewMatrix(camera);
         entityRenderer.render(entities);
         shader.stop();
         terrainShader.start();
         terrainShader.loadSkyColor(RED, GREEN, BLUE);
-        terrainShader.loadLight(sun);
+        terrainShader.loadLights(lights);
         terrainShader.loadViewMatrix(camera);
         terrainRenderer.render(terrains);
         terrainShader.stop();
+        skyboxShader.render(camera);
         terrains.clear();
         entities.clear();
     }
@@ -118,6 +125,7 @@ public class MasterRenderer {
     public void cleanUp(){
         shader.cleanUp();
         terrainShader.cleanUp();
+
     }
 
     private void createProjectionMatrix(int width, int height){

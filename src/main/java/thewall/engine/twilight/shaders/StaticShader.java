@@ -9,18 +9,23 @@ import thewall.engine.twilight.entity.Light;
 import thewall.engine.twilight.utils.Maths;
 import org.jetbrains.annotations.NotNull;
 
-public class StaticShader extends ShaderProgram {
+import java.util.List;
+
+public final class StaticShader extends ShaderProgram {
+    private static final short MAX_LIGHTS = 4;
+
     private int locationTransformationMatrix;
     private int locationProjectionMatrix;
     private int locationViewMatrix;
-    private int locationLightColor;
-    private int locationLightPosition;
+    private int[] locationLightColor;
+    private int[] locationLightPosition;
     private int locationReflectivity;
     private int locationShaneDamper;
     private int location_useFakeLighting;
     private int locationSkyColor;
     private int locationNumberOfRows;
     private int locationOffset;
+    private int locationAttenuation[];
     private int locationRandom;
 
     public StaticShader(){
@@ -32,8 +37,14 @@ public class StaticShader extends ShaderProgram {
         locationTransformationMatrix = super.getUniformLocation("transformationMatrix");
         locationProjectionMatrix = super.getUniformLocation("projectionMatrix");
         locationViewMatrix = super.getUniformLocation("viewMatrix");
-        locationLightColor = super.getUniformLocation("lightColour");
-        locationLightPosition = super.getUniformLocation("lightPosition");
+        locationLightColor = new int[MAX_LIGHTS];
+        locationLightPosition = new int[MAX_LIGHTS];
+        locationAttenuation = new int[MAX_LIGHTS];
+        for(int i = 0; i < MAX_LIGHTS; i++){
+            locationLightPosition[i] = super.getUniformLocation("lightPosition[" + i + "]");
+            locationLightColor[i] = super.getUniformLocation("lightColour[" + i + "]");
+            locationAttenuation[i] = super.getUniformLocation("attenuation[" + i + "]");
+        }
         locationReflectivity = super.getUniformLocation("reflectivity");
         locationShaneDamper = super.getUniformLocation("shineDamper");
         location_useFakeLighting = super.getUniformLocation("useFakeLighting");
@@ -78,9 +89,19 @@ public class StaticShader extends ShaderProgram {
         super.loadBoolean(location_useFakeLighting, useFake);
     }
 
-    public void loadLight(@NotNull Light light){
-        super.loadVector(locationLightColor, light.getColour());
-        super.loadVector(locationLightPosition, light.getPosition());
+    public void loadLights(@NotNull List<Light> lights){
+        for(int i = 0; i < MAX_LIGHTS; i++) {
+            if(i < lights.size()) {
+                super.loadVector(locationLightPosition[i], lights.get(i).getPosition());
+                super.loadVector(locationLightColor[i], lights.get(i).getColour());
+                super.loadVector(locationAttenuation[i], lights.get(i).getAttenuation());
+            }else {
+                super.loadVector(locationLightColor[i], new Vector3f(0, 0, 0));
+                super.loadVector(locationLightPosition[i], new Vector3f(0, 0, 0));
+                super.loadVector(locationAttenuation[i], new Vector3f(1, 0, 0));
+            }
+        }
+
     }
 
     @Override

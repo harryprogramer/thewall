@@ -10,9 +10,15 @@ import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.display.GLFWWindowResizeSystem;
+import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.hardware.Memory;
 import thewall.engine.twilight.hardware.SoundCard;
+import thewall.engine.twilight.input.InputProvider;
+import thewall.engine.twilight.input.gamepad.GLFWGamepadManager;
 import thewall.engine.twilight.input.gamepad.GLFWJoystickCallback;
+import thewall.engine.twilight.input.gamepad.GamepadLookupService;
+import thewall.engine.twilight.input.keyboard.TGLFWKeyboard;
+import thewall.engine.twilight.input.mouse.TGLFWMouse;
 import thewall.engine.twilight.render.MasterRenderer;
 import thewall.engine.twilight.render.SyncTimer;
 import thewall.engine.twilight.runtime.AbstractRuntime;
@@ -32,9 +38,6 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     private TwilightApp twilightApp;
     volatile boolean isInit = false;
     private Thread runtimeThread = null;
-
-
-    private long windowPointer;
 
     volatile boolean isClosing = false;
     volatile boolean isClosed = false;
@@ -67,34 +70,39 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             if (!program.getDebugConsole().isLogging())
                 program.getDebugConsole().startLogging();
             program.createDisplay();
-            glfwFocusWindow(program.getWindowPointer());
-            GL.createCapabilities();
-            program.setRenderer(new MasterRenderer(program));
-            program.setWindowResizeSystem(new GLFWWindowResizeSystem(program.getRenderer()));
+             GL.createCapabilities();
+            MasterRenderer masterRenderer = new MasterRenderer(program, program.getLoader());
+            program.setWindowResizeSystem(new GLFWWindowResizeSystem(masterRenderer));
+            program.setRenderer(masterRenderer);
             program.registerCallbacks();
+            glfwFocusWindow(program.getWindowPointer());
             try {
                 program.onEnable();
             }catch (Exception e){
                 logger.fatal("Exception in app initialization function", e);
                 forceStop();
             }
-            this.windowPointer = program.getWindowPointer();
-            this.twilightApp = program;
-            logger.info("CPU:       " + twilightApp.getRealtimeHardware().getProcessor().getName());
+            logger.info("CPU:       " + program.getRealtimeHardware().getProcessor().getName());
             logger.info("OpenGL:    " + TwilightApp.getRenderAPIVersion());
-            logger.info("GPU:       " + twilightApp.getRealtimeHardware().getUsedGraphic().getName());
-            logger.info("Vendor:    " + twilightApp.getRealtimeHardware().getUsedGraphic().getVendor());
-            logger.info("Memory :   " + (twilightApp.getRealtimeHardware().getMemory().getTotal()) / (1024L * 1024L) + "MB");
-            logger.info("Baseboard: "  + twilightApp.getRealtimeHardware().getBaseboardManufacturer() + " " + twilightApp.getRealtimeHardware().getBaseboardModel());
-            List<SoundCard> soundCards = twilightApp.getRealtimeHardware().getSoundCards();
+            logger.info("GPU:       " + program.getRealtimeHardware().getUsedGraphic().getName());
+            logger.info("Vendor:    " + program.getRealtimeHardware().getUsedGraphic().getVendor());
+            logger.info("Memory :   " + (program.getRealtimeHardware().getMemory().getTotal()) / (1024L * 1024L) + "MB");
+            logger.info("Baseboard: "  + program.getRealtimeHardware().getBaseboardManufacturer() + " " + program.getRealtimeHardware().getBaseboardModel());
+            List<SoundCard> soundCards = program.getRealtimeHardware().getSoundCards();
             int i = 0;
             for(SoundCard soundCard : soundCards) {
                 logger.info(String.format("Sound %d:   %s %s %s", ++i ,soundCard.getName(), soundCard.getCodec(), soundCard.getDriverVersion()));
             }
-            glfwSetJoystickCallback(new GLFWJoystickCallback(this.twilightApp));
+            GamepadLookupService gamepadLookupService = new GamepadLookupService();
+            glfwSetJoystickCallback(new GLFWJoystickCallback(program, gamepadLookupService));
+            program.setInput(new InputProvider(new TGLFWKeyboard(program), new TGLFWMouse(program), new GLFWGamepadManager(gamepadLookupService)));
+            program.setGuiRenderer(new GuiRenderer(program.getLoader()));
+            this.twilightApp = program;
+            logger.info("Initialization complete, runtime is ready");
+            isInit = true;
             engineLoop();
-        }catch (Exception e){
-            logger.fatal("An unknown error has occurred while trying to start the engine core", e);
+        } catch (Throwable e){
+            logger.fatal("An error has occurred while trying to start the engine core", e);
             forceStop();
         }
     }
@@ -151,10 +159,11 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
         scheduler.shutdown();
     }
 
+    static boolean test = false;
     @SneakyThrows
     private void engineLoop(){
 
-        while (!glfwWindowShouldClose(windowPointer)) {
+        while (!glfwWindowShouldClose(twilightApp.getWindowPointer())) {
             try {
                 if(isClosing){
                     break;
@@ -172,9 +181,11 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
                 }
                 twilightApp.updateDisplay();
                 twilightApp.enginePulse();
+
             }catch (Exception e){
                 if(lastError != null){
                     if(e.getClass() == lastError.getClass()){
+
                         if(++errorRepeatCount % 100 == 0){
                             logger.warn(e.getClass().getSimpleName() + " is still throwing in the engine loop, more then " + errorRepeatCount + " times");
                         }
@@ -196,6 +207,10 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
         stop();
     }
 
+    @Override
+    public boolean isReady() {
+        return isInit;
+    }
 
     private void scheduleTask(Runnable r){
         rendererTasks.add(r);
