@@ -70,12 +70,12 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             if (!program.getDebugConsole().isLogging())
                 program.getDebugConsole().startLogging();
             program.createDisplay();
-             GL.createCapabilities();
             MasterRenderer masterRenderer = new MasterRenderer(program, program.getLoader());
             program.setWindowResizeSystem(new GLFWWindowResizeSystem(masterRenderer));
             program.setRenderer(masterRenderer);
             program.registerCallbacks();
             glfwFocusWindow(program.getWindowPointer());
+            program.showWindow();
             try {
                 program.onEnable();
             }catch (Exception e){

@@ -3,7 +3,10 @@ package thewall.engine.twilight.display;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.system.MemoryUtil;
 import thewall.engine.twilight.TwilightApp;
+import thewall.engine.twilight.errors.WindowFailureException;
 
 import java.util.Random;
 
@@ -59,10 +62,11 @@ public class GLFWDisplayManager implements GLDisplayManager {
 
     @Override
     public void createDisplay(){
-        window = GLFW.glfwCreateWindow(width, height, "",  0, 0);
+        window = GLFW.glfwCreateWindow(width, height, "", MemoryUtil.NULL, MemoryUtil.NULL);
+        if(window == MemoryUtil.NULL){
+            throw new WindowFailureException("window is null");
+        }
         glfwMakeContextCurrent(window);
-
-        glfwShowWindow(window);
 
         glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
             if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE ) {
@@ -77,6 +81,8 @@ public class GLFWDisplayManager implements GLDisplayManager {
                 }
             }
         });
+
+        GL.createCapabilities();
 
         lastFrameTime = System.currentTimeMillis();
     }

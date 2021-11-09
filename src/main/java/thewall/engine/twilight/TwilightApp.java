@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.audio.SoundMaster;
@@ -217,6 +218,8 @@ public abstract class TwilightApp extends GLFWWindowManager {
             dummy.m();
         }
 
+        GLFWErrorCallback.createPrint(System.err).set();
+
         System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
         logger.info("Initializing Twilight " + getVersion());
@@ -249,7 +252,7 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
         TwilightRuntimeService.init();
         glfwDefaultWindowHints();
-        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
     }
     public void setFPSLimit(int limit){
         frameLimit = limit;
