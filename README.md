@@ -1,3 +1,1 @@
-# The Wall
-The Twilight engine template game
-
+# Twilight Game Engine
