@@ -4,10 +4,6 @@ public interface ImmediateModeGUI {
 
     void init();
 
-    void show();
-
-    void hide();
-
     void destroy();
 
     void renderBegin();

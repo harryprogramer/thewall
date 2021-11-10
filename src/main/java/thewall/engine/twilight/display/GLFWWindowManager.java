@@ -78,7 +78,7 @@ public class GLFWWindowManager extends GLFWDisplayManager implements WindowManag
         IntBuffer x = BufferUtils.createIntBuffer(1);
         IntBuffer y = BufferUtils.createIntBuffer(1);
         glfwGetWindowSize(getWindowPointer(), x, y);
-        return new Vector2i(x.get(0), y.get(1));
+        return new Vector2i(x.get(0), y.get(0));
     }
 
     @Override

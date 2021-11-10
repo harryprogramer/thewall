@@ -1,19 +1,18 @@
 package thewall.game;
 
 import imgui.ImGui;
-import org.apache.commons.io.FileUtils;
+import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.joml.Vector2f;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector2i;
 import org.joml.Vector3f;
-import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.entity.*;
-import thewall.engine.twilight.events.EngineEvent;
-import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.gui.GuiTexture;
+import thewall.engine.twilight.gui.imgui.ImGuiDesigner;
 import thewall.engine.twilight.gui.imgui.OnImmediateGUI;
-import thewall.engine.twilight.input.gamepad.GamepadNumber;
 import thewall.engine.twilight.models.RawModel;
 import thewall.engine.twilight.models.TexturedModel;
 import thewall.engine.twilight.models.obj.thinmatrix.ModelData;
@@ -24,17 +23,18 @@ import thewall.engine.twilight.textures.TerrainTexture;
 import thewall.engine.twilight.textures.TerrainTexturePack;
 import thewall.game.events.GamepadEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 public class TheWall extends TwilightApp {
     static int frameCount = 0;
+
     static double previousTime = glfwGetTime();
+
+    static int fps = 0;
 
     private static final long  MEGABYTE = 1024L * 1024L;
 
@@ -155,9 +155,10 @@ public class TheWall extends TwilightApp {
 
     }
 
+    float[] lastWatchdog = new float[1000];
+    int lastWatchdogIndex = 0;
 
-
-    static boolean test = false;
+    @SneakyThrows
     @Override
     public void enginePulse() {
 
@@ -187,14 +188,63 @@ public class TheWall extends TwilightApp {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
 
+            fps = frameCount;
+
             frameCount = 0;
             previousTime = currentTime;
+
         }
+
+        if(lastWatchdogIndex == lastWatchdog.length - 1){
+            //Arrays.fill(lastWatchdog, 0);
+            lastWatchdogIndex = -1;
+        }
+
+        lastWatchdog[++lastWatchdogIndex] = (float) ((System.currentTimeMillis() - getWatchdog().getKeepAliveTime())/ 1000.0);
+
+
     }
+    boolean isWindowSizeSet = false;
+
+    float maxWatchdog = 0.005f;
 
     @OnImmediateGUI
     public void onImmediateGUI() {
-        getImmediateGUI().text("test", "debug");
+        ImGuiDesigner gui = getImmediateGUI();
+        Vector2i windowSize = getWindowSize();
+        if(!isWindowSizeSet) {
+            gui.beginWindow("Engine Stats");
+            isWindowSizeSet = true;
+        }else {
+            gui.beginWindow("Engine Stats");
+        }
+        gui.text("Twilight " + getVersion());
+        gui.text("Time: " + new SimpleDateFormat(    "yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
+        gui.text("Window: " + windowSize.x + "x" + windowSize.y);
+        gui.text("FPS: " + fps);
+        gui.text("Watchdog time: " + (System.currentTimeMillis() - getWatchdog().getKeepAliveTime()) / 1000.0);
+
+        float max_watchdog = maximum(lastWatchdog);
+
+        if(max_watchdog > maxWatchdog){
+            maxWatchdog = max_watchdog;
+        }
+
+        gui.plotLines("", lastWatchdog, 0, 0.020f, 200, 100);
+
+        gui.endWindow();
+
+    }
+
+    @Contract(pure = true)
+    private static float maximum(float @NotNull [] array) {
+        if (array.length <= 0)
+            throw new IllegalArgumentException("The array is empty");
+        float max = array[0];
+        for (int i = 1; i < array.length; i++)
+            if (array[i] > max)
+                max = array[i];
+        return max;
     }
 
     private static long getMaxMemory() {

@@ -32,6 +32,10 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>beatunes</id>
+            <url>https://www.beatunes.com/repo/maven2/</url>
+        </repository>
     </repositories>
 
     <profiles>
@@ -606,11 +610,12 @@
             <artifactId>imgui-java-app</artifactId>
             <version>1.84.1.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/de.fabmax/physx-jni -->
+        <!-- https://mvnrepository.com/artifact/com.tagtraum.ffmpeg/ffmpeg -->
         <dependency>
-            <groupId>de.fabmax</groupId>
-            <artifactId>physx-jni</artifactId>
-            <version>0.4.15</version>
+            <groupId>com.tagtraum.ffmpeg</groupId>
+            <artifactId>ffmpeg</artifactId>
+            <version>3.4.2</version>
+            <type>pom</type>
         </dependency>
     </dependencies>
 </project>

@@ -9,7 +9,7 @@ import thewall.engine.twilight.display.GLFWWindowResizeSystem;
 import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.gui.imgui.ImmediateModeGUI;
 import thewall.engine.twilight.gui.imgui.OnImmediateGUI;
-import thewall.engine.twilight.gui.imgui.TWLLegacyImGui;
+import thewall.engine.twilight.gui.imgui.DearImmediateGUIMode;
 import thewall.engine.twilight.hardware.SoundCard;
 import thewall.engine.twilight.input.InputProvider;
 import thewall.engine.twilight.input.gamepad.GLFWGamepadManager;
@@ -20,6 +20,7 @@ import thewall.engine.twilight.input.mouse.TGLFWMouse;
 import thewall.engine.twilight.render.MasterRenderer;
 import thewall.engine.twilight.render.SyncTimer;
 import thewall.engine.twilight.runtime.AbstractRuntime;
+import thewall.engine.twilight.utils.WatchdogMonitor;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -38,6 +39,8 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     private TwilightApp twilightApp;
     volatile boolean isInit = false;
     private Thread runtimeThread = null;
+
+    private final WatchdogMonitor watchdogMonitor = new WatchdogMonitor();
 
     volatile boolean isClosing = false;
     volatile boolean isClosed = false;
@@ -67,6 +70,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     protected void start(@NotNull TwilightApp program) {
         try {
             runtimeThread = Thread.currentThread();
+            watchdogMonitor.start();
             if (!program.getDebugConsole().isLogging())
                 program.getDebugConsole().startLogging();
             program.createDisplay();
@@ -74,8 +78,9 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             program.setWindowResizeSystem(new GLFWWindowResizeSystem(masterRenderer));
             program.setRenderer(masterRenderer);
             program.registerCallbacks();
-            this.imGui = new TWLLegacyImGui(program, "#version 400 core");
+            this.imGui = new DearImmediateGUIMode(program, "#version 400 core");
             this.imGui.init();
+            program.setWatchdog(watchdogMonitor);
             program.setImmediateModeGUI(this.imGui);
             glfwFocusWindow(program.getWindowPointer());
             program.showWindow();
@@ -202,6 +207,8 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
 
                 twilightApp.updateDisplay();
                 twilightApp.enginePulse();
+
+                watchdogMonitor.keepAlive();
 
             }catch (Exception e){
                 if(lastError != null){

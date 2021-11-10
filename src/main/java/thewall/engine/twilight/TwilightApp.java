@@ -23,7 +23,6 @@ import thewall.engine.twilight.events.TEventManager;
 import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.gui.imgui.ImGUIGuard;
 import thewall.engine.twilight.gui.imgui.ImGuiDesigner;
-import thewall.engine.twilight.gui.imgui.ImmediateGUICallback;
 import thewall.engine.twilight.gui.imgui.ImmediateModeGUI;
 import thewall.engine.twilight.hardware.Hardware;
 import thewall.engine.twilight.hardware.PlatformEnum;
@@ -38,6 +37,7 @@ import thewall.engine.twilight.runtime.AbstractRuntime;
 import thewall.engine.twilight.runtime.app.TEngineAppRuntime;
 import thewall.engine.twilight.runtime.TwilightRuntimeService;
 import thewall.engine.twilight.terrain.Terrain;
+import thewall.engine.twilight.utils.WatchdogTimeMonitor;
 
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -60,7 +60,9 @@ public abstract class TwilightApp extends GLFWWindowManager{
 
     private ImmediateModeGUI immediateModeGUI;
 
-    private ImGuiDesigner imGuiDesigner;
+    @Setter
+    @Getter
+    private volatile WatchdogTimeMonitor watchdog;
 
     @Getter
     public static final String version = "1.1.0.3";
@@ -129,17 +131,15 @@ public abstract class TwilightApp extends GLFWWindowManager{
     }
 
     public ImGuiDesigner getImmediateGUI(){
-        return imGuiDesigner;
+        return this.immediateModeGUI.getDesigner();
     }
 
     public void showImmediateGUI(){
         isImGuiShow.set(true);
-        immediateModeGUI.show();
     }
 
     public void hideImmediateGUI(){
         isImGuiShow.set(false);
-        immediateModeGUI.hide();
     }
 
 
@@ -148,8 +148,7 @@ public abstract class TwilightApp extends GLFWWindowManager{
     }
 
     public void setImmediateModeGUI(ImmediateModeGUI gui){
-        this.immediateModeGUI = gui;
-        this.imGuiDesigner = new ImGUIGuard(this, gui);
+        this.immediateModeGUI = new ImGUIGuard(this, gui);
     }
 
     /**

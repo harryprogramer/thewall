@@ -1,9 +1,0 @@
-[thewall.engine.twilight.TwilightApp] [10:38:36] main/INFO ] - Initializing TEngine 1.0.4
-[thewall.engine.twilight.debugger.console.DebugConsole] [10:38:37] main/INFO ] - Showing up debug console
-[thewall.engine.twilight.runtime.AbstractRuntime] [10:38:37] TEngine Main Thread/INFO ] - Starting runtime for [TEngine Game App Runtime]
-[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [10:38:37] TEngine Main Thread/INFO ] - GPU: Intel(R) HD Graphics 630
-[thewall.game.TheWall] [10:38:38] TEngine Main Thread/WARN ] - FPS drop detected, current framerate: 6
-[thewall.engine.twilight.runtime.AbstractRuntime] [10:41:35] Thread-1/INFO ] - Stopping runtime for [TEngine Game App Runtime]
-[thewall.engine.twilight.runtime.app.TEngineAppRuntime] [10:41:35] TEngine Main Thread/INFO ] - Shutting down [The Wall] ...
-[thewall.engine.twilight.debugger.console.DebugConsole] [10:41:35] TEngine Main Thread/INFO ] - Disabling debug logging, stand by
-[thewall.engine.twilight.debugger.console.DebugConsole] [10:41:35] TEngine Main Thread/INFO ] - Closing debug window

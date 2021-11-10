@@ -11,7 +11,7 @@ import thewall.engine.twilight.models.RawModel;
 import thewall.engine.twilight.shaders.SkyboxShader;
 
 public final class SkyboxRender {
-    private static final float SIZE = 500f;
+    private static final float SIZE = 9000f;
 
     private static final float[] VERTICES = {
             -SIZE,  SIZE, -SIZE,

@@ -15,6 +15,16 @@ public class KeyboardCallback implements TKeyboardCallback {
                 Game.getGame().stop();
             }
 
+            case F5_KEY -> {
+                if(action == GLFW.GLFW_RELEASE) {
+                    if (!Game.getGame().isImmediateGUIHidden()) {
+                        Game.getGame().showImmediateGUI();
+                    } else {
+                        Game.getGame().hideImmediateGUI();
+                    }
+                }
+            }
+
             case F3_KEY -> {
                 if(action == GLFW.GLFW_RELEASE) {
                     Mouse mouse = Game.getGame().input().getMouse();

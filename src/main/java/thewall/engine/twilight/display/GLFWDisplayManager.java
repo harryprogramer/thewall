@@ -18,10 +18,10 @@ public class GLFWDisplayManager implements GLDisplayManager {
 
     private volatile boolean isInit = false;
 
-    int fps = 0;
+     int fps = 0;
 
     public long getFps() {
-        return fps;
+        return fps; // FIXME: return 0
     }
 
     private static long lastFrameTime;
