@@ -1,5 +1,6 @@
 package thewall.game;
 
+import imgui.ImGui;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -8,8 +9,10 @@ import org.joml.Vector3f;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.entity.*;
+import thewall.engine.twilight.events.EngineEvent;
 import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.gui.GuiTexture;
+import thewall.engine.twilight.gui.imgui.OnImmediateGUI;
 import thewall.engine.twilight.input.gamepad.GamepadNumber;
 import thewall.engine.twilight.models.RawModel;
 import thewall.engine.twilight.models.TexturedModel;
@@ -152,6 +155,8 @@ public class TheWall extends TwilightApp {
 
     }
 
+
+
     static boolean test = false;
     @Override
     public void enginePulse() {
@@ -182,25 +187,14 @@ public class TheWall extends TwilightApp {
                 logger.warn("FPS drop detected, current framerate: " + frameCount);
             }
 
-            /*
-            if(test) {
-                test = false;
-                GL11.glPointSize(2f);
-                GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK,GL11.GL_POINT);
-
-            }else {
-                GL11.glPointSize(1f);
-                test = true;
-            }
-
-             */
-            Vector3f vector3f = player.getCamera().getPosition();
-            logger.info("X:" + vector3f.x + " Y:" + vector3f.y + " Z:" + vector3f.z);
-
             frameCount = 0;
             previousTime = currentTime;
         }
+    }
 
+    @OnImmediateGUI
+    public void onImmediateGUI() {
+        getImmediateGUI().text("test", "debug");
     }
 
     private static long getMaxMemory() {

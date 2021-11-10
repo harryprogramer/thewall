@@ -53,4 +53,5 @@ public class TwilightLevelEditor extends TwilightApp implements WindowManager {
     public void resizeWindow(int width, int height) {
 
     }
+
 }

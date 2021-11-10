@@ -1,10 +1,12 @@
 package thewall.game;
 
+import imgui.ImGui;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
+import thewall.engine.twilight.gui.imgui.ImmediateGUICallback;
 import thewall.engine.twilight.textures.TextureData;
 import thewall.game.input.KeyboardCallback;
 
@@ -31,6 +33,6 @@ public class Game {
         game.enableAutoWindowResizable();
         game.setKeyboardCallback(new KeyboardCallback());
         game.setFPSLimit(300);
-
+        game.showImmediateGUI();
     }
 }

@@ -1,17 +1,15 @@
 package thewall.engine.twilight.runtime.app;
 
 import lombok.SneakyThrows;
-import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.TwilightApp;
-import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.display.GLFWWindowResizeSystem;
 import thewall.engine.twilight.gui.GuiRenderer;
-import thewall.engine.twilight.hardware.Memory;
+import thewall.engine.twilight.gui.imgui.ImmediateModeGUI;
+import thewall.engine.twilight.gui.imgui.OnImmediateGUI;
+import thewall.engine.twilight.gui.imgui.TWLLegacyImGui;
 import thewall.engine.twilight.hardware.SoundCard;
 import thewall.engine.twilight.input.InputProvider;
 import thewall.engine.twilight.input.gamepad.GLFWGamepadManager;
@@ -23,6 +21,7 @@ import thewall.engine.twilight.render.MasterRenderer;
 import thewall.engine.twilight.render.SyncTimer;
 import thewall.engine.twilight.runtime.AbstractRuntime;
 
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -35,6 +34,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     private final static Logger logger = LogManager.getLogger(TEngineAppRuntime.class);
     private final SyncTimer syncTimer = new SyncTimer(SyncTimer.LWJGL_GLFW);
     private final static ExecutorService scheduler = Executors.newSingleThreadExecutor();
+    private volatile ImmediateModeGUI imGui;
     private TwilightApp twilightApp;
     volatile boolean isInit = false;
     private Thread runtimeThread = null;
@@ -74,6 +74,9 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             program.setWindowResizeSystem(new GLFWWindowResizeSystem(masterRenderer));
             program.setRenderer(masterRenderer);
             program.registerCallbacks();
+            this.imGui = new TWLLegacyImGui(program, "#version 400 core");
+            this.imGui.init();
+            program.setImmediateModeGUI(this.imGui);
             glfwFocusWindow(program.getWindowPointer());
             program.showWindow();
             try {
@@ -146,6 +149,9 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
         if(twilightApp != null) {
             twilightApp.getRenderer().cleanUp();
             twilightApp.getLoader().cleanUp();
+            if(twilightApp.isImmediateGUIHidden()){
+                imGui.destroy();
+            }
             glfwFreeCallbacks(twilightApp.getWindowPointer());
             glfwDestroyWindow(twilightApp.getWindowPointer());
         }
@@ -179,6 +185,21 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
                         it.remove();
                     }
                 }
+                long startTime = System.currentTimeMillis();
+                if(twilightApp.isImmediateGUIHidden()){
+                    imGui.renderBegin();
+                    List<Method> callers = getMethodsAnnotatedWithIMGUI(twilightApp);
+                    for(Method caller : callers){
+                        caller.invoke(twilightApp);
+                    }
+                    imGui.renderEnd();
+                }
+                long endTime = System.currentTimeMillis();
+                double finalTime = (endTime - startTime) / 1000.0;
+                if(finalTime > 0.025){
+                    logger.warn("ImGUI render is taking too long to render, ticks behind: " + finalTime);
+                }
+
                 twilightApp.updateDisplay();
                 twilightApp.enginePulse();
 
@@ -205,6 +226,20 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
         }
 
         stop();
+    }
+
+    private static @NotNull List<Method> getMethodsAnnotatedWithIMGUI(final @NotNull Object type) {
+        final List<Method> methods = new ArrayList<>();
+        Class<?> klass = type.getClass();
+        while (klass != Object.class) {
+            for (final Method method : klass.getDeclaredMethods()) {
+                if (method.isAnnotationPresent(OnImmediateGUI.class)) {
+                    methods.add(method);
+                }
+            }
+            klass = klass.getSuperclass();
+        }
+        return methods;
     }
 
     @Override

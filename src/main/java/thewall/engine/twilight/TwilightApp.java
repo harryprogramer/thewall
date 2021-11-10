@@ -8,14 +8,12 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.GL11;
 import thewall.engine.twilight.audio.SoundMaster;
 import thewall.engine.twilight.debugger.TEngineDebugger;
 import thewall.engine.twilight.debugger.console.DebugConsole;
 import thewall.engine.twilight.display.DisplayResizeCallback;
 import thewall.engine.twilight.display.GLFWWindowManager;
-import thewall.engine.twilight.display.GLFWWindowResizeSystem;
 import thewall.engine.twilight.display.WindowResizeSystem;
 import thewall.engine.twilight.entity.Entity;
 import thewall.engine.twilight.entity.Light;
@@ -23,19 +21,17 @@ import thewall.engine.twilight.errors.InitializationException;
 import thewall.engine.twilight.events.EventManager;
 import thewall.engine.twilight.events.TEventManager;
 import thewall.engine.twilight.gui.GuiRenderer;
+import thewall.engine.twilight.gui.imgui.ImGUIGuard;
+import thewall.engine.twilight.gui.imgui.ImGuiDesigner;
+import thewall.engine.twilight.gui.imgui.ImmediateGUICallback;
+import thewall.engine.twilight.gui.imgui.ImmediateModeGUI;
 import thewall.engine.twilight.hardware.Hardware;
 import thewall.engine.twilight.hardware.PlatformEnum;
 import thewall.engine.twilight.hardware.hna.RealtimeHNAccess;
 import thewall.engine.twilight.input.Input;
 import thewall.engine.twilight.input.InputProvider;
-import thewall.engine.twilight.input.gamepad.GLFWGamepadManager;
-import thewall.engine.twilight.input.gamepad.GamepadManager;
-import thewall.engine.twilight.input.keyboard.Keyboard;
-import thewall.engine.twilight.input.keyboard.TGLFWKeyboard;
 import thewall.engine.twilight.input.keyboard.TKeyboardCallback;
 import thewall.engine.twilight.input.keyboard.KeyboardKeys;
-import thewall.engine.twilight.input.mouse.Mouse;
-import thewall.engine.twilight.input.mouse.TGLFWMouse;
 import thewall.engine.twilight.models.Loader;
 import thewall.engine.twilight.render.MasterRenderer;
 import thewall.engine.twilight.runtime.AbstractRuntime;
@@ -50,7 +46,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static org.lwjgl.glfw.GLFW.*;
 
 @SuppressWarnings("unused")
-public abstract class TwilightApp extends GLFWWindowManager {
+public abstract class TwilightApp extends GLFWWindowManager{
     private static final AtomicBoolean isInit = new AtomicBoolean(false);
     private final static Logger logger = LogManager.getLogger(TwilightApp.class);
     private final static PlatformEnum[] supportedPlatform = {PlatformEnum.WINDOWS, PlatformEnum.LINUX, PlatformEnum.MACOS};
@@ -61,6 +57,10 @@ public abstract class TwilightApp extends GLFWWindowManager {
     private static long timeout = 15000;
     private PrintWriter logCallback;
     private Thread renderThread;
+
+    private ImmediateModeGUI immediateModeGUI;
+
+    private ImGuiDesigner imGuiDesigner;
 
     @Getter
     public static final String version = "1.1.0.3";
@@ -106,6 +106,7 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
     private WindowResizeSystem windowResizeSystem;
 
+    private final AtomicBoolean isImGuiShow = new AtomicBoolean(false);
 
     @Setter
     private InputProvider input;
@@ -127,6 +128,29 @@ public abstract class TwilightApp extends GLFWWindowManager {
         windowWidth = width;
     }
 
+    public ImGuiDesigner getImmediateGUI(){
+        return imGuiDesigner;
+    }
+
+    public void showImmediateGUI(){
+        isImGuiShow.set(true);
+        immediateModeGUI.show();
+    }
+
+    public void hideImmediateGUI(){
+        isImGuiShow.set(false);
+        immediateModeGUI.hide();
+    }
+
+
+    public boolean isImmediateGUIHidden(){
+        return isImGuiShow.get();
+    }
+
+    public void setImmediateModeGUI(ImmediateModeGUI gui){
+        this.immediateModeGUI = gui;
+        this.imGuiDesigner = new ImGUIGuard(this, gui);
+    }
 
     /**
      * Set window title
@@ -252,12 +276,11 @@ public abstract class TwilightApp extends GLFWWindowManager {
 
         TwilightRuntimeService.init();
         glfwDefaultWindowHints();
-        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE); // FIXME czarny ekran na Windowsie (problem z podwojnym buforem obrazu), rozwiazanie tymczasowe: podwojne buforowanie zostalo włączone
     }
     public void setFPSLimit(int limit){
         frameLimit = limit;
     }
-
 
     public void stop(){
         runtime.forceStop();
@@ -358,9 +381,12 @@ public abstract class TwilightApp extends GLFWWindowManager {
         timeout = time;
     }
 
+
+
     public static String getRenderAPIVersion(){
         return GL11.glGetString(GL11.GL_VERSION);
     }
+
 
     public abstract void onEnable();
 

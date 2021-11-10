@@ -593,6 +593,24 @@
             <artifactId>java-data-front</artifactId>
             <version>v2.0.0</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/io.github.spair/imgui-java-binding -->
+        <!-- https://mvnrepository.com/artifact/io.github.spair/imgui-java-binding -->
+        <!-- https://mvnrepository.com/artifact/io.github.spair/imgui-java-binding -->
+        <dependency>
+            <groupId>io.github.spair</groupId>
+            <artifactId>imgui-java-binding</artifactId>
+            <version>1.84.1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.spair</groupId>
+            <artifactId>imgui-java-app</artifactId>
+            <version>1.84.1.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/de.fabmax/physx-jni -->
+        <dependency>
+            <groupId>de.fabmax</groupId>
+            <artifactId>physx-jni</artifactId>
+            <version>0.4.15</version>
+        </dependency>
     </dependencies>
 </project>
