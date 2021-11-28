@@ -1,10 +1,12 @@
 package thewall.engine.twilight;
 
+import io.github.alexarchambault.windowsansi.WindowsAnsi;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.fusesource.jansi.AnsiConsole;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -13,13 +15,13 @@ import thewall.engine.twilight.audio.SoundMaster;
 import thewall.engine.twilight.debugger.TEngineDebugger;
 import thewall.engine.twilight.debugger.console.DebugConsole;
 import thewall.engine.twilight.display.DisplayResizeCallback;
-import thewall.engine.twilight.display.GLFWWindowManager;
+import thewall.engine.twilight.display.GLFWDisplay;
 import thewall.engine.twilight.display.WindowResizeSystem;
-import thewall.engine.twilight.entity.Entity;
 import thewall.engine.twilight.entity.Light;
+import thewall.engine.twilight.entity.Spatial;
 import thewall.engine.twilight.errors.InitializationException;
 import thewall.engine.twilight.events.EventManager;
-import thewall.engine.twilight.events.TEventManager;
+import thewall.engine.twilight.events.JTEEventManager;
 import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.gui.imgui.ImGUIGuard;
 import thewall.engine.twilight.gui.imgui.ImGuiDesigner;
@@ -32,21 +34,28 @@ import thewall.engine.twilight.input.InputProvider;
 import thewall.engine.twilight.input.keyboard.TKeyboardCallback;
 import thewall.engine.twilight.input.keyboard.KeyboardKeys;
 import thewall.engine.twilight.models.Loader;
-import thewall.engine.twilight.render.MasterRenderer;
+import thewall.engine.twilight.renderer.MasterRenderer;
 import thewall.engine.twilight.runtime.AbstractRuntime;
 import thewall.engine.twilight.runtime.app.TEngineAppRuntime;
 import thewall.engine.twilight.runtime.TwilightRuntimeService;
 import thewall.engine.twilight.terrain.Terrain;
 import thewall.engine.twilight.utils.WatchdogTimeMonitor;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+/**
+ * Base class for engine app
+ *
+ * @deprecated due api rebuild from 11.17.2021, {@link thewall.engine.LegacyApp}
+ */
+@Deprecated(forRemoval = true)
 @SuppressWarnings("unused")
-public abstract class TwilightApp extends GLFWWindowManager{
+public abstract class TwilightApp extends GLFWDisplay {
     private static final AtomicBoolean isInit = new AtomicBoolean(false);
     private final static Logger logger = LogManager.getLogger(TwilightApp.class);
     private final static PlatformEnum[] supportedPlatform = {PlatformEnum.WINDOWS, PlatformEnum.LINUX, PlatformEnum.MACOS};
@@ -104,7 +113,7 @@ public abstract class TwilightApp extends GLFWWindowManager{
     private volatile MasterRenderer renderer;
 
     @Getter
-    private final EventManager eventManager = new TEventManager();
+    private final EventManager eventManager = new JTEEventManager();
 
     private WindowResizeSystem windowResizeSystem;
 
@@ -158,7 +167,7 @@ public abstract class TwilightApp extends GLFWWindowManager{
      * */
     public void setWindowTitle(String windowTitle){
         checkInit();
-        glfwSetWindowTitle(getWindowPointer(), windowTitle);
+        glfwSetWindowTitle(getWindow(), windowTitle);
     }
 
     public Hardware getRealtimeHardware(){
@@ -185,7 +194,7 @@ public abstract class TwilightApp extends GLFWWindowManager{
 
     public void setKeyboardCallback(TKeyboardCallback TKeyboardCallback){
         checkInit();
-        runtime.executeTask(() -> glfwSetKeyCallback(getWindowPointer(), (window, key, scancode, action, mods) -> {
+        runtime.executeTask(() -> glfwSetKeyCallback(getWindow(), (window, key, scancode, action, mods) -> {
             try {
                 TKeyboardCallback.invoke(KeyboardKeys.keyToEnum(key), scancode, action, mods);
             }catch (Exception e){
@@ -204,7 +213,7 @@ public abstract class TwilightApp extends GLFWWindowManager{
         renderer.processTerrain(terrain);
     }
 
-    public void processEntity(Entity entity){
+    public void processEntity(Spatial entity){
         renderer.processEntity(entity);
     }
 
@@ -228,10 +237,8 @@ public abstract class TwilightApp extends GLFWWindowManager{
     //    this.rndrCamera = camera;
     //}
 
-
     @SneakyThrows
     public static void init(){
-
         class Dummy {
             public void m() {
             }
@@ -240,6 +247,20 @@ public abstract class TwilightApp extends GLFWWindowManager{
             Dummy dummy = new Dummy();
             dummy.m();
         }
+
+        AnsiConsole.systemInstall();
+
+        if (com.oracle.svm.core.os.IsDefined.WIN32()) {
+            try {
+                WindowsAnsi.setup();
+            } catch (IOException e) {
+                logger.warn("ANSI terminal colors unavailable to init", e);
+            }
+
+        }
+
+        System.setOut(AnsiConsole.out());
+        System.setErr(AnsiConsole.err());
 
         GLFWErrorCallback.createPrint(System.err).set();
 
@@ -288,7 +309,6 @@ public abstract class TwilightApp extends GLFWWindowManager{
     private volatile boolean isError = false;
     private volatile Throwable error = null;
 
-    @SneakyThrows
     private static @Nullable AbstractRuntime<TwilightApp> startRuntime(TwilightApp app){
         checkInit();
         AbstractRuntime<TwilightApp> runtime;
@@ -335,7 +355,13 @@ public abstract class TwilightApp extends GLFWWindowManager{
 
     public static void startApp(TwilightApp app){
         AbstractRuntime<TwilightApp> runtime;
-        runtime = startRuntime(app);
+        try {
+            runtime = startRuntime(app);
+        }catch (InitializationException e){
+            logger.fatal("Engine not initialized", e);
+            System.exit(1);
+            return;
+        }
         if(runtime == null){
             throw new InitializationException("Engine was not initialized probably, look logs upper");
         }
@@ -347,6 +373,7 @@ public abstract class TwilightApp extends GLFWWindowManager{
         if(!isInit.get()){
             throw new InitializationException("TwLight", TwilightApp.class);
         }
+
     }
 
     private void checkStart(){
@@ -391,5 +418,5 @@ public abstract class TwilightApp extends GLFWWindowManager{
 
     public abstract void onDisable();
 
-    public abstract void enginePulse();
+    public abstract void update();
 }

@@ -2,8 +2,9 @@ package thewall.engine.twilight.models.obj.pgts;
 
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import thewall.engine.twilight.errors.NotImplementedException;
 import thewall.engine.twilight.models.Loader;
-import thewall.engine.twilight.models.RawModel;
+import thewall.engine.twilight.models.Mesh;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,9 +14,9 @@ import java.util.List;
 
 public class OBJObjectUtils {
 
-    @Deprecated
+    @Deprecated(forRemoval = true)
     @Contract(pure = true)
-    public static RawModel loadToRawModel(@NotNull OBJObject objObject, Loader loader){
+    public static Mesh loadToRawModel(@NotNull OBJObject objObject, Loader loader){
         List<Float> vertexPosition = new ArrayList<>();
         List<Float> texturePosition = new ArrayList<>();
         List<Integer> faceList = new ArrayList<>();
@@ -41,7 +42,8 @@ public class OBJObjectUtils {
             }
         }
         // FIXME
-        return loader.loadToVAO(listToFloatArray(vertexPosition), listToIntegerArray(vertexIncides), listToFloatArray(vertexTexturePositionProcessed), null);
+        //return loader.loadToVAO(listToFloatArray(vertexPosition), listToIntegerArray(vertexIncides), listToFloatArray(vertexTexturePositionProcessed), null);
+        throw new NotImplementedException();
     }
 
     @Contract(pure = true)

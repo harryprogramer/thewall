@@ -61,8 +61,8 @@ public class GLFWDisplayManager implements GLDisplayManager {
     }
 
     @Override
-    public void createDisplay(){
-        window = GLFW.glfwCreateWindow(width, height, "", MemoryUtil.NULL, MemoryUtil.NULL);
+    public void createDisplay(int width, int height, String name){
+        window = GLFW.glfwCreateWindow(width, height, name, MemoryUtil.NULL, MemoryUtil.NULL);
         if(window == MemoryUtil.NULL){
             throw new WindowFailureException("window is null");
         }
@@ -89,7 +89,7 @@ public class GLFWDisplayManager implements GLDisplayManager {
 
 
     @Override
-    public void updateDisplay() throws Exception {
+    public void updateDisplay() {
         glfwSwapBuffers(window);
 
         glfwPollEvents();
@@ -114,7 +114,7 @@ public class GLFWDisplayManager implements GLDisplayManager {
     }
 
     @Override
-    public long getWindowPointer() {
+    public long getWindow() {
         return window;
     }
 }

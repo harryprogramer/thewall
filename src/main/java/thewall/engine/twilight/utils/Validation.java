@@ -72,6 +72,7 @@ public class Validation {
         return obj;
     }
 
+    @SafeVarargs
     public static <T> void checkNull(T @NotNull ... obj){
         for(T var : obj) {
             if (isNull(var)) {
@@ -81,6 +82,7 @@ public class Validation {
 
     }
 
+    @SafeVarargs
     public static <T> void checkNull(Class<?> sourceClass, T @NotNull ... obj){
         for(T var : obj) {
             if (isNull(var, sourceClass)) {
@@ -89,6 +91,7 @@ public class Validation {
         }
     }
 
+    @SafeVarargs
     public static <T> void checkNull(String name, T @NotNull ... obj){
         for(T var : obj) {
             if (isNull(var, name)) {

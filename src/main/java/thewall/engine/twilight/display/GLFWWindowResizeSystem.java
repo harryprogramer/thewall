@@ -1,6 +1,6 @@
 package thewall.engine.twilight.display;
 
-import thewall.engine.twilight.render.MasterRenderer;
+import thewall.engine.twilight.renderer.MasterRenderer;
 
 public class GLFWWindowResizeSystem extends WindowResizeSystem {
     private final MasterRenderer masterRenderer;

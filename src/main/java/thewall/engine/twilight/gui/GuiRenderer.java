@@ -6,27 +6,28 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import thewall.engine.twilight.entity.Spatial;
 import thewall.engine.twilight.models.Loader;
-import thewall.engine.twilight.models.RawModel;
 import thewall.engine.twilight.shaders.GuiShader;
-import thewall.engine.twilight.utils.Maths;
+import thewall.engine.twilight.math.Maths;
 
 import java.util.List;
 
+@Deprecated
 public class GuiRenderer {
 
-    private final RawModel quad;
+    private /*FIXME*/ Object quad;
     private GuiShader shader;
 
     public GuiRenderer(@NotNull Loader loader){
         float[] positions = {-1, 1, -1, -1, 1, 1, 1 ,-1};
-        this.quad = loader.loadToVAO(positions);
-        this.shader = new GuiShader();
+        // FIXME this.quad = loader.loadToVAO(positions);
+        this.shader = new GuiShader(null);
     }
 
     public void render(@NotNull List<GuiTexture> guis){
         shader.start();
-        GL30.glBindVertexArray(quad.getVaoID());
+        //GL30.glBindVertexArray(quad.getVaoID()); FIXME
         GL20.glEnableVertexAttribArray(0);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -36,7 +37,7 @@ public class GuiRenderer {
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getTexture());
             Matrix4f matrix = Maths.createTransformationMatrix(texture.getPosition(), texture.getScale());
             shader.loadTransformation(matrix);
-            GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, quad.getVertexCount());
+            //GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, quad.getVertexCount()); FIXME
         }
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_DEPTH_TEST);

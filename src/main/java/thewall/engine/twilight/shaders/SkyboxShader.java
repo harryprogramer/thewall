@@ -2,7 +2,8 @@ package thewall.engine.twilight.shaders;
 
 import org.joml.Matrix4f;
 import thewall.engine.twilight.entity.Camera;
-import thewall.engine.twilight.utils.Maths;
+import thewall.engine.twilight.math.Maths;
+import thewall.engine.twilight.renderer.opengl.GL;
 
 public final class SkyboxShader extends ShaderProgram{
 
@@ -12,8 +13,8 @@ public final class SkyboxShader extends ShaderProgram{
 	private int location_projectionMatrix;
 	private int location_viewMatrix;
 	
-	public SkyboxShader() {
-		super(VERTEX_FILE, FRAGMENT_FILE);
+	public SkyboxShader(GL gl) {
+		super(VERTEX_FILE, FRAGMENT_FILE, gl);
 	}
 	
 	public void loadProjectionMatrix(Matrix4f matrix){

@@ -6,19 +6,13 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.display.GLFWWindowResizeSystem;
-import thewall.engine.twilight.gui.GuiRenderer;
 import thewall.engine.twilight.gui.imgui.ImmediateModeGUI;
 import thewall.engine.twilight.gui.imgui.OnImmediateGUI;
 import thewall.engine.twilight.gui.imgui.DearImmediateGUIMode;
 import thewall.engine.twilight.hardware.SoundCard;
-import thewall.engine.twilight.input.InputProvider;
-import thewall.engine.twilight.input.gamepad.GLFWGamepadManager;
-import thewall.engine.twilight.input.gamepad.GLFWJoystickCallback;
 import thewall.engine.twilight.input.gamepad.GamepadLookupService;
-import thewall.engine.twilight.input.keyboard.TGLFWKeyboard;
-import thewall.engine.twilight.input.mouse.TGLFWMouse;
-import thewall.engine.twilight.render.MasterRenderer;
-import thewall.engine.twilight.render.SyncTimer;
+import thewall.engine.twilight.renderer.MasterRenderer;
+import thewall.engine.twilight.renderer.SyncTimer;
 import thewall.engine.twilight.runtime.AbstractRuntime;
 import thewall.engine.twilight.utils.WatchdogMonitor;
 
@@ -29,6 +23,14 @@ import java.util.concurrent.*;
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 
+
+/**
+ *
+ * This environment runs the main engine program {@link TwilightApp}
+ *
+ * @deprecated api rebuild from 11.17.2021, {@link JTEEnvironment}
+ */
+@Deprecated(forRemoval = true)
 public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     private int errorRepeatCount = 0;
     private Exception lastError = null;
@@ -40,7 +42,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     volatile boolean isInit = false;
     private Thread runtimeThread = null;
 
-    private final WatchdogMonitor watchdogMonitor = new WatchdogMonitor();
+    private WatchdogMonitor watchdogMonitor;
 
     volatile boolean isClosing = false;
     volatile boolean isClosed = false;
@@ -49,7 +51,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
 
 
     public TEngineAppRuntime() {
-        super("Twilight Game App Runtime");
+        super("Engine Thread");
     }
 
     @Override
@@ -70,10 +72,11 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     protected void start(@NotNull TwilightApp program) {
         try {
             runtimeThread = Thread.currentThread();
+            watchdogMonitor = new WatchdogMonitor(Thread.currentThread());
             watchdogMonitor.start();
             if (!program.getDebugConsole().isLogging())
                 program.getDebugConsole().startLogging();
-            program.createDisplay();
+            //program.createDisplay();
             MasterRenderer masterRenderer = new MasterRenderer(program, program.getLoader());
             program.setWindowResizeSystem(new GLFWWindowResizeSystem(masterRenderer));
             program.setRenderer(masterRenderer);
@@ -82,7 +85,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             this.imGui.init();
             program.setWatchdog(watchdogMonitor);
             program.setImmediateModeGUI(this.imGui);
-            glfwFocusWindow(program.getWindowPointer());
+            glfwFocusWindow(program.getWindow());
             program.showWindow();
             try {
                 program.onEnable();
@@ -102,9 +105,9 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
                 logger.info(String.format("Sound %d:   %s %s %s", ++i ,soundCard.getName(), soundCard.getCodec(), soundCard.getDriverVersion()));
             }
             GamepadLookupService gamepadLookupService = new GamepadLookupService();
-            glfwSetJoystickCallback(new GLFWJoystickCallback(program, gamepadLookupService));
-            program.setInput(new InputProvider(new TGLFWKeyboard(program), new TGLFWMouse(program), new GLFWGamepadManager(gamepadLookupService)));
-            program.setGuiRenderer(new GuiRenderer(program.getLoader()));
+            //glfwSetJoystickCallback(new GLFWJoystickCallback(program, gamepadLookupService));
+            //program.setInput(new InputProvider(new GLFWKeyboard(program), new GLFWMouse(program), new GLFWGamepadManager(gamepadLookupService)));
+            //program.setGuiRenderer(new GuiRenderer(program.getLoader()));
             this.twilightApp = program;
             logger.info("Initialization complete, runtime is ready");
             isInit = true;
@@ -141,7 +144,6 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             stopEngine();
             if(twilightApp != null) {
                 twilightApp.onDisable();
-                twilightApp.getDebugConsole().stopLogging();
                 twilightApp.getDebugConsole().closeConsole();
             }
             logger.info("Closing app...");
@@ -157,8 +159,8 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
             if(twilightApp.isImmediateGUIHidden()){
                 imGui.destroy();
             }
-            glfwFreeCallbacks(twilightApp.getWindowPointer());
-            glfwDestroyWindow(twilightApp.getWindowPointer());
+            glfwFreeCallbacks(twilightApp.getWindow());
+            glfwDestroyWindow(twilightApp.getWindow());
         }
 
         glfwTerminate();
@@ -174,7 +176,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
     @SneakyThrows
     private void engineLoop(){
 
-        while (!glfwWindowShouldClose(twilightApp.getWindowPointer())) {
+        while (!glfwWindowShouldClose(twilightApp.getWindow())) {
             try {
                 if(isClosing){
                     break;
@@ -206,7 +208,7 @@ public class TEngineAppRuntime extends AbstractRuntime<TwilightApp> {
                 }
 
                 twilightApp.updateDisplay();
-                twilightApp.enginePulse();
+                twilightApp.update();
 
                 watchdogMonitor.keepAlive();
 

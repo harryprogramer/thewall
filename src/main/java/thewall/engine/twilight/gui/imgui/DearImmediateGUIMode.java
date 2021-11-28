@@ -7,12 +7,8 @@ import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import thewall.engine.twilight.display.GLDisplayManager;
-
-import java.util.Arrays;
 
 public final class DearImmediateGUIMode implements ImmediateModeGUI, ImGuiDesigner {
 
@@ -42,7 +38,7 @@ public final class DearImmediateGUIMode implements ImmediateModeGUI, ImGuiDesign
         ImGui.createContext();
         ImGuiIO io = ImGui.getIO();
         io.addConfigFlags(ImGuiConfigFlags.ViewportsEnable);
-        imGuiGlfw.init(displayManager.getWindowPointer(), true);
+        imGuiGlfw.init(displayManager.getWindow(), true);
         imGuiGl3.init(glslVersion);
         isInit = true;
     }

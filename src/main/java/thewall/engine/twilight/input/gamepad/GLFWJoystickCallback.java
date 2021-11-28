@@ -3,9 +3,9 @@ package thewall.engine.twilight.input.gamepad;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFWJoystickCallbackI;
-import thewall.engine.twilight.TwilightApp;
 import thewall.engine.twilight.events.input.gamepad.GamepadConnectedEvent;
 import thewall.engine.twilight.events.input.gamepad.GamepadDisconnectedEvent;
+import thewall.engine.twilight.system.lwjgl.LegacyLwjglContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +16,17 @@ public class GLFWJoystickCallback implements GLFWJoystickCallbackI {
 
     private final GamepadLookupService gamepadLookupService;
 
-    private final TwilightApp twilightApp;
+    private final LegacyLwjglContext context;
 
 
-    public GLFWJoystickCallback(TwilightApp twilightApp, GamepadLookupService gamepadLookupService){
-        this.twilightApp = twilightApp;
+    public GLFWJoystickCallback(LegacyLwjglContext context, GamepadLookupService gamepadLookupService){
+        this.context = context;
         this.gamepadLookupService = gamepadLookupService;
 
         List<Integer> controllers = getActiveControllers();
         for(int controller : controllers){
             gamepadLookupService.createGamepad(controller);
-            this.twilightApp.getEventManager().callEvent(new GamepadConnectedEvent(new GLFWGamepad(controller)));
+            this.context.getEventManager().callEvent(new GamepadConnectedEvent(new GLFWGamepad(controller)));
         }
     }
 
@@ -34,10 +34,10 @@ public class GLFWJoystickCallback implements GLFWJoystickCallbackI {
     public void invoke(int jid, int event) {
         jid++;
         if(event == GLFW_CONNECTED){
-            twilightApp.getEventManager().callEvent(new GamepadConnectedEvent(gamepadLookupService.createGamepad(jid)));
+            context.getEventManager().callEvent(new GamepadConnectedEvent(gamepadLookupService.createGamepad(jid)));
         }else if(event == GLFW_DISCONNECTED){
             Gamepad gamepad = gamepadLookupService.getGamepad(jid);
-            twilightApp.getEventManager().callEvent(new GamepadDisconnectedEvent(gamepadLookupService.getGamepad(jid)));
+            context.getEventManager().callEvent(new GamepadDisconnectedEvent(gamepadLookupService.getGamepad(jid)));
             gamepadLookupService.deleteGamepad(gamepad.getNumber().getRawNumber());
         }
     }

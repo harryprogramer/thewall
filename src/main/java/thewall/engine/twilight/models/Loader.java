@@ -1,35 +1,33 @@
 package thewall.engine.twilight.models;
 
 
+import com.google.common.primitives.Floats;
+import com.google.common.primitives.Ints;
 import de.matthiasmann.twl.utils.PNGDecoder;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryStack;
-import org.w3c.dom.Text;
+import thewall.engine.twilight.errors.NotImplementedException;
 import thewall.engine.twilight.errors.TextureDecoderException;
-import thewall.engine.twilight.textures.TextureData;
 import thewall.engine.twilight.utils.Validation;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.stb.STBImage.*;
 
-@Deprecated
+@Deprecated(forRemoval = true)
 public class Loader {
     private final static Logger logger = LogManager.getLogger(Loader.class);
 
@@ -37,25 +35,28 @@ public class Loader {
     private final List<Integer> vbos = new ArrayList<>();
     private final List<Integer> textures = new ArrayList<>();
 
-    public RawModel loadToVAO(float[] positions, int[] indices, float[] textureCoords, float[] normals){
+    public Object /*FIXME*/ loadToVAO(Mesh model){
         int vaoID = createVAO();
-        bindIndicesBuffer(indices);
-        storeDataInAttributeList(0,3,positions);
-        storeDataInAttributeList(1,2,textureCoords);
-        storeDataInAttributeList(2,3,normals);
+
+        bindIndicesBuffer(Ints.toArray(model.getIndices()));
+        storeDataInAttributeList(0,3, Floats.toArray(model.getVertices()));
+        storeDataInAttributeList(1,2, Floats.toArray(model.getTextureCoordinates()));
+        storeDataInAttributeList(2,3, Floats.toArray(model.getNormals()));
         unbindVAO();
-        return new RawModel(vaoID, indices.length);
+        // return new VAOModelBuilder(vaoID, model.getIndices().size());
+        throw new NotImplementedException(); /*FIXME*/
     }
 
-    public RawModel loadToVAO(float[] positions){
+    public VAOModel loadToVAO(float[] positions){
         return loadToVAO(positions, 2);
     }
 
-    public RawModel loadToVAO(float[] positions, int dimensions){
+    public VAOModel loadToVAO(float[] positions, int dimensions){
         int vaoID = createVAO();
         this.storeDataInAttributeList(0, dimensions, positions);
         unbindVAO();
-        return new RawModel(vaoID, positions.length / dimensions);
+        //return new VAOModelBuilder(vaoID, positions.length / dimensions);
+        throw new NotImplementedException(); /*FIXME*/
     }
 
     private int createVAO(){
@@ -79,9 +80,9 @@ public class Loader {
         Validation.checkNull(getClass(), textureFiles);
         int coordinates = GL_TEXTURE_CUBE_MAP_POSITIVE_X - 1;
         for(String string : textureFiles){
-            TextureData textureData = decodeTextureFile("res/texture/skybox/" + string + ".png");
-            GL11.glTexImage2D(++coordinates, 0, GL_RGBA, textureData.getWidth(), textureData.getHeight(),
-                    0, GL_RGBA, GL_UNSIGNED_BYTE, textureData.getBuffer());
+            //TextureData textureData = decodeTextureFile("res/texture/skybox/" + string + ".png");
+            //GL11.glTexImage2D(++coordinates, 0, GL_RGBA, textureData.getWidth(), textureData.getHeight(),
+            //        0, GL_RGBA, GL_UNSIGNED_BYTE, textureData.getBuffer());
         }
 
         GL11.glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -92,31 +93,11 @@ public class Loader {
 
 
 
-    private @NotNull TextureData decodeTextureFile(String fileName) throws TextureDecoderException {
-        int width;
-        int height;
-        ByteBuffer buffer;
-        try{
-            FileInputStream in = new FileInputStream(fileName);
-            PNGDecoder pngDecoder = new PNGDecoder(in);
-            width = pngDecoder.getWidth();
-            height = pngDecoder.getHeight();
-            buffer = ByteBuffer.allocateDirect(4 * width * height);
-            pngDecoder.decode(buffer, width * 4, PNGDecoder.Format.RGBA);
-            buffer.flip();
-            in.close();
-        }catch (Exception e){
-            logger.error("Texture file decoder error, cannot decode [" + fileName + "]", e);
-            throw new TextureDecoderException(e);
-        }
-
-        return new TextureData(width, height, buffer);
-    }
 
 
 
     @SneakyThrows
-    private int loadTexture4(String filename, int pixelFormat, int textureMagFilter){
+    private int loadTexture4(String filename, int pixelFormat){
 
         //load png file
         PNGDecoder decoder = new PNGDecoder(new FileInputStream("res/texture/" + filename + ".png"));
@@ -232,9 +213,9 @@ public class Loader {
         }
     }
 
-    public int loadTexture(String fileName, int pixelFormat, int textureMagFilter){
+    public int loadTexture(String fileName, int pixelFormat, @Deprecated int textureMagFilter){
 
-        return loadTexture4(fileName, pixelFormat, textureMagFilter);
+        return loadTexture4(fileName, pixelFormat);
     }
 
     private void storeDataInAttributeList(int number, int coordinateSize ,float[] data){
@@ -286,4 +267,5 @@ public class Loader {
             GL11.glDeleteTextures(texture);
         }
     }
+
 }

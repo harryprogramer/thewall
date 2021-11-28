@@ -4,13 +4,14 @@ import org.jetbrains.annotations.Blocking;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonBlocking;
 import org.jetbrains.annotations.NotNull;
+import thewall.engine.twilight.audio.jmf.SoundManager;
 
 import java.io.File;
 import java.util.Map;
 
 
 /**
- * Interface to fetch current audio metadata and information
+ * Interface to fetch current audio metadata
  * <p></p>
  *
  * @see SoundManager

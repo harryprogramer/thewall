@@ -1,18 +1,24 @@
 package thewall.engine.twilight.terrain;
 
+import com.google.common.collect.Lists;
+import com.google.common.primitives.Floats;
 import lombok.Getter;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
+import thewall.engine.twilight.errors.NotImplementedException;
 import thewall.engine.twilight.models.Loader;
-import thewall.engine.twilight.models.RawModel;
-import thewall.engine.twilight.textures.TerrainTexture;
-import thewall.engine.twilight.textures.TerrainTexturePack;
-import thewall.engine.twilight.utils.Maths;
+import thewall.engine.twilight.models.Mesh;
+import thewall.engine.twilight.renderer.opengl.vao.VAOManager;
+import thewall.engine.twilight.texture.TerrainTexture;
+import thewall.engine.twilight.texture.TerrainTexturePack;
+import thewall.engine.twilight.math.Maths;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Arrays;
 
+@Deprecated
 public class Terrain {
     private static final float SIZE = 800;
     private static final float MAX_HEIGHT = 40;
@@ -21,7 +27,7 @@ public class Terrain {
     @Getter
     private final float x, z;
     @Getter
-    private final RawModel model;
+    private final Mesh model;
     @Getter
     private final TerrainTexturePack texturePack;
     @Getter
@@ -29,7 +35,7 @@ public class Terrain {
 
     private float[][] heights;
 
-    public Terrain(int gridX, int gridZ, Loader loader, TerrainTexturePack texturePack, TerrainTexture blendMap, String heightMap){
+    public Terrain(int gridX, int gridZ, VAOManager loader, TerrainTexturePack texturePack, TerrainTexture blendMap, String heightMap){
         this.texturePack = texturePack;
         this.blendMap = blendMap;
         this.x = gridX * SIZE;
@@ -63,7 +69,7 @@ public class Terrain {
         return answer;
     }
 
-    private RawModel generateTerrain(Loader loader, String heightMap){
+    private Mesh generateTerrain(VAOManager loader, String heightMap){
         BufferedImage image;
         try{
             image = ImageIO.read(new File("res/" + heightMap + ".png"));
@@ -77,10 +83,10 @@ public class Terrain {
 
         int count = VERTEX_COUNT * VERTEX_COUNT;
         heights = new float[VERTEX_COUNT][VERTEX_COUNT];
-        float[] vertices = new float[count * 3];
-        float[] normals = new float[count * 3];
-        float[] textureCoords = new float[count*2];
-        int[] indices = new int[6*(VERTEX_COUNT-1)*(VERTEX_COUNT-1)];
+        Float[] vertices = new Float[count * 3];
+        Float[] normals = new Float[count * 3];
+        Float[] textureCoords = new Float[count*2];
+        Integer[] indices = new Integer[6*(VERTEX_COUNT-1)*(VERTEX_COUNT-1)];
         int vertexPointer = 0;
         for(int i=0;i<VERTEX_COUNT;i++){
             for(int j=0;j<VERTEX_COUNT;j++){
@@ -113,7 +119,10 @@ public class Terrain {
                 indices[pointer++] = bottomRight;
             }
         }
-        return loader.loadToVAO(vertices, indices, textureCoords, normals);
+
+        Mesh mesh = new Mesh(Arrays.asList(vertices), Arrays.asList(indices), Arrays.asList(normals), Arrays.asList(textureCoords));
+        mesh.setID(loader.loadToVAO(mesh));
+        return mesh;
     }
 
     private Vector3f calculateNormal(int x, int z, BufferedImage image){

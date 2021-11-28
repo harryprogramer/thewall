@@ -10,6 +10,7 @@ import static org.lwjgl.glfw.GLFW.glfwGetWindowSize;
 
 public class DisplayUtils {
     @Contract("_ -> new")
+    @Deprecated
     public static @NotNull Resolution getWindowSize(long window){
         IntBuffer w = BufferUtils.createIntBuffer(1);
         IntBuffer h = BufferUtils.createIntBuffer(1);

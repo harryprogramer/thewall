@@ -19,7 +19,6 @@ public class TestEvemt {
                 System.out.println(method.getName());
                 if (method.isAnnotationPresent(annotation)) {
                     Annotation annotInstance = method.getAnnotation(annotation);
-                    // TODO process annotInstance
                     methods.add(method);
                 }
             }

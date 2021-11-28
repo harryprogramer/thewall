@@ -6,8 +6,10 @@ import org.joml.Vector2f;
 import org.joml.Vector3f;
 import thewall.engine.twilight.entity.Camera;
 import thewall.engine.twilight.entity.Light;
-import thewall.engine.twilight.utils.Maths;
+import thewall.engine.twilight.math.Maths;
 import org.jetbrains.annotations.NotNull;
+import thewall.engine.twilight.renderer.opengl.GL;
+import thewall.engine.twilight.utils.Colour;
 
 import java.util.List;
 
@@ -25,11 +27,11 @@ public final class StaticShader extends ShaderProgram {
     private int locationSkyColor;
     private int locationNumberOfRows;
     private int locationOffset;
-    private int locationAttenuation[];
+    private int[] locationAttenuation;
     private int locationRandom;
 
-    public StaticShader(){
-        super("vertexShader.frag", "fragmentShader.vert");
+    public StaticShader(GL gl){
+        super("vertexShader.frag", "fragmentShader.vert", gl);
     }
 
     @Override
@@ -64,8 +66,8 @@ public final class StaticShader extends ShaderProgram {
         super.loadVector2f(locationOffset, vector2f);
     }
 
-    public void loadSkyColor(float r, float g, float b){
-        super.loadVector(locationSkyColor, new Vector3f(r, g, b));
+    public void loadSkyColor(Colour colour){
+        super.loadVector(locationSkyColor, new Vector3f(colour.getRed(), colour.getGreen(), colour.getBlue()));
     }
 
     public void loadTransformationMatrix(Matrix4f matrix4f){

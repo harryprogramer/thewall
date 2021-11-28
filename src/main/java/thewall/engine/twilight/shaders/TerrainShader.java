@@ -5,7 +5,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import thewall.engine.twilight.entity.Camera;
 import thewall.engine.twilight.entity.Light;
-import thewall.engine.twilight.utils.Maths;
+import thewall.engine.twilight.math.Maths;
+import thewall.engine.twilight.renderer.opengl.GL;
 
 import java.util.List;
 
@@ -27,8 +28,8 @@ public final class TerrainShader extends ShaderProgram{
     private int locationBTexture;
     private int locationBlendMap;
 
-    public TerrainShader(){
-        super("terrain/terrainVertexShader.vert", "terrain/terrainfragmentShader.frag");
+    public TerrainShader(GL gl){
+        super("terrain/terrainVertexShader.vert", "terrain/terrainfragmentShader.frag", gl);
     }
 
     @Override

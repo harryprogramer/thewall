@@ -4,6 +4,7 @@ import lombok.Data;
 import org.joml.Vector2f;
 
 @Data
+@Deprecated
 public class GuiTexture {
     private final int texture;
 

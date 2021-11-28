@@ -3,7 +3,7 @@ package tests.renderEngine.engine.audio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import thewall.engine.twilight.audio.SoundChannel;
-import thewall.engine.twilight.audio.SoundManager;
+import thewall.engine.twilight.audio.jmf.SoundManager;
 
 class SoundManagerTest {
     private SoundManager soundManager;

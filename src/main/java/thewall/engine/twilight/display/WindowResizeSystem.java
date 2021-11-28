@@ -1,5 +1,6 @@
 package thewall.engine.twilight.display;
 
+@Deprecated
 public abstract class WindowResizeSystem implements DisplayResizeCallback {
 
     @Override

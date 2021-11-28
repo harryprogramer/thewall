@@ -6,14 +6,12 @@ import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
 import thewall.engine.twilight.display.GLFWDisplayManager;
 import thewall.engine.twilight.input.Input;
-import thewall.engine.twilight.input.InputProvider;
-import thewall.engine.twilight.input.keyboard.KeyboardKeys;
 import thewall.engine.twilight.input.mouse.CursorPosition;
 import thewall.engine.twilight.models.TexturedModel;
-import thewall.engine.twilight.terrain.Terrain;
-import thewall.game.Game;
+import thewall.game.thewall.Game;
 
-public class Player extends Entity {
+@Deprecated(forRemoval = true)
+public class Player extends Spatial {
     private final static Logger logger = LogManager.getLogger(Player.class);
 
     private static final float RUN_SPEED = 20;
@@ -35,10 +33,10 @@ public class Player extends Entity {
     @Getter
     private final Camera camera;
 
-    public Player(TexturedModel texturedModel, Vector3f vector3f, float rotX, float rotY, float rotZ, float scale, Terrain terrain) {
-        super(texturedModel, vector3f, scale, terrain);
-        this.camera = new Camera(vector3f, terrain);
-        camera.setPosition(vector3f.x - 25, vector3f.y + 25, vector3f.z);
+    public Player(TexturedModel texturedModel, Vector3f vector3f, float rotX, float rotY, float rotZ, float scale) {
+        // FIXME super(texturedModel, vector3f, scale, terrain);
+        this.camera = new Camera(vector3f);
+        camera.setTransformation(vector3f.x - 25, vector3f.y + 25, vector3f.z);
         getRotation().set(0, 180, 0);
         camera.getRotation().set(0, 180, 0);
     }
@@ -66,7 +64,7 @@ public class Player extends Entity {
         float x = (float) Math.sin(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds());
         float z = (float) Math.cos(Math.toRadians(camera.getRotation().y)) * (moveSpeed / 2 * GLFWDisplayManager.getFrameTimeSeconds());
 
-
+        /*
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.A_KEY)){
             move(new Vector3f(-z, 0, x));
             camera.move(new Vector3f(-z, 0, x));
@@ -109,6 +107,8 @@ public class Player extends Entity {
         if(input.getKeyboard().isKeyPressed(KeyboardKeys.SPACE_KEY)){
             jump();
         }
+        FIXME
+         */
 
         float dx = (float) (newMouseX - oldMouseX);
         float dy = (float) (newMouseY - oldMouseY);

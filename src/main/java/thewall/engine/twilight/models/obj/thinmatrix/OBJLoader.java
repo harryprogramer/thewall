@@ -3,7 +3,7 @@ package thewall.engine.twilight.models.obj.thinmatrix;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import thewall.engine.twilight.models.Loader;
-import thewall.engine.twilight.models.RawModel;
+import thewall.engine.twilight.models.Mesh;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * OBJ loader to {@link RawModel}
+ * OBJ loader to {@link Mesh}
  *
  * @deprecated {@link OBJFileLoader}
  *
@@ -29,7 +29,7 @@ public final class OBJLoader {
     }
 
     @Deprecated
-    public static RawModel loadObjModel(String fileName, Loader loader) {
+    public static Mesh loadObjModel(String fileName, Loader loader) {
         FileReader fr = null;
         try {
             fr = new FileReader("res/" + fileName + ".obj");
@@ -106,8 +106,11 @@ public final class OBJLoader {
         for(int i=0;i<indices.size();i++){
             indicesArray[i] = indices.get(i);
         }
+        /*
         return loader.loadToVAO(verticesArray, indicesArray, textureArray, normalsArray);
 
+        */
+        return null; // FIXME
     }
 
     private static void processVertex(String[] vertexData, List<Integer> indices,

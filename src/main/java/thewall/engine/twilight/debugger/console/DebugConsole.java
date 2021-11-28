@@ -12,6 +12,7 @@ import thewall.engine.twilight.scheduler.TEngineThreadFactory;
 import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
@@ -21,7 +22,7 @@ import java.util.concurrent.*;
 
 public final class DebugConsole {
     @Getter
-    private static final DebugConsole console = new DebugConsole();
+    private static DebugConsole console = new DebugConsole();
 
     private static final Logger logger = LogManager.getLogger(DebugConsole.class);
 
@@ -116,8 +117,8 @@ public final class DebugConsole {
         }, 0, 10, TimeUnit.MILLISECONDS);
     }
 
-    public void stopLogging(){
-        logger.info("Disabling debug logging, stand by");
+    private void stopLogging(){
+        logger.info("Stopping logging for debug console");
         if(!isLoggerEnabled){
             throw new IllegalStateException("Logger is already switch off");
         }
@@ -126,14 +127,17 @@ public final class DebugConsole {
     }
 
 
+    @Deprecated
     public void fatal(String text){
         invokeLog(text, LogLevel.FATAL);
     }
 
+    @Deprecated
     public void warn(String text){
         invokeLog(text, LogLevel.WARN);
     }
 
+    @Deprecated
     public void info(String text){
         invokeLog(text, LogLevel.INFO);
     }
@@ -216,9 +220,16 @@ public final class DebugConsole {
     }
 
     public void closeConsole(){
-        logger.info("Closing debug window");
-        jFrame.setVisible(false);
-        jFrame.dispose();
+        EventQueue.invokeLater(() -> {
+            WindowEvent wev = new WindowEvent(jFrame, WindowEvent.WINDOW_CLOSING);
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+
+            // this will hide and dispose the frame, so that the application quits by
+            // itself if there is nothing else around.
+            jFrame.setVisible(false);
+            jFrame.dispose();
+            stopLogging();
+        });
     }
 
     private void showOnScreen( int screen, JFrame frame )

@@ -5,13 +5,29 @@ import thewall.engine.twilight.input.keyboard.Keyboard;
 import thewall.engine.twilight.input.mouse.Mouse;
 
 public class InputProvider implements Input{
-    private final GamepadManager gamepadManager;
-    private final Keyboard keyboard;
-    private final Mouse mouse;
+    private GamepadManager gamepadManager;
+    private Keyboard keyboard;
+    private Mouse mouse;
+
+    public InputProvider(){
+
+    }
 
     public InputProvider(Keyboard keyboard, Mouse mouse, GamepadManager gamepadManager){
         this.gamepadManager = gamepadManager;
         this.keyboard = keyboard;
+        this.mouse = mouse;
+    }
+
+    public void setGamepadManager(GamepadManager gamepadManager){
+        this.gamepadManager = gamepadManager;
+    }
+
+    public void setKeyboard(Keyboard keyboard){
+        this.keyboard = keyboard;
+    }
+
+    public void setMouse(Mouse mouse){
         this.mouse = mouse;
     }
 

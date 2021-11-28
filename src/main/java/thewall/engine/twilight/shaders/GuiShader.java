@@ -1,6 +1,7 @@
 package thewall.engine.twilight.shaders;
 
 import org.joml.Matrix4f;
+import thewall.engine.twilight.renderer.opengl.GL;
 
 public final class GuiShader extends ShaderProgram{
 
@@ -9,8 +10,8 @@ public final class GuiShader extends ShaderProgram{
 
     private int location_transformationMatrix;
 
-    public GuiShader() {
-        super(VERTEX_FILE, FRAGMENT_FILE);
+    public GuiShader(GL gl) {
+        super(VERTEX_FILE, FRAGMENT_FILE, gl);
     }
 
     public void loadTransformation(Matrix4f matrix){

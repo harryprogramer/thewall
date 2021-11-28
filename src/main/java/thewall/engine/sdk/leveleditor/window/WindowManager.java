@@ -1,15 +1,13 @@
 package thewall.engine.sdk.leveleditor.window;
 
 public interface WindowManager {
-    void createWindow(int width, int height);
+    void showWindow();
 
     void hideWindow();
 
-    void showWindow();
+    void setWindowTitle();
 
-    void setWindowTitle(String title);
+    void destroyWindow();
 
-    void closeWindow();
-    
-    void resizeWindow(int width, int height);
+    void createWindow();
 }

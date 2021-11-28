@@ -1,5 +1,6 @@
 package thewall.engine.twilight.models;
 
+@Deprecated(forRemoval = true)
 public class ExampleModels {
     public final static float[] krzysztof = {
             -0.5f,0.5f,0,
