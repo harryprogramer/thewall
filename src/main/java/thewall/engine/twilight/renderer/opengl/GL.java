@@ -1,7 +1,6 @@
 package thewall.engine.twilight.renderer.opengl;
 
 import org.lwjgl.opengl.*;
-import org.lwjgl.system.NativeType;
 
 import java.nio.*;
 

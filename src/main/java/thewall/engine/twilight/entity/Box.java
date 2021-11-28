@@ -202,7 +202,7 @@ public class Box extends Spatial {
         }
         boxMesh.setNormals(normalsVertex);
 
-        this.boxMesh = new Mesh(Floats.asList(STATIC_BOX_POSITIONS), Arrays.asList(BOX_INDICES), textureCoords, normalsVertex);
+        //this.boxMesh = new Mesh(Floats.asList(STATIC_BOX_POSITIONS), Arrays.asList(BOX_INDICES), textureCoords, normalsVertex);
 
         boxMesh.setName("Box");
 

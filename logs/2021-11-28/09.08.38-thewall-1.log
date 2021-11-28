@@ -1,0 +1,230 @@
+[thewall.engine.LegacyApp] [09:08:38] main/INFO ] - Initializing Twilight Twilight 1.2
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Warming up JVM...
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Installing ANSI Console
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Setting ANSI console out OutputStream [AnsiPrintStream{type=Redirected, colors=Colors16, mode=Strip, resetAtUninstall=true}]
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Setting ANSI console err OutputStream [AnsiPrintStream{type=Redirected, colors=Colors16, mode=Strip, resetAtUninstall=true}]
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Creating GLFW error callback
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Setting stream proxy JTE debug console
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Starting Twilight Runtime Service
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Registering runtime service
+[thewall.engine.LegacyApp] [09:08:38] main/INFO ] - Starting application, searching for runtime...
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Finding runtime to run app
+[thewall.engine.LegacyApp] [09:08:38] main/INFO ] - Found runtime [thewall.engine.twilight.runtime.app.JTEEnvironment], executing program...
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Runtime thread exception guard is ready
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Starting runtime thread
+[thewall.engine.LegacyApp] [09:08:38] main/DEBUG] - Waiting for runtime to continue
+[thewall.engine.twilight.runtime.AbstractRuntime] [09:08:38] TwLight Main Thread/INFO ] - Starting runtime for [JTE Environment]
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:38] TwLight Main Thread/INFO ] - Capturing runtime thread...
+[thewall.engine.twilight.utils.WatchdogMonitor] [09:08:38] TwLight Main Thread/INFO ] - Watchdog started, working in background active
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:38] TwLight Main Thread/INFO ] - Java VM:                   OpenJDK 64-Bit Server VM
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:38] TwLight Main Thread/INFO ] - Java Home:                 C:\Users\szymo\Documents\graalvm-ce-java17-windows-amd64-21.3.0\graalvm-ce-java17-21.3.0
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:38] TwLight Main Thread/INFO ] - Java Vendor:               GraalVM Community
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:38] TwLight Main Thread/INFO ] - Java Version:              17.0.1
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:38] TwLight Main Thread/INFO ] - Java Specification Vendor: Oracle Corporation
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:38] TwLight Main Thread/INFO ] - Finding best context for runtime
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:38] TwLight Main Thread/INFO ] - Context for [Sound Master]:        thewall.engine.twilight.audio.jmf.SoundManager
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:38] TwLight Main Thread/INFO ] - Context for [Input Manager]:       thewall.engine.twilight.input.glfw.GLFWInput
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:38] TwLight Main Thread/INFO ] - Context for [Renderer]:            thewall.engine.twilight.renderer.opengl.GLRenderer
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:38] TwLight Main Thread/DEBUG] - OpenGL 2.0+ support available
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:38] TwLight Main Thread/DEBUG] - OpenGL 3.0+ support available
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:39] TwLight Main Thread/DEBUG] - OpenGL 4.0+ support available
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:39] TwLight Main Thread/DEBUG] - Enabling OpenGL 4.0+ debug message callback
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStreamError] [09:08:39] TwLight Main Thread/ERROR] - SLF4J: Class path contains multiple SLF4J bindings.
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStreamError] [09:08:39] TwLight Main Thread/ERROR] - SLF4J: Found binding in [jar:file:/C:/Users/szymo/.m2/repository/org/slf4j/slf4j-simple/1.7.32/slf4j-simple-1.7.32.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStreamError] [09:08:39] TwLight Main Thread/ERROR] - SLF4J: Found binding in [jar:file:/C:/Users/szymo/.m2/repository/org/slf4j/slf4j-log4j12/1.7.30/slf4j-log4j12-1.7.30.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStreamError] [09:08:39] TwLight Main Thread/ERROR] - SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStreamError] [09:08:39] TwLight Main Thread/ERROR] - SLF4J: Actual binding is of type [org.slf4j.impl.SimpleLoggerFactory]
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - CPU:                       Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Renderer:                  OpenGL 4.6.0 - Build 30.0.100.9864
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - GPU:                       Intel(R) HD Graphics 630
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Vendor:                    Intel
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Memory :                   16268MB
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Baseboard:                 ASUSTeK COMPUTER INC. unknown
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Sound 1:   Realtek Semiconductor Corp. Realtek High Definition Audio Realtek High Definition Audio RTKVHD64.sys 6.0.8899.1
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Sound 2:   Intel(R) Corporation Audio dla wyświetlaczy Intel(R) Audio dla wyświetlaczy Intel(R) IntcDAud.sys 10.27.0.10
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Sound 3:   Microsoft USB Audio Device USB Audio Device USBAUDIO.sys 10.0.19041.1202
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Sound 4:   Logitech Logitech PRO X Gaming Headset Logitech PRO X Gaming Headset USBAUDIO.sys 2021.11.3479.0
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Sound 5:   Eugene Muzychenko Virtual Audio Cable Virtual Audio Cable vrtaucbl.sys 4.66.0.12138
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:08:39] TwLight Main Thread/INFO ] - Context found! [thewall.engine.twilight.system.lwjgl.windows.WindowsJTEContext]
+[thewall.engine.twilight.shaders.ShaderProgram] [09:08:39] TwLight Main Thread/ERROR] - Uniform from [thewall.engine.twilight.shaders.StaticShader] [random] not found
+[thewall.engine.twilight.system.lwjgl.LegacyLwjglContext] [09:08:39] TwLight Main Thread/WARN ] - OpenGL ERROR [SOURCE] [1282]: Error has been generated. GL error GL_INVALID_OPERATION in (null): (ID: 173538523) Generic error
+[thewall.engine.twilight.renderer.opengl.GLRenderer] [09:08:39] TwLight Main Thread/DEBUG] - Creating projection matrix with [FOV: 90.0 | NEARPLANE:  0.1 | FARPLANE: 17000.0]
+[thewall.engine.twilight.texture.opengl.JTEGLTextureManager] [09:08:39] TwLight Main Thread/DEBUG] - Decoding texture [res/texture/skybox/right.png]
+[thewall.engine.twilight.texture.opengl.JTEGLTextureManager] [09:08:39] TwLight Main Thread/DEBUG] - Decoding texture [res/texture/skybox/left.png]
+[thewall.engine.twilight.texture.opengl.JTEGLTextureManager] [09:08:39] TwLight Main Thread/DEBUG] - Decoding texture [res/texture/skybox/top.png]
+[thewall.engine.twilight.texture.opengl.JTEGLTextureManager] [09:08:39] TwLight Main Thread/DEBUG] - Decoding texture [res/texture/skybox/bottom.png]
+[thewall.engine.twilight.texture.opengl.JTEGLTextureManager] [09:08:39] TwLight Main Thread/DEBUG] - Decoding texture [res/texture/skybox/back.png]
+[thewall.engine.twilight.texture.opengl.JTEGLTextureManager] [09:08:39] TwLight Main Thread/DEBUG] - Decoding texture [res/texture/skybox/front.png]
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStream] [09:08:39] TwLight Main Thread/INFO ] - 
+[thewall.engine.twilight.debugger.console.ConsoleOutProxy.OutStream] [09:08:40] TwLight Main Thread/INFO ] - 
+[thewall.engine.LegacyApp] [09:08:40] main/INFO ] - Runtime ready to work, initialization complet
+[thewall.game.blocks.Game] [09:08:40] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:40] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.engine.twilight.utils.WatchdogMonitor] [09:08:40] Watchdog Service/INFO ] - Watchdog keep-alive received successfully, watchdog init complete
+[thewall.game.blocks.Game] [09:08:41] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:41] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:41] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:41] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:42] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:42] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:42] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:42] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:43] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:43] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:43] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:43] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:44] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:44] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:44] TwLight Main Thread/INFO ] - Cam: 0.0
+[thewall.game.blocks.Game] [09:08:44] TwLight Main Thread/INFO ] - Distance between [Box #1]: 32.75668
+[thewall.game.blocks.Game] [09:08:45] TwLight Main Thread/INFO ] - Cam: 29.0
+[thewall.game.blocks.Game] [09:08:45] TwLight Main Thread/INFO ] - Distance between [Box #1]: 43.749287
+[thewall.game.blocks.Game] [09:08:45] TwLight Main Thread/INFO ] - Cam: 60.8
+[thewall.game.blocks.Game] [09:08:45] TwLight Main Thread/INFO ] - Distance between [Box #1]: 69.06258
+[thewall.game.blocks.Game] [09:08:46] TwLight Main Thread/INFO ] - Cam: 60.8
+[thewall.game.blocks.Game] [09:08:46] TwLight Main Thread/INFO ] - Distance between [Box #1]: 69.06258
+[thewall.game.blocks.Game] [09:08:46] TwLight Main Thread/INFO ] - Cam: 94.1
+[thewall.game.blocks.Game] [09:08:46] TwLight Main Thread/INFO ] - Distance between [Box #1]: 99.6384
+[thewall.game.blocks.Game] [09:08:47] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:47] TwLight Main Thread/INFO ] - Distance between [Box #1]: 137.74663
+[thewall.game.blocks.Game] [09:08:47] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:47] TwLight Main Thread/INFO ] - Distance between [Box #1]: 160.27983
+[thewall.game.blocks.Game] [09:08:48] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:48] TwLight Main Thread/INFO ] - Distance between [Box #1]: 191.65038
+[thewall.game.blocks.Game] [09:08:48] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:48] TwLight Main Thread/INFO ] - Distance between [Box #1]: 186.92096
+[thewall.game.blocks.Game] [09:08:49] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:49] TwLight Main Thread/INFO ] - Distance between [Box #1]: 206.30824
+[thewall.game.blocks.Game] [09:08:50] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:50] TwLight Main Thread/INFO ] - Distance between [Box #1]: 202.86157
+[thewall.game.blocks.Game] [09:08:50] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:50] TwLight Main Thread/INFO ] - Distance between [Box #1]: 202.86157
+[thewall.game.blocks.Game] [09:08:51] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:51] TwLight Main Thread/INFO ] - Distance between [Box #1]: 202.86157
+[thewall.game.blocks.Game] [09:08:51] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:51] TwLight Main Thread/INFO ] - Distance between [Box #1]: 202.86157
+[thewall.game.blocks.Game] [09:08:52] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:52] TwLight Main Thread/INFO ] - Distance between [Box #1]: 217.58978
+[thewall.game.blocks.Game] [09:08:52] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:52] TwLight Main Thread/INFO ] - Distance between [Box #1]: 231.62328
+[thewall.game.blocks.Game] [09:08:53] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:53] TwLight Main Thread/INFO ] - Distance between [Box #1]: 289.5971
+[thewall.game.blocks.Game] [09:08:53] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:53] TwLight Main Thread/INFO ] - Distance between [Box #1]: 355.84393
+[thewall.game.blocks.Game] [09:08:54] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:54] TwLight Main Thread/INFO ] - Distance between [Box #1]: 418.40707
+[thewall.game.blocks.Game] [09:08:54] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:54] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:55] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:55] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:55] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:55] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:56] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:56] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:56] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:56] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:57] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:57] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:58] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:58] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:58] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:58] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:59] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:59] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:08:59] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:08:59] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:00] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:00] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:00] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:00] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:01] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:01] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:01] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:01] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:02] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:02] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:03] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:03] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:03] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:03] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:04] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:04] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:04] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:04] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:05] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:05] TwLight Main Thread/INFO ] - Distance between [Box #1]: 427.2832
+[thewall.game.blocks.Game] [09:09:05] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:05] TwLight Main Thread/INFO ] - Distance between [Box #1]: 409.98096
+[thewall.game.blocks.Game] [09:09:06] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:06] TwLight Main Thread/INFO ] - Distance between [Box #1]: 380.2107
+[thewall.game.blocks.Game] [09:09:06] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:06] TwLight Main Thread/INFO ] - Distance between [Box #1]: 374.26828
+[thewall.game.blocks.Game] [09:09:07] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:07] TwLight Main Thread/INFO ] - Distance between [Box #1]: 435.52417
+[thewall.game.blocks.Game] [09:09:08] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:08] TwLight Main Thread/INFO ] - Distance between [Box #1]: 497.0828
+[thewall.game.blocks.Game] [09:09:08] TwLight Main Thread/INFO ] - Cam: 137.09999
+[thewall.game.blocks.Game] [09:09:08] TwLight Main Thread/INFO ] - Distance between [Box #1]: 549.2573
+[thewall.game.blocks.Game] [09:09:09] TwLight Main Thread/INFO ] - Cam: 80.399994
+[thewall.game.blocks.Game] [09:09:09] TwLight Main Thread/INFO ] - Distance between [Box #1]: 593.8763
+[thewall.game.blocks.Game] [09:09:09] TwLight Main Thread/INFO ] - Cam: 23.199997
+[thewall.game.blocks.Game] [09:09:09] TwLight Main Thread/INFO ] - Distance between [Box #1]: 645.92584
+[thewall.game.blocks.Game] [09:09:10] TwLight Main Thread/INFO ] - Cam: -29.000004
+[thewall.game.blocks.Game] [09:09:10] TwLight Main Thread/INFO ] - Distance between [Box #1]: 698.3264
+[thewall.game.blocks.Game] [09:09:10] TwLight Main Thread/INFO ] - Cam: -28.600006
+[thewall.game.blocks.Game] [09:09:10] TwLight Main Thread/INFO ] - Distance between [Box #1]: 750.38934
+[thewall.game.blocks.Game] [09:09:11] TwLight Main Thread/INFO ] - Cam: 26.699995
+[thewall.game.blocks.Game] [09:09:11] TwLight Main Thread/INFO ] - Distance between [Box #1]: 805.7122
+[thewall.game.blocks.Game] [09:09:11] TwLight Main Thread/INFO ] - Cam: 68.399994
+[thewall.game.blocks.Game] [09:09:11] TwLight Main Thread/INFO ] - Distance between [Box #1]: 841.7637
+[thewall.game.blocks.Game] [09:09:12] TwLight Main Thread/INFO ] - Cam: 89.09999
+[thewall.game.blocks.Game] [09:09:12] TwLight Main Thread/INFO ] - Distance between [Box #1]: 885.90717
+[thewall.game.blocks.Game] [09:09:12] TwLight Main Thread/INFO ] - Cam: 89.09999
+[thewall.game.blocks.Game] [09:09:12] TwLight Main Thread/INFO ] - Distance between [Box #1]: 899.27374
+[thewall.game.blocks.Game] [09:09:13] TwLight Main Thread/INFO ] - Cam: 89.09999
+[thewall.game.blocks.Game] [09:09:13] TwLight Main Thread/INFO ] - Distance between [Box #1]: 875.0016
+[thewall.game.blocks.Game] [09:09:14] TwLight Main Thread/INFO ] - Cam: 89.09999
+[thewall.game.blocks.Game] [09:09:14] TwLight Main Thread/INFO ] - Distance between [Box #1]: 837.96405
+[thewall.game.blocks.Game] [09:09:14] TwLight Main Thread/INFO ] - Cam: 89.09999
+[thewall.game.blocks.Game] [09:09:14] TwLight Main Thread/INFO ] - Distance between [Box #1]: 811.17896
+[thewall.game.blocks.Game] [09:09:15] TwLight Main Thread/INFO ] - Cam: 89.09999
+[thewall.game.blocks.Game] [09:09:15] TwLight Main Thread/INFO ] - Distance between [Box #1]: 812.254
+[thewall.game.blocks.Game] [09:09:15] TwLight Main Thread/INFO ] - Cam: 89.09999
+[thewall.game.blocks.Game] [09:09:15] TwLight Main Thread/INFO ] - Distance between [Box #1]: 787.48773
+[thewall.game.blocks.Game] [09:09:16] TwLight Main Thread/INFO ] - Cam: 48.299995
+[thewall.game.blocks.Game] [09:09:16] TwLight Main Thread/INFO ] - Distance between [Box #1]: 741.3081
+[thewall.game.blocks.Game] [09:09:16] TwLight Main Thread/INFO ] - Cam: 5.7999916
+[thewall.game.blocks.Game] [09:09:16] TwLight Main Thread/INFO ] - Distance between [Box #1]: 691.93243
+[thewall.game.blocks.Game] [09:09:17] TwLight Main Thread/INFO ] - Cam: 5.4999905
+[thewall.game.blocks.Game] [09:09:17] TwLight Main Thread/INFO ] - Distance between [Box #1]: 639.35
+[thewall.game.blocks.Game] [09:09:17] TwLight Main Thread/INFO ] - Cam: 57.999992
+[thewall.game.blocks.Game] [09:09:17] TwLight Main Thread/INFO ] - Distance between [Box #1]: 595.9837
+[thewall.game.blocks.Game] [09:09:18] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:18] TwLight Main Thread/INFO ] - Distance between [Box #1]: 553.68774
+[thewall.game.blocks.Game] [09:09:18] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:18] TwLight Main Thread/INFO ] - Distance between [Box #1]: 513.8846
+[thewall.game.blocks.Game] [09:09:19] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:19] TwLight Main Thread/INFO ] - Distance between [Box #1]: 521.2501
+[thewall.game.blocks.Game] [09:09:20] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:20] TwLight Main Thread/INFO ] - Distance between [Box #1]: 548.4507
+[thewall.game.blocks.Game] [09:09:20] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:20] TwLight Main Thread/INFO ] - Distance between [Box #1]: 578.17365
+[thewall.game.blocks.Game] [09:09:21] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:21] TwLight Main Thread/INFO ] - Distance between [Box #1]: 598.25507
+[thewall.game.blocks.Game] [09:09:21] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:21] TwLight Main Thread/INFO ] - Distance between [Box #1]: 578.7666
+[thewall.game.blocks.Game] [09:09:22] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:22] TwLight Main Thread/INFO ] - Distance between [Box #1]: 553.4121
+[thewall.game.blocks.Game] [09:09:22] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:22] TwLight Main Thread/INFO ] - Distance between [Box #1]: 534.1713
+[thewall.game.blocks.Game] [09:09:23] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:23] TwLight Main Thread/INFO ] - Distance between [Box #1]: 525.2522
+[thewall.game.blocks.Game] [09:09:23] TwLight Main Thread/INFO ] - Cam: 91.19999
+[thewall.game.blocks.Game] [09:09:23] TwLight Main Thread/INFO ] - Distance between [Box #1]: 525.2522
+[thewall.engine.twilight.renderer.opengl.GLRenderer] [09:09:24] TwLight Main Thread/INFO ] - Cleaning VAO list
+[thewall.engine.twilight.renderer.opengl.GLRenderer] [09:09:24] TwLight Main Thread/INFO ] - Cleaning textures
+[thewall.engine.twilight.runtime.AbstractRuntime] [09:09:24] TwLight Main Thread/INFO ] - Stopping runtime for [JTE Environment]
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:09:24] TwLight Main Thread/INFO ] - Closing runtime for [thewall.game.blocks.Game@1d71ac95]
+[thewall.engine.twilight.runtime.app.JTEEnvironment] [09:09:24] TwLight Main Thread/INFO ] - Stopping JTE runtime watchdog
+[thewall.engine.twilight.utils.WatchdogMonitor] [09:09:24] TwLight Main Thread/INFO ] - Stopping watchdog, service going down...
+[thewall.engine.twilight.debugger.console.DebugConsole] [09:09:24] AWT-EventQueue-0/INFO ] - Stopping logging for debug console

@@ -1,10 +1,13 @@
 package thewall.engine.twilight.renderer.opengl.vao;
 
+import com.google.common.collect.Lists;
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
 import lombok.SneakyThrows;
+import oms3.annotations.In;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.util.Integers;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.BufferUtils;
 import thewall.engine.twilight.models.Mesh;
@@ -105,18 +108,13 @@ public class LegacyVAOManager implements VAOManager {
     }
 
     @SneakyThrows
-    private int loadMeshToVAO(@NotNull Mesh mesh){
-        float[] a = Floats.toArray(mesh.getVertices());
-        float[] c = Floats.toArray(mesh.getTextureCoordinates());
-        float[] d = Floats.toArray(mesh.getNormals());
-
+    private int loadMeshToVAO(float[] vertices, int[] indices, float[] textureCoordinates, float[] geometryNormals){
         PrintWriter fileOutputStream = new PrintWriter(new FileOutputStream("models.txt"));
-        int iMax = a.length - 1;
-        fileOutputStream.println(mesh.getName());
+        int iMax = vertices.length - 1;
         StringBuilder b = new StringBuilder();
         b.append('[');
         for (int i = 0; ; i++) {
-            b.append(a[i]);
+            b.append(vertices[i]);
             if (i == iMax) {
                 fileOutputStream.println("Vertices: " + b.append(']'));
                 break;
@@ -124,23 +122,23 @@ public class LegacyVAOManager implements VAOManager {
             b.append("f, ");
         }
         //fileOutputStream.println("Vertices: " + Arrays.toString(Floats.toArray(mesh.getVertices())));
-        fileOutputStream.println("Indices: " + Arrays.toString(Ints.toArray(mesh.getIndices())));
-        iMax = c.length - 1;
+        fileOutputStream.println("Indices: " + Arrays.toString(indices));
+        iMax = textureCoordinates.length - 1;
         b = new StringBuilder();
         b.append('[');
         for (int i = 0; ; i++) {
-            b.append(c[i]);
+            b.append(textureCoordinates[i]);
             if (i == iMax) {
                 fileOutputStream.println("Texture: " + b.append(']'));
                 break;
             }
             b.append("f, ");
         }
-        iMax = d.length - 1;
+        iMax = geometryNormals.length - 1;
         b = new StringBuilder();
         b.append('[');
         for (int i = 0; ; i++) {
-            b.append(d[i]);
+            b.append(geometryNormals[i]);
             if (i == iMax) {
                 fileOutputStream.println("Normals: " + b.append(']'));
                 break;
@@ -149,10 +147,10 @@ public class LegacyVAOManager implements VAOManager {
         }
         fileOutputStream.flush();
         int vao = createVAO();
-        bindIndicesBuffer(Ints.toArray(mesh.getIndices()));
-        storeDataInVAO(0, 3, Floats.toArray(mesh.getVertices()), vao);
-        storeDataInVAO(1, 2, Floats.toArray(mesh.getTextureCoordinates()), vao);
-        storeDataInVAO(2, 3, Floats.toArray(mesh.getNormals()), vao);
+        bindIndicesBuffer(indices);
+        storeDataInVAO(0, 3, vertices, vao);
+        storeDataInVAO(1, 2, textureCoordinates, vao);
+        storeDataInVAO(2, 3, geometryNormals, vao);
         unbindVAO();
         return vao;
     }
@@ -160,7 +158,17 @@ public class LegacyVAOManager implements VAOManager {
     @Override
     public int loadToVAO(Mesh mesh) {
         Validation.checkNull(mesh);
-        return loadMeshToVAO(mesh);
+        return loadToVAO(mesh.getVertices(), mesh.getIndices(), mesh.getTextureCoordinates(), mesh.getNormals());
+    }
+
+    @Override
+    public int loadToVAO(float[] vertices, int[] indices, float[] textureCoordinates, float[] geometryNormals) {
+        return loadMeshToVAO(vertices, indices, textureCoordinates, geometryNormals);
+    }
+
+    @Override
+    public int loadToVAO(List<Float> vertices, List<Integer> indices, List<Float> textureCoordinates, List<Float> geometryNormals) {
+        return loadToVAO(Floats.toArray(vertices), Ints.toArray(indices), Floats.toArray(textureCoordinates), Floats.toArray(geometryNormals));
     }
 
     @Override
@@ -172,23 +180,27 @@ public class LegacyVAOManager implements VAOManager {
     }
 
     @Override
-    public void freeMesh(Mesh mesh) {
+    public void freeMesh(@NotNull Mesh mesh) {
         List<Integer> vbos = fbo.get(mesh.getID());
         if(vbos == null){
             throw new NullPointerException("VAO not exist");
         }
-        gl.glDeleteBuffers(mesh.getID());
+        gl3.glDeleteVertexArrays(mesh.getID());
         for(Integer vbo : vbos){
-            gl3.glDeleteBuffers(vbo);
+            gl.glDeleteBuffers(vbo);
         }
         fbo.remove(mesh.getID());
     }
 
     @Override
     public void cleanUp() {
-        for(Iterator<List<Integer>> iterator = fbo.values().iterator(); iterator.hasNext();){
-            List<Integer> integers = iterator.next();
-            // TODO vao and vbo clean up
+        for(Map.Entry<Integer, List<Integer>> entry : fbo.entrySet()){
+            Integer vao = entry.getKey();
+            List<Integer> vbos = entry.getValue();
+            gl3.glDeleteVertexArrays(vao);
+            for(Integer vbo : vbos){
+                gl.glDeleteBuffers(vbo);
+            }
         }
     }
 }
