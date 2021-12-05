@@ -1,3 +1,2 @@
 # Twilight Game Engine
-
-s̴̤̏̈́o̵̢̍́o̵͖͝n̶̛͍̠̈́
+Project was moved to https://github.com/harryprogramer/jtengine2
